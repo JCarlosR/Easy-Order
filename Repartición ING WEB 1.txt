@@ -1,0 +1,62 @@
+
+
+foreach($empresa->$areas as $area)
+$area->idArea
+$area->descripcion
+
+$area->empresa
+
+
+<?php echo $a ?>
+<?= $a ?>
+{{ $a }}
+
+action="scripts/modificarEmpresa.php"
+
+
+WEB
+1º Hacer las pantallas
+2º Implementar funcionalidad
+
+APP IOS
+1º Todas las pantallas
+
+easyorder.com/solicitar/
+
+WEB USER
+1. Index( sinBotonLogin y con este )			CB(RA)
+2. Login, SigUp						CB(JU)
+3. solicitar					CM(RA) 
+								CA(RA)
+5. Orden						CM(JU)
+6. GuardarPlato						CM(SO)
+7. ConfirmarPago					CM(AR)
+
+8. SeguimientoOrden					CM(AR)
+9. MenusAnteriores					CM(JU)
+
+WEB ADMIN
+1. GestionPlatos(GestionPlatos2)			CA(JU)
+2. PedidosPendientes(PickUp y Delivery)			CA(SO)
+3. PedidosEntregadosDelivery(tambien hacer lo de pickUp)CM(SO)
+4. AsignarMenus						CB(SO)
+4. AsignarPlatos					CA(AR)
+5. AsignarDetalles					CA(AR)		
+WEB CHEF
+1. PedidosEnEspera(Atendidos)				CM(JU)
+2. VisualizacionPedidoEnEspera(Atendido)		CM(SO)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

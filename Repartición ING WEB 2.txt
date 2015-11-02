@@ -1,0 +1,66 @@
+USUARIO
+
+	* solicitar
+	Falta que al hacer click en ver más salga un modal para ver con más detalle lo que contiene y un botón para ordenar dicho combo. -> A MI
+
+	* previsualizar
+	Verificar si el decimal se puede agregar. -> A JUAREZ
+
+	* confirmar
+	Imprimir la hora actual 11:45 a.m.
+	Darle required al checkbox -> A ARCADIO
+
+	* anteriores
+	La presentación debe mostrar los platos catalogados, y al hacer click sobre un plato, mostrar sus detalles. -> A JUAREZ *
+
+	* recepcion
+	Asignar un mismo ícono a cada tipo de plato. Poner el nombre del plato, y también catalogar según tipo de plato. -> A ARCADIO
+
+ADMIN
+	1. JUAREZ INEXISTENTE
+
+	pedidos-pendientes
+	Un pedido dentro de un panel. Imágenes con el mismo tamaño. -> A SOLES
+
+	pedidos-entregados
+	Reflejar los cambios aplicados a las imágenes y también al modal (según pedidos-pendientes). -> A SOLES
+
+	asignar-menu
+	Agregar assets a las imágenes. -> A SOLES
+
+	gestionar-platos
+	Revisar javascript para el traslado. 
+	Centrar verticalmente los botones*.
+	Agregarle borde a las imgs según la clase de Soles bootstrap.
+
+	gestionar-detalles
+	Gestionar detalles al plato X que diga.
+	Ícono de guardar usado antes*.
+
+
+	*** Revisar las opciones del menú superior.
+	Las opciones tomarlas del admin.welcome y del chef.welcome
+
+CHEF
+	1. JUAREZ INEXISTENTE
+
+	en-espera
+	Revisar los src de las imágenes, que tengan asset.
+	Cambiar según el modal anterior (en extra-content).
+	Quitar el container > row que están dentro de content ya que no requieren.
+	
+
+OTRAS TAREAS	
+	Juarez debe agregar combos a la tabla de combos de la BD (unos 3 combos),
+	y añadir unos 4 platos más con sus detalles.
+
+	Tener en cta que cada combo tiene platos, y cada plato sus detalles.
+
+
+PD
+	Si Juarez sube los INSERT que irán en la BD hasta antes de las 12 p.m. de hoy,
+	yo me encargaré de hacer sus pantallas.
+
+Jimmy
+	Se encargará de continuar desarrollando la app móvil.
+	Revisará el tema de webservices y hará uso de estos en las pantallas ya creadas.
