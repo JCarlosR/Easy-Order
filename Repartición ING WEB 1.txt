@@ -1,48 +1,34 @@
-
-
-foreach($empresa->$areas as $area)
-$area->idArea
-$area->descripcion
-
-$area->empresa
-
-
-<?php echo $a ?>
-<?= $a ?>
-{{ $a }}
-
-action="scripts/modificarEmpresa.php"
-
-
 WEB
-1º Hacer las pantallas
-2º Implementar funcionalidad
+1. Hacer las pantallas
+2. Implementar funcionalidad
 
-APP IOS
-1º Todas las pantallas
+APP iOS
+1. Todas las pantallas
 
-easyorder.com/solicitar/
+resources/views/
 
-WEB USER
-1. Index( sinBotonLogin y con este )			CB(RA)
-2. Login, SigUp						CB(JU)
-3. solicitar					CM(RA) 
-								CA(RA)
-5. Orden						CM(JU)
-6. GuardarPlato						CM(SO)
-7. ConfirmarPago					CM(AR)
+Relacionado al usuario
+----------------------
+1. user/welcome						RA
+2. auth/login, auth/register		JU
+3. user/solicitar					RA
+5. user/orden                       JU
+6. modal de la vista anterior       SO
+7. user/confirmar                   AR
+8. user/recepcion                   AR
+9. user/anteriores                  JU
 
-8. SeguimientoOrden					CM(AR)
-9. MenusAnteriores					CM(JU)
+Relacionado al admin
+--------------------
+1. admin/gestionar-platos           JU
+   admin/gestionar-detalles         AR **
+2. admin/pendientes                 SO
+3. admin/entregados                 SO
+4. admin/asignar-menu               SO
+4. admin/asignar-platos             AR
 
-WEB ADMIN
-1. GestionPlatos(GestionPlatos2)			CA(JU)
-2. PedidosPendientes(PickUp y Delivery)			CA(SO)
-3. PedidosEntregadosDelivery(tambien hacer lo de pickUp)CM(SO)
-4. AsignarMenus						CB(SO)
-4. AsignarPlatos					CA(AR)
-5. AsignarDetalles					CA(AR)		
-WEB CHEF
+Relacionado al chef
+-------------------
 1. PedidosEnEspera(Atendidos)				CM(JU)
 2. VisualizacionPedidoEnEspera(Atendido)		CM(SO)
 

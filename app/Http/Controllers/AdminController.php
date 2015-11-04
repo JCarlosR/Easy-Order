@@ -19,6 +19,11 @@ class AdminController extends Controller {
         return view('admin.asignar-menu');
     }
 
+    public function getAsignarPlatos()
+    {
+        return view('admin.asignar-platos');
+    }
+
     public function getPendientes()
     {
         return view('admin.pendientes');
@@ -31,7 +36,7 @@ class AdminController extends Controller {
 
     public function getGestionarPlatos()
     {
-        return view('admin.gestionar-platos');
+        return view('admin.welcome');
     }
 
     public function getGestionarDetalles()

@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-6">
                 <header>
-                    <h1>Orden de Delivery</h1>
+                    <h1>Orden de delivery</h1>
                 </header>
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
