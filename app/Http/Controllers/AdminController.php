@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Detalle;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller {
 
@@ -36,12 +38,15 @@ class AdminController extends Controller {
 
     public function getGestionarPlatos()
     {
-        return view('admin.welcome');
+        return view('admin.gestionar-platos');
     }
 
     public function getGestionarDetalles()
     {
-        return view('admin.gestionar-detalles');
+        //$detalles = Detalle::paginate(12);
+        $notif = Session::get('notif');
+        $detalles = Detalle::all();
+        return view('admin.gestionar-detalles')->with(compact(['detalles', 'notif']));
     }
 
 

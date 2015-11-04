@@ -20,24 +20,17 @@ Relacionado al usuario
 
 Relacionado al admin
 --------------------
-1. admin/gestionar-platos           JU
+1. admin/gestionar-platos           JU **
    admin/gestionar-detalles         AR **
 2. admin/pendientes                 SO
 3. admin/entregados                 SO
 4. admin/asignar-menu               SO
-4. admin/asignar-platos             AR
+5. admin/asignar-platos             AR
 
 Relacionado al chef
 -------------------
-1. PedidosEnEspera(Atendidos)				CM(JU)
-2. VisualizacionPedidoEnEspera(Atendido)		CM(SO)
-
-
-
-
-
-
-
+1. chef/en-espera                   JU
+2. chef/pedido-espera               SO
 
 
 

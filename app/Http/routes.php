@@ -32,6 +32,7 @@ Route::get('anteriores', 'UsuarioController@getAnteriores');
 // Páginas disponibles para un admin autenticado
 Route::get('bienvenido/admin', 'AdminController@getWelcome');
 Route::get('asignar/menu', 'AdminController@getAsignarMenu');
+Route::get('asignar/platos', 'AdminController@getAsignarPlatos');
 Route::get('pedidos/entregados', 'AdminController@getEntregados');
 Route::get('pedidos/pendientes', 'AdminController@getPendientes');
 Route::get('gestionar/platos', 'AdminController@getGestionarPlatos');
@@ -40,3 +41,8 @@ Route::get('gestionar/detalles', 'AdminController@getGestionarDetalles');
 // Páginas disponibles para un chef autenticado
 Route::get('bienvenido/chef', 'ChefController@getWelcome');
 Route::get('pedidos/en-espera', 'ChefController@getEnEspera');
+
+// CRUD para los detalles
+Route::post('detalle/registrar', 'DetalleController@postRegistrar');
+Route::post('detalle/modificar', 'DetalleController@postModificar');
+Route::post('detalle/eliminar', 'DetalleController@postEliminar');

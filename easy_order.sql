@@ -47,7 +47,7 @@ CREATE TABLE Plato
 	nombre varchar(50) NOT NULL,
 	descripcion varchar(255) NOT NULL,
 	imagen varchar(60), -- path
-	precio float NOT NULL -- referencial
+	precio decimal(8,2) NOT NULL -- referencial
 );
 
 -- Detalles (un detalle puede asociarse a varios platos)
@@ -58,12 +58,14 @@ CREATE TABLE Detalle
 	nombre varchar(50) NOT NULL,
 	descripcion varchar(255) NOT NULL,
 	imagen varchar(60), -- path
-	precio float NOT NULL -- referencial
+	precio decimal(8,2) NOT NULL -- referencial
 );
 
 -- Detalles disponibles para 1 plato específico
 CREATE TABLE PlatoDetalles
 (
+	id int AUTO_INCREMENT PRIMARY KEY,
+
 	plato_id int NOT NULL,
 	detalle_id int NOT NULL,
 
@@ -82,13 +84,14 @@ CREATE TABLE Menu
 -- Detalle de cada menú
 CREATE TABLE MenuPlatos
 (
+	id int AUTO_INCREMENT PRIMARY KEY,
+
 	menu_id int NOT NULL,
 	plato_id int NOT NULL,
 
 	FOREIGN key (menu_id) REFERENCES Menu(id),
-	FOREIGN key (plato_id) REFERENCES Plato(id),
+	FOREIGN key (plato_id) REFERENCES Plato(id)
 
-	PRIMARY KEY (menu_id, plato_id)
 );
 
 
@@ -109,28 +112,26 @@ CREATE TABLE Combo
 -- Platos que incluye un combo
 CREATE TABLE ComboPlatos
 (
+	id int AUTO_INCREMENT PRIMARY KEY,
+
 	combo_id int NOT NULL,
 	FOREIGN KEY (combo_id) REFERENCES Combo(id),
 
 	plato_id int NOT NULL,
-	FOREIGN KEY (plato_id) REFERENCES Plato(id),
+	FOREIGN KEY (plato_id) REFERENCES Plato(id)
 
-	PRIMARY KEY (combo_id, plato_id)
 );
 
 -- Detalles que incluye un plato en un combo
 CREATE TABLE ComboPlatoDetalles
 (
-	combo_id int NOT NULL,
-	FOREIGN KEY (combo_id) REFERENCES Combo(id),
+	id int AUTO_INCREMENT PRIMARY KEY,
 
-	plato_id int NOT NULL,
-	FOREIGN KEY (plato_id) REFERENCES Plato(id),
+	comboplatos_id int NOT NULL,
+	FOREIGN KEY (comboplatos_id) REFERENCES ComboPlatos(id),
 
 	detalle_id int NOT NULL,
-	FOREIGN KEY (detalle_id) REFERENCES Detalle(id),
-
-	PRIMARY KEY (combo_id, plato_id, detalle_id)
+	FOREIGN KEY (detalle_id) REFERENCES Detalle(id)
 );
 
 
@@ -146,31 +147,28 @@ CREATE TABLE Orden
 	FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
 
 	fecha date NOT NULL,
-	importe float NOT NULL,
-	descuento float
+	importe decimal(8,2) NOT NULL,
+	descuento decimal(8,2)
 );
 
 CREATE TABLE OrdenPlatos
 (
+	id int AUTO_INCREMENT PRIMARY KEY,
+
 	orden_id int NOT NULL,
 	FOREIGN KEY (orden_id) REFERENCES Orden(id),
 
 	plato_id int NOT NULL,
-	FOREIGN KEY (plato_id) REFERENCES Plato(id),
-
-	PRIMARY KEY (orden_id, plato_id)
+	FOREIGN KEY (plato_id) REFERENCES Plato(id)
 );
 
 CREATE TABLE OrdenPlatoDetalles
 (
-	orden_id int NOT NULL,
-	FOREIGN KEY (orden_id) REFERENCES Orden(id),
+	id int AUTO_INCREMENT PRIMARY KEY,
 
-	plato_id int NOT NULL,
-	FOREIGN KEY (plato_id) REFERENCES Plato(id),
+	ordenplatos_id int NOT NULL,
+	FOREIGN KEY (ordenplatos_id) REFERENCES OrdenPlatos(id),
 
 	detalle_id int NOT NULL,
-	FOREIGN KEY (detalle_id) REFERENCES Detalle(id),
-
-	PRIMARY KEY (orden_id, plato_id, detalle_id)
+	FOREIGN KEY (detalle_id) REFERENCES Detalle(id)
 );
