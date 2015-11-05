@@ -10,11 +10,25 @@
 @endsection
 
 @section('menu-options')
-    <li class="dropdown"><a href=" {{ url('guardarPlato') }} ">Guardar Plato</a></li>
-    <li class="dropdown"><a href=" {{ url('pedidosPendientes') }}">P. Pendientes</a></li>
-    <li class="dropdown"><a href=" {{ url('pedidosEntregados') }}">P. Entregados</a></li>
-    <li class="dropdown active"><a href=" {{ url('asignarMenu') }}">Asignar Menús</a></li>
-    <li class="dropdown"><a href="{{ url('/') }}">Cerrar sesión</a></li>
+    <li class="dropdown"><a href="#">Home</a></li>
+    <li class="dropdown">
+        <a href="#">Platos y detalles <b class="caret"></b></a>
+        <ul class="dropdown-menu" style="display: none;">
+            <li><a href="{{ url('gestionar/platos') }}">Gestionar platos</a></li>
+            <li><a href="{{ url('gestionar/detalles') }}">Gestionar detalles</a></li>
+        </ul>
+    </li>
+    <li class="dropdown active"><a href="{{ url('asignar/menu') }}">Menú del día</a></li>
+    <li class="dropdown">
+        <a href="#">Pedidos <b class="caret"></b></a>
+        <ul class="dropdown-menu" style="display: none;">
+            <li><a href="{{ url('pedidos/pendientes') }}">Pedidos pendientes</a></li>
+            <li><a href="{{ url('pedidos/entregados') }}">Pedidos entregados</a></li>
+        </ul>
+    </li>
+    <li class="dropdown"><a href="{{ url('gestionar/chefs') }}">Chefs</a></li>
+
+    <li class="dropdown"><a href="{{ url('salir') }}">Salir</a></li>
 @endsection
 
 @section('content')
@@ -22,260 +36,31 @@
         <div class="panel with-nav-tabs panel-default">
             <div class="panel-heading">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#lunes" data-toggle="tab">Lunes</a></li>
-                    <li class=""><a href="#martes" data-toggle="tab">Martes</a></li>
-                    <li class=""><a href="#miercoles" data-toggle="tab">Miercoles</a></li>
-                    <li class=""><a href="#jueves" data-toggle="tab">Jueves</a></li>
-                    <li class=""><a href="#viernes" data-toggle="tab">Viernes</a></li>
-                    <li class=""><a href="#sabado" data-toggle="tab">Sábado</a></li>
-                    <li class=""><a href="#domingo" data-toggle="tab">Domingo</a></li>
+                    @for($i=0; $i<7; ++$i)
+                    <li @if($i==0) class="active" @endif>
+                        <a href="#{{ $diasSlug[$i]  }}" data-toggle="tab">{{ $diasName[$i]  }}</a>
+                    </li>
+                    @endfor
                 </ul>
             </div>
             <div class="panel-body">
                 <div class="tab-content">
-                    <div class="tab-pane fade active in" id="lunes">
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Entradas / Sopas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/entrada.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Segundos</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/segundo.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Postres</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/postre.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Bebidas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/bebida.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
 
-                    <div class="tab-pane fade" id="martes">
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Entradas / Sopas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/entrada.jpg') }}" class="img-rounded img-w-h">
+                    @foreach($diasSlug as $dia)
+                    <div class="tab-pane fade @if ($dia=="lunes") active in @endif" id="{{ $dia }}">
+                        @foreach($tipos as $tipo)
+                            <a href="{{ url('asignar/platos') }}/{{ $dia }}/{{ $tipo->descripcion }}" class="col-md-3">
+                                <div class="panel panel-default">
+                                    <h3 class="panel-heading">{{ $tipo->descripcion }}</h3>
+                                    <div class="panel-body">
+                                        <img src="{{ asset('images/tipos') }}/{{ $tipo->descripcion }}.jpg" class="img-rounded img-w-h">
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Segundos</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/segundo.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Postres</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/postre.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Bebidas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/bebida.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        @endforeach
                     </div>
+                    @endforeach
 
-                    <div class="tab-pane fade" id="miercoles">
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Entradas / Sopas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/entrada.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Segundos</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/segundo.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Postres</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/postre.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Bebidas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/bebida.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="tab-pane fade" id="jueves">
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Entradas / Sopas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/entrada.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Segundos</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/segundo.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Postres</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/postre.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Bebidas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/bebida.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="tab-pane fade" id="viernes">
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Entradas / Sopas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/entrada.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Segundos</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/segundo.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Postres</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/postre.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Bebidas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/bebida.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="tab-pane fade" id="sabado">
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Entradas / Sopas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/entrada.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Segundos</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/segundo.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Postres</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/postre.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Bebidas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/bebida.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="tab-pane fade" id="domingo">
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Entradas / Sopas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/entrada.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Segundos</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/segundo.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Postres</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/postre.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="col-md-3">
-                            <div class="panel panel-default">
-                                <h3 class="panel-heading">Bebidas</h3>
-                                <div class="panel-body">
-                                    <img src="{{ asset('images/bebida.jpg') }}" class="img-rounded img-w-h">
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

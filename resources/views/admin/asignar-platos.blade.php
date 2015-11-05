@@ -4,17 +4,38 @@
     <style>
         .plato{
             margin: 1.4em 0;
+            height: 165px;
         }
-
+        .img-thumbnail {
+            width: 100px;
+            height: 100px;
+        }
+        .detalle{
+            line-height: 100%;
+        }
     </style>
 @endsection
 
 @section('menu-options')
-    <li class="dropdown"><a href="#">Galería</a></li>
-    <li class="dropdown active"><a href="#">Solicitar</a></li>
-    <li class="dropdown"><a href="#">Menús anteriores</a></li>
-    <li class="dropdown"><a href="{{ url('seguimientoOrden') }}">Confirmar</a></li>
-    <li class="dropdown"><a href="{{ url('/') }}">Cerrar sesión</a></li>
+    <li class="dropdown"><a href="#">Home</a></li>
+    <li class="dropdown">
+        <a href="#">Platos y detalles <b class="caret"></b></a>
+        <ul class="dropdown-menu" style="display: none;">
+            <li><a href="{{ url('gestionar/platos') }}">Gestionar platos</a></li>
+            <li><a href="{{ url('gestionar/detalles') }}">Gestionar detalles</a></li>
+        </ul>
+    </li>
+    <li class="dropdown active"><a href="{{ url('asignar/menu') }}">Menú del día</a></li>
+    <li class="dropdown">
+        <a href="#">Pedidos <b class="caret"></b></a>
+        <ul class="dropdown-menu" style="display: none;">
+            <li><a href="{{ url('pedidos/pendientes') }}">Pedidos pendientes</a></li>
+            <li><a href="{{ url('pedidos/entregados') }}">Pedidos entregados</a></li>
+        </ul>
+    </li>
+    <li class="dropdown"><a href="{{ url('gestionar/chefs') }}">Chefs</a></li>
+
+    <li class="dropdown"><a href="{{ url('salir') }}">Salir</a></li>
 @endsection
 
 @section('content')
@@ -24,30 +45,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Platos para seleccionar</div>
                 <div id="original" class="panel-body">
-                    <div id="ele" class="plato col-md-3 text-center">
-                        <img  class="img-rounded" src="http://lorempixel.com/140/140/food/0" width="100" height="100">
-                        <input type="checkbox" name="origen" value="ele"/>PLATO XYZ
+                    @foreach($noAsignados as $plato)
+                    <div id="ele{{ $plato->id }}" class="plato col-md-4 text-center">
+                        <img  class="img-thumbnail img-rounded" src="{{ asset('images/platos') }}/{{ $plato->imagen }}.jpg">
+                        <input type="checkbox" name="origen" value="ele{{ $plato->id }}"/> <p class="detalle">{{ $plato->nombre }}</p>
                     </div>
-                    <div id="ele2" class="plato col-md-3 text-center">
-                        <img class="img-rounded" src="http://lorempixel.com/140/140/food/1" width="100" height="100">
-                        <input type="checkbox" name="origen" value="ele2"/>PLATO XYZ
-                    </div>
-                    <div id="ele3" class="plato col-md-3 text-center">
-                        <img class="img-rounded" src="http://lorempixel.com/140/140/food/2" width="100" height="100">
-                        <input type="checkbox" name="origen" value="ele3"/>PLATO XYZ
-                    </div>
-                    <div id="ele4" class="plato col-md-3 text-center">
-                        <img  class="img-rounded" src="http://lorempixel.com/140/140/food/0" width="100" height="100">
-                        <input type="checkbox" name="origen" value="ele4"/>PLATO XYZ
-                    </div>
-                    <div id="ele5" class="plato col-md-3 text-center">
-                        <img class="img-rounded" src="http://lorempixel.com/140/140/food/1" width="100" height="100">
-                        <input type="checkbox" name="origen" value="ele5"/>PLATO XYZ
-                    </div>
-                    <div id="ele6" class="plato col-md-3 text-center">
-                        <img class="img-rounded" src="http://lorempixel.com/140/140/food/2" width="100" height="100">
-                        <input type="checkbox" name="origen" value="ele6"/>PLATO XYZ
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -68,13 +71,11 @@
     </div>
     <div class="clearfix visible-xs-block"></div>
     <div class="col-md-12">
-    <a type="button" class="btn btn-primary pull-left" href="bienvenido/welcome">Regresar</a>
-
-    <a type="button" class="btn btn-success pull-right " href="{{  url('gestionar/detalles')  }}">Asignar detalles</a>
+    <a type="button" class="btn btn-primary pull-right" href="bienvenido/welcome">Regresar</a>
 
     </div>
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('scripts/admin/gestionar-platos.js') }}"></script>
+    <script src="{{ asset('scripts/admin/asignar-platos.js') }}"></script>
 @endsection

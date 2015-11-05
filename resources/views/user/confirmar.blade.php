@@ -35,7 +35,7 @@
                     </tr>
                     <tr>
                         <th>Hora del pedido</th>
-                        <td>{{ $fecha }}   -    {{ $hora }}</td>
+                        <td>{{ $fecha }} - {{ $hora }}</td>
                     </tr>
                     <tr >
                         <th>Hora de entrega</th>

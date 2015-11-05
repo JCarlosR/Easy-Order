@@ -22,7 +22,7 @@ function mostrarEditar() {
     var nombre = $(this).next().text();
     $modalEditar.find('[name="nombre"]').val(nombre);
 
-    var descripcion = $(this).data('descripcion');
+    var descripcion = $(this).attr('title');
     $modalEditar.find('[name="descripcion"]').val(descripcion);
 
     var precio = $(this).data('precio');

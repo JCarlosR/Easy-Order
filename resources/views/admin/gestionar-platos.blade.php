@@ -11,6 +11,7 @@
             width: 100px;
             height: 100px;
         }
+
         .detalle{
             line-height: 100%;
         }
@@ -65,15 +66,15 @@
         @endif
 
         <div class="col-md-6">
-            <h1>Gestionar detalles</h1>
+            <h1>Gestionar platos</h1>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    @foreach($detalles as $detalle)
+                    @foreach($platos as $plato)
                         <div class="plato col-md-3 text-center">
-                            <img data-id="{{ $detalle->id }}" data-precio="{{ $detalle->precio }}" class="img-thumbnail" title="{{ $detalle->descripcion }}"
-                                 src="{{ asset('images/detalles') }}/{{ $detalle->imagen }}.jpg">
+                            <img data-id="{{ $plato->id }}" data-precio="{{$plato->precio}}" class="img-thumbnail" title="{{ $plato->descripcion }}"
+                                 src="{{ asset('images/platos') }}/{{ $plato->imagen }}.jpg">
 
-                            <p class="detalle">{{ $detalle->nombre }}</p>
+                            <p class="detalle">{{ $plato->nombre }}</p>
                             <span class="glyphicon glyphicon-remove" style="color:red" data-eliminar></span>
 
                         </div>
@@ -85,22 +86,22 @@
             </div>
         </div>
         <div class="col-md-6">
-            <h1>Nuevo detalle</h1>
+            <h1>Nuevo plato</h1>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form action="{{ url('detalle/registrar') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('plato/registrar') }}" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" name="nombre" placeholder="Ingrese nombre del detalle" value="{{ old('nombre') }}" required/>
+                            <input type="text" class="form-control" name="nombre" placeholder="Ingrese nombre del plato" value="{{ old('nombre') }}" required/>
                         </div>
                         <div class="form-group">
                             <label for="descripcion">Descripción</label>
-                            <input type="text" class="form-control" name="descripcion" placeholder="Ingrese descripción del detalle" value="{{ old('descripcion') }}" required/>
+                            <input type="text" class="form-control" name="descripcion" placeholder="Ingrese descripción del plato" value="{{ old('descripcion') }}" required/>
                         </div>
                         <div class="form-group">
                             <label for="precio">Precio</label>
-                            <input type="number" step="0.01" min="0" class="form-control" name="precio" placeholder="Ingrese precio del detalle" value="{{ old('precio') }}" required/>
+                            <input type="number" step="0.01" min="0" class="form-control" name="precio" placeholder="Ingrese precio del plato" value="{{ old('precio') }}" required/>
                         </div>
                         <div class="form-group">
                             <label for="imagen">Imagen</label>
@@ -123,9 +124,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Editar detalle</h4>
+                    <h4 class="modal-title">Editar plato</h4>
                 </div>
-                <form action="{{ url('detalle/modificar') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('plato/modificar') }}" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
 
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -164,15 +165,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Eliminar detalle</h4>
+                    <h4 class="modal-title">Eliminar plato</h4>
                 </div>
-                <form action="{{ url('detalle/eliminar') }}" method="POST">
+                <form action="{{ url('plato/eliminar') }}" method="POST">
                     <div class="modal-body">
 
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
                         <div class="form-group">
-                            <label for="nombre">¿Desea eliminar el siguiente detalle?</label>
+                            <label for="nombre">¿Desea eliminar el siguiente plato?</label>
                             <input type="text" readonly class="form-control" name="nombre"/>
                         </div>
                     </div>
@@ -193,3 +194,4 @@
 @section('scripts')
     <script src="{{ asset('scripts/admin/gestionar-detalles.js') }}"></script>
 @endsection
+

@@ -15,7 +15,7 @@ class AuthController extends Controller
     // Personalización del sistema de autenticación
     protected $username = "username";
     protected $loginPath = "ingresar";
-    protected $redirectPath = 'bienvenido/usuario';
+    protected $redirectPath = '/';
 
     /**
      * Create a new authentication controller instance.

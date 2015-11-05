@@ -21,4 +21,10 @@ class Plato extends Model
         return $this->hasMany('App\PlatoDetalles', 'plato_id');
     }
 
+    // Cada plato se puede relacionar con varios menus
+    public function menu_platos()
+    {
+        return $this->hasMany('App\MenuPlatos', 'plato_id');
+    }
+
 }

@@ -1,40 +1,40 @@
 insert into Plato (tipo_id,nombre,descripcion,imagen,precio) values
 	(1,
 	'Caldo de Gallina',
-	'El Plato constara de la presa de gallina y caldo', 
+	'El plato constara de la presa de gallina y caldo',
 	'caldogallina', -- path
 	5),
 	(1,
 	'Shambar',
-	'El Plato constara del pellejo, caldo y menestras', 
+	'El plato constará del pellejo, caldo y menestras',
 	'shambar', -- path
 	5),
-	(2,
+	(1,
 	'Papa a la Huancaina',
-	'El Plato constara de crema Huancaina, huevo y papa',
+	'El plato constara de crema Huancaina, huevo y papa',
 	'papahuancaina', -- path
 	3),
-	(3,
+	(2,
 	'Arroz con Pato',
-	'El Plato constara del pato, guiso y arroz', 
+	'El plato constara del pato, guiso y arroz',
 	'pato', -- path
 	5),
-	(3,
+	(2,
 	'Lomito saltado',
-	'El Plato constara del lomito tradicional y papa frita', 
+	'El plato constara del lomito tradicional y papa frita',
 	'lomito', -- path
 	5),
-	(4,
+	(3,
 	'Mazamorra',
-	'El platillo constara de una vaso de mazamorra', 
+	'El platillo constara de un vaso de mazamorra',
 	'mazamorra', -- path
 	5),
-	(4,
+	(3,
 	'Ensalada de Fruta',
-	'El Plato constara del porciónes de platano, papaya y mandarina', 
+	'El plato constara del porciones de platano, papaya y mandarina',
 	'ensaladaf', -- path
 	5),
-	(5,
+	(4,
 	'Jugo especial',
 	'El jugo constara de papaya y piña', 
 	'jugoespecial', -- path
@@ -142,3 +142,7 @@ insert into Detalle (nombre,descripcion,imagen,precio) values
 -- Detalles disponibles para 1 plato específico
 insert into PlatoDetalles (plato_id,detalle_id) values (1,1),(1,2),(1,3),(2,2),(2,4),(3,5),(3,6),(4,7),(4,8),(4,9),
 	(5,10),(5,7),(6,11),(6,12),(7,13),(7,14),(8,15),(8,16);
+
+insert into `usuario` (`id`, `username`, `full_name`, `password`, `phone`, `email`, `tipo`, `remember_token`, `updated_at`, `created_at`) VALUES
+(1, 'administrador', 'Administrador Easy-Order', '$2y$10$9sL.j10Zg9FQUZj.iLvk3uf/VKLcgQoPGksbhAMW0V.EyC1KKvXbq', '555555555', 'admin@admin.com', 2, NULL, '2015-11-05 02:07:01', '2015-11-05 02:07:01'),
+(2, 'chef', 'Chef Easy-Order', '$2y$10$9sL.j10Zg9FQUZj.iLvk3uf/VKLcgQoPGksbhAMW0V.EyC1KKvXbq', '555555555', 'chef@chef.com', 1, NULL, '2015-11-05 02:07:01', '2015-11-05 02:07:01');

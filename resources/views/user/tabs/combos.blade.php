@@ -34,7 +34,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAddFO">
+                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAddFO" onclick="location.href='previsualizar'"
                         <span class="glyphicon glyphicon-plus"></span> Ver más
                     </button>
                 </div>

@@ -29,11 +29,10 @@ CREATE TABLE Tipo
 
 -- Tipos por defecto
 INSERT Tipo (descripcion) VALUES
-('Sopa'),
-('Entrada'),
-('Segundo'),
-('Postre'),
-('Bebida');
+('Entradas'),
+('Segundos'),
+('Postres'),
+('Bebidas');
 
 
 -- Información de cada plato (independiente)
