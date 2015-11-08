@@ -12,7 +12,9 @@
             margin: 1.4em 0;
         }
         .plato img {
-            border-radius: 1.8em;
+            border-radius: 10px;
+            width: 200px;
+            height: 150px;
             display: block;
             margin: 0 auto;
         }

@@ -27,4 +27,9 @@ class Plato extends Model
         return $this->hasMany('App\MenuPlatos', 'plato_id');
     }
 
+    //Cada plato tiene un tipo de plato
+    public function tipo()
+    {
+        return $this->belongsTo('App\Tipo', 'tipo_id');
+    }
 }

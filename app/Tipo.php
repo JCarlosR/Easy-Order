@@ -18,7 +18,6 @@ class Tipo extends Model
     // Cada tipo engloba platos
     public function platos()
     {
-        return $this->hasMany('App\Plato', 'tipo_id');
+        return $this->hasMany('App\Plato', 'plato_id');
     }
-
 }

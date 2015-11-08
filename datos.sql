@@ -143,6 +143,11 @@ insert into Detalle (nombre,descripcion,imagen,precio) values
 insert into PlatoDetalles (plato_id,detalle_id) values (1,1),(1,2),(1,3),(2,2),(2,4),(3,5),(3,6),(4,7),(4,8),(4,9),
 	(5,10),(5,7),(6,11),(6,12),(7,13),(7,14),(8,15),(8,16);
 
+
+insert into Menu(fecha)VALUES('2015-11-7');
+insert into MenuPlatos(menu_id,plato_id) VALUES
+(1,1),(1,2),(1,4),(1,6),(1,8);
+
 insert into `usuario` (`id`, `username`, `full_name`, `password`, `phone`, `email`, `tipo`, `remember_token`, `updated_at`, `created_at`) VALUES
 (1, 'administrador', 'Administrador Easy-Order', '$2y$10$9sL.j10Zg9FQUZj.iLvk3uf/VKLcgQoPGksbhAMW0V.EyC1KKvXbq', '555555555', 'admin@admin.com', 2, NULL, '2015-11-05 02:07:01', '2015-11-05 02:07:01'),
 (2, 'chef', 'Chef Easy-Order', '$2y$10$9sL.j10Zg9FQUZj.iLvk3uf/VKLcgQoPGksbhAMW0V.EyC1KKvXbq', '555555555', 'chef@chef.com', 1, NULL, '2015-11-05 02:07:01', '2015-11-05 02:07:01');

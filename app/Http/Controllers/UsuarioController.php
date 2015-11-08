@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Menu;
+use App\Plato;
+use App\PlatoDetalles;
 use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller {
@@ -16,7 +19,34 @@ class UsuarioController extends Controller {
 
     public function getSolicitar()
     {
-        return view('user.solicitar');
+        $platos = Plato::all();
+        $menu = Menu::where('fecha','2015-11-7')->first();
+        $relaciones = $menu->menu_platos;
+        $entradas = [];
+        $segundos = [];
+        $postres = [];
+        $bebidas = [];
+
+        foreach ( $relaciones as $relacion )
+        {
+            switch ( $relacion->plato->tipo->descripcion )
+            {
+                case "Entradas":
+                    $entradas[] = $relacion->plato;
+                    break;
+                case "Segundos":
+                    $segundos[] = $relacion->plato;
+                    break;
+                case "Postres" :
+                    $postres[]  = $relacion->plato;
+                    break;
+                case "Bebidas" :
+                    $bebidas[]  = $relacion->plato;
+                    break;
+            }
+        }
+
+        return view('user.solicitar')->with(compact(['entradas','segundos','postres','bebidas']));
     }
 
     public function getPrevisualizar()
@@ -71,5 +101,4 @@ class UsuarioController extends Controller {
     {
         return view('user.anteriores');
     }
-
 }
