@@ -69,3 +69,9 @@
         </div>
     </div>
 @endsection
+
+
+
+@section('scripts')
+    <script src="{{ asset('scripts/user/solicitar.js') }}"></script>
+@endsection

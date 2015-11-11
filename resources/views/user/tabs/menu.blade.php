@@ -17,8 +17,8 @@
                     <div class="panel-body">
                         @foreach( $entradas as $entrada)
                             <div class="col-md-3 text-center plato">
-                                <input type="checkbox" value=" "/> {{$entrada->nombre}}
-                                <img src="{{ asset('images/platos') }}/{{ $entrada->imagen}}.jpg"/">
+                                <input type="checkbox" value=" "/> {{ $entrada->nombre }}
+                                <img src="{{ asset('images/platos') }}/{{ $entrada->imagen }}.jpg" data-id="{{ $entrada->id }}" class="img-thumbnail"/>
                             </div>
                         @endforeach
                     </div>
@@ -31,8 +31,8 @@
                     <div class="panel-body">
                         @foreach( $segundos   as $segundo)
                             <div class="col-md-3 plato text-center">
-                                <input type="checkbox" value=" "/> {{$segundo->nombre}}
-                                <img src="{{ asset('images/platos') }}/{{ $segundo->imagen}}.jpg"/>
+                                <input type="checkbox" value=" "/> {{ $segundo->nombre }}
+                                <img src="{{ asset('images/platos') }}/{{ $segundo->imagen }}.jpg" data-id="{{ $segundo->id }}" class="img-thumbnail"/>
                             </div>
                         @endforeach
                     </div>
@@ -45,8 +45,8 @@
                     <div class="panel-body">
                         @foreach( $postres   as $postre)
                             <div class="col-md-3 plato text-center">
-                                <input type="checkbox" value=" "/> {{$postre->nombre}}
-                                <img src="{{ asset('images/platos') }}/{{ $postre->imagen}}.jpg"/>
+                                <input type="checkbox" value=" "/> {{ $postre->nombre }}
+                                <img src="{{ asset('images/platos') }}/{{ $postre->imagen }}.jpg" data-id="{{ $postre->id }}" class="img-thumbnail"/>
                             </div>
                         @endforeach
                     </div>
@@ -59,8 +59,8 @@
                     <div class="panel-body">
                         @foreach( $bebidas   as $bebida)
                             <div class="col-md-3 plato text-center">
-                                <input type="checkbox" value=" "/> {{$bebida->nombre}}
-                                <img src="{{ asset('images/platos') }}/{{ $bebida->imagen}}.jpg"/>
+                                <input type="checkbox" value=" "/> {{ $bebida->nombre }}
+                                <img src="{{ asset('images/platos') }}/{{ $bebida->imagen}}.jpg" data-id="{{ $bebida->id }}" class="img-thumbnail"/>
                             </div>
                         @endforeach
                     </div>
@@ -74,22 +74,40 @@
 </button>
 
 @section('extra-content')
-    <div id="myModal" class="modal fade in">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Detalles del plato</h4>
-                </div>
-                <div class="modal-body">
-                    <img src="" alt="">
-
-                </div>
-                <div class="modal-footer">
-                    <div class="btn-group">
-                        <button class="btn btn-danger form-control" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+    @parent
+    @foreach( $platos as $plato )
+        <div id="modalDetalles" class="modal fade in" data-plato="{{ $plato->id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Elija los detalles</h4>
                     </div>
+                    <form action="{{ url('#') }}" method="POST">
+                        <div class="modal-body">
+                            <div class="tab-pane fade in ">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    @foreach($plato->detalles as $detalle)
+                                        <div class="col-md-3 plato text-center">
+                                            <input type="checkbox" value=" "/> {{ $detalle->nombre }}
+                                            <img src="{{ asset('images/detalles') }}/{{ $detalle->imagen}}.jpg" data-id="{{ $detalle->id }}" class="img-thumbnail"/>
+                                        </div>
+                                    @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-group pull-left">
+                                <button class="btn btn-danger pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                            </div>
+                            <div class="btn-group pull-right">
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> Guardar plato</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
+    @endforeach
 @endsection

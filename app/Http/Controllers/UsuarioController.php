@@ -19,7 +19,7 @@ class UsuarioController extends Controller {
 
     public function getSolicitar()
     {
-        $platos = Plato::all();
+
         $menu = Menu::where('fecha','2015-11-7')->first();
         $relaciones = $menu->menu_platos;
         $entradas = [];
@@ -27,8 +27,11 @@ class UsuarioController extends Controller {
         $postres = [];
         $bebidas = [];
 
+
+
         foreach ( $relaciones as $relacion )
         {
+            $platos[] = $relacion->plato;
             switch ( $relacion->plato->tipo->descripcion )
             {
                 case "Entradas":
@@ -46,7 +49,7 @@ class UsuarioController extends Controller {
             }
         }
 
-        return view('user.solicitar')->with(compact(['entradas','segundos','postres','bebidas']));
+        return view('user.solicitar')->with(compact(['entradas','segundos','postres','bebidas', 'platos']));
     }
 
     public function getPrevisualizar()
