@@ -62,7 +62,10 @@
                 </div>
                 <!-- Tab Menú del día -->
                 <div id="menu" class="tab-pane fade">
-                    @include('user.tabs.menu')
+                    <form action="{{ url('previsualizar') }}" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        @include('user.tabs.menu')
+                    </form>
                 </div>
             </div>
 

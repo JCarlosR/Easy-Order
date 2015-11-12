@@ -24,7 +24,7 @@ Route::get('salir', 'Auth\AuthController@getLogout');
 // Páginas disponibles para un usuario autenticado
 Route::get('bienvenido/usuario', 'UsuarioController@getWelcome');
 Route::get('solicitar', 'UsuarioController@getSolicitar');
-Route::get('previsualizar', 'UsuarioController@getPrevisualizar');
+Route::post('previsualizar', 'UsuarioController@getPrevisualizar');
 Route::get('confirmar', 'UsuarioController@getConfirmar');
 Route::get('recepcion', 'UsuarioController@getRecepcion');
 Route::get('anteriores', 'UsuarioController@getAnteriores');

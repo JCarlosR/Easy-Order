@@ -36,13 +36,12 @@
                         </div>
                         <div id="collapseOne" class="panel-collapse collapse in">
                             <div class="panel-body">
-                                <p>Plato X</p>
-
-                                <p class="detalle">Detalle 1</p>
-
-                                <p class="detalle">Detalle 2</p>
-
-                                <p class="detalle">Detalle 3</p>
+                                @foreach($entradas as $entrada)
+                                    <p>{{ $entrada->nombre }}</p>
+                                    @foreach($detalles as $detalle)
+                                        <p class="detalle">$detalle[$entrada->id]</p>
+                                    @endforeach
+                                @endforeach
                             </div>
                         </div>
                     </div>

@@ -21,4 +21,8 @@ class Detalle extends Model
         return $this->hasMany('App\PlatoDetalles', 'detalle_id');
     }
 
+    public function platos()
+    {
+        return $this->belongsToMany('App\Plato', 'PlatoDetalles', "detalle_id");
+    }
 }

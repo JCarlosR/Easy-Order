@@ -5,8 +5,6 @@ function funcPrincipal() {
     $('.img-thumbnail').on('click', mostrarDetalles);
 }
 
-
-
 function mostrarDetalles() {
     // Obtener el id del plato del data-id
     var idPlato = $(this).data('id');

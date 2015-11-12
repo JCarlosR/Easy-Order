@@ -36,6 +36,6 @@ class Plato extends Model
     //Cada plato presenta varios detalles
     public function detalles()
     {
-        return $this->belongsToMany('App\Detalle', 'PlatoDetalles', "detalle_id");
+        return $this->belongsToMany('App\Detalle', 'PlatoDetalles', "plato_id");
     }
 }

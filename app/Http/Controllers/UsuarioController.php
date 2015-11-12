@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers;
 
+
 use App\Menu;
 use App\Plato;
 use App\PlatoDetalles;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class UsuarioController extends Controller {
 
@@ -22,12 +24,11 @@ class UsuarioController extends Controller {
 
         $menu = Menu::where('fecha','2015-11-7')->first();
         $relaciones = $menu->menu_platos;
+
         $entradas = [];
         $segundos = [];
         $postres = [];
         $bebidas = [];
-
-
 
         foreach ( $relaciones as $relacion )
         {
@@ -52,9 +53,30 @@ class UsuarioController extends Controller {
         return view('user.solicitar')->with(compact(['entradas','segundos','postres','bebidas', 'platos']));
     }
 
-    public function getPrevisualizar()
+    public function getPrevisualizar(Request $request)
     {
-        return view('user.orden');
+        $entradas_id = $request->get('entradas');
+
+        $entradas = Plato::find($entradas_id);
+        $segundos = Plato::find( $request->get('segundos') );
+        $postres = Plato::find( $request->get('postres') );
+        $bebidas = Plato::find( $request->get('bebidas') );
+
+        $detalles = [];
+        foreach($entradas_id as $entrada) {
+            $detalles[$entrada] = $request->get('detalles'+$entrada);
+        }
+        foreach($segundos as $segundo) {
+            $detalles[$segundo] = $request->get('detalles'+$segundo);
+        }
+        foreach($postres as $postre) {
+            $detalles[$postre] = $request->get('detalles'+$postre);
+        }
+        foreach($bebidas as $bebida) {
+            $detalles[$bebida] = $request->get('detalles'+$bebida);
+        }
+
+        return view('user.orden')->with(compact(['entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
     }
 
     public function getConfirmar()
@@ -63,7 +85,7 @@ class UsuarioController extends Controller {
         $hora = date('h:i A',time() - 3600*date('I'));
         $time = getdate(time());
         $dia = $time['wday'];
-        $dia_mes=$time['mday'];
+        $dia_mes = $time['mday'];
         $mes = $time['mon'];
         $year = $time['year'];
         $dia_name = "";
