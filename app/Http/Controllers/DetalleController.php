@@ -123,4 +123,78 @@ class DetalleController extends Controller {
 		$data['notif'] = "El detalle se ha eliminado correctamente.";
 		return redirect('gestionar/detalles')->with($data);
 	}
+
+
+	// Webservice API
+	public function index()
+	{
+		return Detalle::all();
+	}
+
+	public function show($id)
+	{
+		return Detalle::find($id);
+	}
+
+	public function store(Request $request)
+	{
+		$validator = Validator::make($request->all(), [
+			'nombre' => 'required|min:3|max:50',
+			'descripcion' => 'required|min:5|max:255',
+			'precio' => 'required|min:0'
+		]);
+
+
+		if ($validator->fails())
+			return [
+				'created' => false,
+				'errors'  => $validator->errors()->all()
+			];
+
+		Detalle::create([
+			'nombre'	  => $request->get('nombre'),
+			'descripcion' => $request->get('descripcion'),
+			'precio'      => $request->get('precio')
+		]);
+
+		return ['created' => true];
+	}
+
+	public function update($id, Request $request)
+	{
+		$validator = Validator::make($request->all(), [
+			'nombre'      => 'required|min:3|max:50',
+			'descripcion' => 'required|min:5|max:255',
+			'precio'      => 'required|min:0',
+			'id'		  => 'exists:Detalle,id'
+		]);
+
+		if ($validator->fails())
+			return [
+				'updated' => false,
+				'errors'  => $validator->errors()->all()
+			];
+
+		$detalle = Detalle::find($id);
+		$detalle->nombre = $request->get('nombre');
+		$detalle->descripcion = $request->get('descripcion');
+		$detalle->precio = $request->get('precio');
+		$detalle->save();
+
+		return ['updated' => true];
+	}
+
+	public function destroy($id)
+	{
+		$detalle = Detalle::find($id);
+
+		if (! $detalle)
+			return ['deleted' => false, 'error' => 'El plato indicado no existe.'];
+
+		if ($detalle->detalles->count()>0)
+			return ['deleted' => false, 'error' => 'Deben eliminarse primero los detalles asociados.'];
+
+		$detalle->delete();
+		return ['deleted' => true];
+	}
 }

@@ -49,3 +49,9 @@ Route::post('detalle/eliminar', 'DetalleController@postEliminar');
 
 
 // Rutas referentes al webservice que consumirá la app iOS
+
+// Platos API
+Route::resource('plato', 'PlatoController', ['only' => ['index', 'store', 'update', 'destroy', 'show']]);
+
+// Detalles API
+Route::resource('detalle', 'DetalleController', ['only' => ['index', 'store', 'update', 'destroy', 'show']]);
