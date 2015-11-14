@@ -1,24 +1,17 @@
 <?php
 
+// Página principal
+Route::get('/', 'HomeController@getWelcome');
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        switch (Auth::user()->tipo) {
-            case 0: return view('user.welcome');
-            case 1: return view('chef.welcome');
-            case 2: return view('admin.welcome');
-        }
-    }
-
-    return view('home');
-});
-
+// Login
 Route::get('ingresar', 'Auth\AuthController@getLogin');
 Route::post('ingresar', 'Auth\AuthController@postLogin');
 
+// Registro
 Route::get('registro', 'Auth\AuthController@getRegister');
 Route::post('registro', 'Auth\AuthController@postRegister');
 
+// Logout
 Route::get('salir', 'Auth\AuthController@getLogout');
 
 // Páginas disponibles para un usuario autenticado
@@ -53,3 +46,6 @@ Route::post('plato/eliminar', 'PlatoController@postEliminar');
 Route::post('detalle/registrar', 'DetalleController@postRegistrar');
 Route::post('detalle/modificar', 'DetalleController@postModificar');
 Route::post('detalle/eliminar', 'DetalleController@postEliminar');
+
+
+// Rutas referentes al webservice que consumirá la app iOS
