@@ -55,3 +55,6 @@ Route::resource('plato', 'PlatoController', ['only' => ['index', 'store', 'updat
 
 // Detalles API
 Route::resource('detalle', 'DetalleController', ['only' => ['index', 'store', 'update', 'destroy', 'show']]);
+
+//API Menú
+Route::resource('menu', 'MenuController', ['only' => ['index', 'show']]);
