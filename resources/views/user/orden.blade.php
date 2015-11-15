@@ -36,12 +36,13 @@
                         </div>
                         <div id="collapseOne" class="panel-collapse collapse in">
                             <div class="panel-body">
-                                @foreach($entradas as $entrada)
-                                    <p>{{ $entrada->nombre }}</p>
-                                    @foreach($detalles as $detalle)
-                                        <p class="detalle">$detalle[$entrada->id]</p>
+                                @if($entradas)
+                                    @foreach($entradas as $entrada)
+                                        <p>{{ $entrada->nombre }}</p>
+                                            <p class="detalle">Detalle 1</p>
+                                            <p class="detalle">Detalle 2</p>
                                     @endforeach
-                                @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -55,13 +56,13 @@
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <p>Plato X</p>
-
-                                <p class="detalle">Detalle 1</p>
-
-                                <p class="detalle">Detalle 2</p>
-
-                                <p class="detalle">Detalle 3</p>
+                                @if($segundos)
+                                    @foreach($segundos as $segundo)
+                                        <p>{{ $segundo->nombre }}</p>
+                                        <p class="detalle">Detalle 1</p>
+                                        <p class="detalle">Detalle 2</p>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -75,13 +76,13 @@
                         </div>
                         <div id="collapseThree" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <p>Plato X</p>
-
-                                <p class="detalle">Detalle 1</p>
-
-                                <p class="detalle">Detalle 2</p>
-
-                                <p class="detalle">Detalle 3</p>
+                                @if($postres)
+                                    @foreach($postres as $postre)
+                                        <p>{{ $postre->nombre }}</p>
+                                        <p class="detalle">Detalle 1</p>
+                                        <p class="detalle">Detalle 2</p>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -94,13 +95,13 @@
                         </div>
                         <div id="collapseFour" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <p>Plato X</p>
-
-                                <p class="detalle">Detalle 1</p>
-
-                                <p class="detalle">Detalle 2</p>
-
-                                <p class="detalle">Detalle 3</p>
+                                @if($bebidas)
+                                    @foreach($bebidas as $bebida)
+                                        <p>{{ $bebida->nombre }}</p>
+                                        <p class="detalle">Detalle 1</p>
+                                        <p class="detalle">Detalle 2</p>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>

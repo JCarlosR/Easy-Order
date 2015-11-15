@@ -18,8 +18,8 @@
             display: block;
             margin: 0 auto;
         }
-        .plato input[type="checkbox"] {
-
+        .alto-det {
+            height: 70px;
         }
     </style>
 @endsection

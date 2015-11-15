@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\Combo;
 use App\Menu;
 use App\Plato;
 use App\PlatoDetalles;
@@ -21,7 +22,9 @@ class UsuarioController extends Controller {
 
     public function getSolicitar()
     {
-
+        //Combos
+        $combos = Combo::all();
+        // Menu del día
         $menu = Menu::where('fecha','2015-11-7')->first();
         $relaciones = $menu->menu_platos;
 
@@ -50,7 +53,7 @@ class UsuarioController extends Controller {
             }
         }
 
-        return view('user.solicitar')->with(compact(['entradas','segundos','postres','bebidas', 'platos']));
+        return view('user.solicitar')->with(compact(['combos','entradas','segundos','postres','bebidas', 'platos']));
     }
 
     public function getPrevisualizar(Request $request)
@@ -62,7 +65,7 @@ class UsuarioController extends Controller {
         $postres = Plato::find( $request->get('postres') );
         $bebidas = Plato::find( $request->get('bebidas') );
 
-        $detalles = [];
+        /*$detalles = [];
         foreach($entradas_id as $entrada) {
             $detalles[$entrada] = $request->get('detalles'+$entrada);
         }
@@ -74,9 +77,9 @@ class UsuarioController extends Controller {
         }
         foreach($bebidas as $bebida) {
             $detalles[$bebida] = $request->get('detalles'+$bebida);
-        }
+        }*/
 
-        return view('user.orden')->with(compact(['entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
+        return view('user.orden')->with(compact(['entradas', 'segundos', 'postres', 'bebidas']));
     }
 
     public function getConfirmar()

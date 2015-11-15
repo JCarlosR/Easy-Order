@@ -123,6 +123,16 @@ class AdminController extends Controller {
         return view('admin.gestionar-detalles')->with(compact(['detalles', 'notif']));
     }
 
+    public function getGestionarPlatoDetalles()
+    {
+        //$detalles = Detalle::paginate(12);
+        $notif = Session::get('notif');
+        $detalles = Detalle::all();
+        return view('admin.gestionar-detalles')->with(compact(['detalles', 'notif']));
+    }
+
+
+
 
 
 }
