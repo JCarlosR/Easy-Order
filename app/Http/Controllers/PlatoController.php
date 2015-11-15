@@ -15,7 +15,8 @@ class PlatoController extends Controller {
 			'nombre' => 'required|min:3|max:50',
 			'descripcion' => 'required|min:5|max:255',
 			'precio' => 'required|min:0',
-			'imagen' => 'required'
+			'imagen' => 'required',
+			'tipo_id' => 'required'
 		]);
 
 		if ($validator->fails()) {
@@ -62,7 +63,8 @@ class PlatoController extends Controller {
 			'nombre'        => 'required|min:3|max:50',
 			'descripcion'   => 'required|min:5|max:255',
 			'precio'        => 'required|min:0',
-			'id'		    => 'exists:Plato,id'
+			'id'		    => 'exists:Plato,id',
+			'tipo_id'       => 'required'
 		]);
 
 		if ($validator->fails()) {
@@ -121,5 +123,82 @@ class PlatoController extends Controller {
 		$plato->delete();
 		$data['notif'] = "El plato se ha eliminado correctamente.";
 		return redirect('gestionar/platos')->with($data);
+	}
+
+	// Webservice API
+	public function index()
+	{
+		return Plato::all();
+	}
+
+	public function show($id)
+	{
+		return Plato::find($id);
+	}
+
+	public function store(Request $request)
+	{
+		$validator = Validator::make($request->all(), [
+			'nombre'      => 'required|min:3|max:50',
+			'descripcion' => 'required|min:5|max:255',
+			'precio'      => 'required|min:0',
+			'tipo_id'     => 'required|exists:Tipo,id'
+		]);
+
+		if ($validator->fails())
+			return [
+				'created' => false,
+				'errors'  => $validator->errors()->all()
+			];
+
+		Plato::create([
+			'nombre'	  => $request->get('nombre'),
+			'descripcion' => $request->get('descripcion'),
+			'precio'      => $request->get('precio'),
+			'tipo_id'     => $request->get('tipo_id')
+		]);
+
+		return ['created' => true];
+	}
+
+	public function update($id, Request $request)
+	{
+		$validator = Validator::make($request->all(), [
+			'nombre'      => 'required|min:3|max:50',
+			'descripcion' => 'required|min:5|max:255',
+			'precio'      => 'required|min:0',
+			'tipo_id'     => 'required',
+			'id'		  => 'exists:Plato,id'
+		]);
+
+		if ($validator->fails())
+			return [
+				'updated' => false,
+				'errors'  => $validator->errors()->all()
+			];
+
+		$plato = Plato::find($id);
+
+		$plato->nombre = $request->get('nombre');
+		$plato->descripcion = $request->get('descripcion');
+		$plato->precio = $request->get('precio');
+		$plato->tipo_id = $request->get('tipo_id');
+		$plato->save();
+
+		return ['updated' => true];
+	}
+
+	public function destroy($id)
+	{
+		$plato = Plato::find($id);
+
+		if (! $plato)
+			return ['deleted' => false, 'error' => 'El plato indicado no existe.'];
+
+		if ($plato->detalles->count()>0)
+			return ['deleted' => false, 'error' => 'Deben eliminarse primero los detalles asociados.'];
+
+		$plato->delete();
+		return ['deleted' => true];
 	}
 }
