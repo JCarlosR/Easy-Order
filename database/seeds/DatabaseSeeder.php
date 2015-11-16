@@ -21,6 +21,13 @@ class DatabaseSeeder extends Seeder
         $this->call(PlatoTableSeeder::class);
 
         // Registramos detalles por defecto
+        $this->call(DetalleTableSeeder::class);
+
+        // Asociamos los platos con sus detalles correspondientes
+        $this->call(PlatoDetallesTableSeeder::class);
+
+        // Menú del día (fecha actual) y sus platos
+        $this->call(MenuTableSeeder::class);
 
         Model::reguard();
     }
