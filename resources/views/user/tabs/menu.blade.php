@@ -18,7 +18,15 @@
                         @foreach( $entradas as $entrada)
                             <div class="col-md-3 text-center plato">
                                 <input type="checkbox" value="{{ $entrada->id }}" name="entradas[]"/> {{ $entrada->nombre }}
-                                <img src="{{ asset('images/platos') }}/{{ $entrada->imagen }}.jpg" data-id="{{ $entrada->id }}" class="img-thumbnail"/>
+                                <div class="vista">
+                                    <img src="{{ asset('images/platos') }}/{{ $entrada->imagen }}.jpg" data-id="{{ $entrada->id }}" class="img-thumbnail"/>
+                                    <div class="mascara">
+                                        <h2>{{ $entrada->nombre }}</h2>
+                                        <p>{{ $entrada->descripcion }}</p>
+                                        <label class="informacion"> S/.{{ $entrada->precio }}</label>
+                                    </div>
+                                </div>
+
                             </div>
                         @endforeach
                     </div>
@@ -32,7 +40,14 @@
                         @foreach( $segundos   as $segundo)
                             <div class="col-md-3 plato text-center">
                                 <input type="checkbox" value="{{ $segundo->id }}" name="segundos[]"/> {{ $segundo->nombre }}
-                                <img src="{{ asset('images/platos') }}/{{ $segundo->imagen }}.jpg" data-id="{{ $segundo->id }}" class="img-thumbnail"/>
+                                <div class="vista">
+                                    <img src="{{ asset('images/platos') }}/{{ $segundo->imagen }}.jpg" data-id="{{ $segundo->id }}" class="img-thumbnail"/>
+                                    <div class="mascara">
+                                        <h2>{{ $segundo->nombre }}</h2>
+                                        <p>{{ $segundo->descripcion }}</p>
+                                        <label class="informacion"> S/.{{ $segundo->precio }}</label>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -46,7 +61,14 @@
                         @foreach( $postres   as $postre)
                             <div class="col-md-3 plato text-center">
                                 <input type="checkbox" value="{{ $postre->id }}" name="postres[]"/> {{ $postre->nombre }}
-                                <img src="{{ asset('images/platos') }}/{{ $postre->imagen }}.jpg" data-id="{{ $postre->id }}" class="img-thumbnail"/>
+                                <div class="vista">
+                                    <img src="{{ asset('images/platos') }}/{{ $postre->imagen }}.jpg" data-id="{{ $postre->id }}" class="img-thumbnail"/>
+                                    <div class="mascara">
+                                        <h2>{{ $postre->nombre }}</h2>
+                                        <p>{{ $postre->descripcion }}</p>
+                                        <label class="informacion"> S/.{{ $postre->precio }}</label>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -60,7 +82,14 @@
                         @foreach( $bebidas   as $bebida)
                             <div class="col-md-3 plato text-center">
                                 <input type="checkbox" value="{{ $bebida->id }}" name="bebidas[]"/> {{ $bebida->nombre }}
-                                <img src="{{ asset('images/platos') }}/{{ $bebida->imagen}}.jpg" data-id="{{ $bebida->id }}" class="img-thumbnail"/>
+                                <div class="vista">
+                                    <img src="{{ asset('images/platos') }}/{{ $bebida->imagen}}.jpg" data-id="{{ $bebida->id }}" class="img-thumbnail"/>
+                                    <div class="mascara detail">
+                                        <h2>{{ $bebida->nombre }}</h2>
+                                        <p>{{ $bebida->descripcion }}</p>
+                                        <label class="informacion"> S/.{{ $bebida->precio }}</label>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -86,7 +115,15 @@
                             @foreach($plato->detalles as $detalle)
                                 <div class="col-md-4 plato text-center">
                                     <input type="checkbox" value="{{ $detalle->id }}" name="detalles{{ $plato->id }}[]"/> {{ $detalle->nombre }}
-                                    <img src="{{ asset('images/detalles') }}/{{ $detalle->imagen}}.jpg" data-id="{{ $detalle->id }}" class="img-thumbnail"/>
+
+                                    <div class="vista">
+                                        <img src="{{ asset('images/detalles') }}/{{ $detalle->imagen}}.jpg" data-id="{{ $detalle->id }}" class="img-thumbnail"/>
+                                        <div class="mascara">
+                                            <h2>{{ $detalle->nombre }}</h2>
+                                            <p>{{ $detalle->descripcion }}</p>
+                                            <label class="informacion"> S/.{{ $detalle->precio }}</label>
+                                        </div>
+                                    </div>
                                 </div>
                             @endforeach
                             </div>
