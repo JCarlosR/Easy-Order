@@ -4,10 +4,11 @@ use App\Detalle;
 use App\Menu;
 use App\MenuPlatos;
 use App\Plato;
+use App\PlatoDetalles;
 use App\Tipo;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller {
@@ -123,15 +124,56 @@ class AdminController extends Controller {
         return view('admin.gestionar-detalles')->with(compact(['detalles', 'notif']));
     }
 
-    public function getGestionarPlatoDetalles()
+    public function getPlatoDetalles()
     {
-        //$detalles = Detalle::paginate(12);
-        $notif = Session::get('notif');
-        $detalles = Detalle::all();
-        return view('admin.gestionar-detalles')->with(compact(['detalles', 'notif']));
+        $platos = Plato::all();
+        return view('admin.gestionar-platodetalles')->with(compact(['platos']));
     }
 
+    public function getGestionarPlatoDetalles($id)
+    {
+        $relaciones = PlatoDetalles::where('plato_id',$id)->get();
+        $detalles = Detalle::all();
+        $plato = Plato::find($id);
 
+        $asignados = [];
+        $noAsignados = [];
+        foreach ($detalles as $detalle) {
+            $asignado = false;
+            foreach ($relaciones as $relacion) {
+                //se encontro el plato dentro de las relaciones
+                if ($relacion->detalle_id == $detalle->id) {
+                    $asignado = true;
+                    break;
+                }
+            }
+            if ($asignado) {
+                $asignados[] = $detalle;
+            } else {
+                $noAsignados[] = $detalle;
+            }
+        }
+
+        return view('admin.asignar-detalles')->with(compact(['plato','asignados','noAsignados']));
+    }
+
+    public function postGestionarPlatoDetalles($id, Request $request){
+        $asignar = $request->get('asignar');
+        if($asignar == 1){
+            $relacion = PlatoDetalles::create([
+                'plato_id'=>$id,
+                'detalle_id'=>$request->get('detalle_id')
+            ]);
+            if($relacion)
+                return ['exito'=>true];
+            return ['exito'=>false];
+        }
+        else{
+            $relacion = PlatoDetalles::where('plato_id',$id)->where('detalle_id',$request->get('detalle_id'))->first();
+            $relacion->delete();
+            return ['exito'=>true];
+        }
+    }
 
 
 

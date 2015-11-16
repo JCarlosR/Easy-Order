@@ -31,7 +31,9 @@ Route::get('pedidos/entregados', 'AdminController@getEntregados');
 Route::get('pedidos/pendientes', 'AdminController@getPendientes');
 Route::get('gestionar/platos', 'AdminController@getGestionarPlatos');
 Route::get('gestionar/detalles', 'AdminController@getGestionarDetalles');
-Route::get('gestionar/platodetalles', 'AdminController@getGestionarPlatoDetalles');
+Route::get('gestionar/platodetalles', 'AdminController@getPlatoDetalles');
+Route::get('gestionar/platodetalles/{id}', 'AdminController@getGestionarPlatoDetalles');
+Route::post('gestionar/platodetalles/{id}', 'AdminController@postGestionarPlatoDetalles');
 
 // Páginas disponibles para un chef autenticado
 Route::get('bienvenido/chef', 'ChefController@getWelcome');

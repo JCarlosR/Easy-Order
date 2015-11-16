@@ -16,6 +16,7 @@
         <ul class="dropdown-menu" style="display: none;">
             <li><a href="{{ url('gestionar/platos') }}">Gestionar platos</a></li>
             <li><a href="{{ url('gestionar/detalles') }}">Gestionar detalles</a></li>
+            <li><a href="{{ url('gestionar/platodetalles') }}">Asignar detalles</a></li>
         </ul>
     </li>
     <li class="dropdown active"><a href="{{ url('asignar/menu') }}">Menú del día</a></li>
