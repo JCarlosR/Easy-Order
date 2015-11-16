@@ -67,9 +67,24 @@ class UsuarioController extends Controller {
         $bebidas_id = $request->get('bebidas');
 
         $entradas = Plato::find( $entradas_id );
+        if($entradas)
+        foreach($entradas as $entrada)
+            $total += $entrada->precio;
+
         $segundos = Plato::find( $segundos_id );
+        if($segundos)
+        foreach($segundos as $segundo)
+            $total += $segundo->precio;
+
         $postres = Plato::find( $postres_id );
+        if($postres)
+        foreach($postres as $postre)
+            $total += $postre->precio;
+
         $bebidas = Plato::find( $bebidas_id );
+        if($bebidas)
+        foreach($bebidas as $bebida)
+            $total += $bebida->precio;
 
         $detalles = [];
         if($entradas_id)
@@ -108,6 +123,7 @@ class UsuarioController extends Controller {
                 if($detalles_objetos)
                     foreach($detalles_objetos as $detalle)
                         $total += $detalle->precio;
+
             }
 
 //        dd($request->get('detalles'+1));
