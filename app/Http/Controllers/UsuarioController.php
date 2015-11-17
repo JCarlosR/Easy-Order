@@ -5,7 +5,7 @@ use App\Combo;
 use App\Detalle;
 use App\Menu;
 use App\Plato;
-use App\PlatoDetalles;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -23,12 +23,15 @@ class UsuarioController extends Controller {
 
     public function getSolicitar()
     {
-        //Combos
+        // Listado de combos
         $combos = Combo::all();
+
         // Menu del día
-        $menu = Menu::where('fecha','2015-11-7')->first();
+        $fechaActual = Carbon::now()->toDateString();
+        $menu = Menu::where('fecha', $fechaActual)->first();
         $relaciones = $menu->menu_platos;
 
+        $platos = [];
         $entradas = [];
         $segundos = [];
         $postres = [];
