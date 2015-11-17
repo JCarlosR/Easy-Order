@@ -38,9 +38,13 @@
                             <div class="panel-body">
                                 @if($entradas)
                                     @foreach($entradas as $entrada)
-                                        <p>{{ $entrada->nombre }}</p>
-                                            <p class="detalle">Detalle 1</p>
-                                            <p class="detalle">Detalle 2</p>
+                                        <p>{{ $entrada->nombre }}<strong class="pull-right">S/. {{ $entrada->precio }}</strong></p>
+
+                                        @if($detalles[$entrada->id])
+                                            @foreach($detalles[$entrada->id] as $detalle)
+                                                <p class="detalle">{{ $detalle->nombre }}<span class="pull-right">S/. {{ $detalle->precio }}</span></p>
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                 @endif
                             </div>
@@ -49,18 +53,20 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span
-                                            class="glyphicon glyphicon-cutlery">
-                    </span> Segundos</a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    <span class="glyphicon glyphicon-cutlery"></span> Segundos</a>
                             </h4>
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse">
                             <div class="panel-body">
                                 @if($segundos)
                                     @foreach($segundos as $segundo)
-                                        <p>{{ $segundo->nombre }}</p>
-                                        <p class="detalle">Detalle 1</p>
-                                        <p class="detalle">Detalle 2</p>
+                                        <p>{{ $segundo->nombre }}<span class="pull-right">S/. {{ $segundo->precio }}</span></p>
+                                        @if($detalles[$segundo->id])
+                                            @foreach($detalles[$segundo->id] as $detalle)
+                                                <p class="detalle">{{ $detalle->nombre }}<span class="pull-right">S/. {{ $detalle->precio }}</span></p>
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                 @endif
                             </div>
@@ -78,9 +84,12 @@
                             <div class="panel-body">
                                 @if($postres)
                                     @foreach($postres as $postre)
-                                        <p>{{ $postre->nombre }}</p>
-                                        <p class="detalle">Detalle 1</p>
-                                        <p class="detalle">Detalle 2</p>
+                                        <p>{{ $postre->nombre }} <span class="pull-right">S/. {{ $postre->precio }}</span> </p>
+                                        @if($detalles[$postre->id])
+                                            @foreach($detalles[$postre->id] as $detalle)
+                                                <p class="detalle">{{ $detalle->nombre }}<span class="pull-right">S/. {{ $detalle->precio }}</span></p>
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                 @endif
                             </div>
@@ -97,9 +106,12 @@
                             <div class="panel-body">
                                 @if($bebidas)
                                     @foreach($bebidas as $bebida)
-                                        <p>{{ $bebida->nombre }}</p>
-                                        <p class="detalle">Detalle 1</p>
-                                        <p class="detalle">Detalle 2</p>
+                                        <p>{{ $bebida->nombre }}<span class="pull-right">S/. {{ $bebida->precio }}</span></p>
+                                        @if($detalles[$bebida->id])
+                                            @foreach($detalles[$bebida->id] as $detalle)
+                                                <p class="detalle">{{ $detalle->nombre }}<span class="pull-right">S/. {{ $detalle->precio }}</span></p>
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                 @endif
                             </div>
@@ -134,11 +146,8 @@
                     <label for="txtTotal">Total</label>
 
                     <div class="input-group">
-
                         <div class="input-group-addon">S/.</div>
-                        <input type="text" class="form-control" id="txtTotal" readonly>
-
-                        <div class="input-group-addon">.00</div>
+                        <input type="text" class="form-control" id="txtTotal" readonly value="{{ $total }}">
                     </div>
                 </div>
 

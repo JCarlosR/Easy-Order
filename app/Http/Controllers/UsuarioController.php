@@ -2,6 +2,7 @@
 
 
 use App\Combo;
+use App\Detalle;
 use App\Menu;
 use App\Plato;
 use App\PlatoDetalles;
@@ -58,28 +59,75 @@ class UsuarioController extends Controller {
 
     public function getPrevisualizar(Request $request)
     {
+        $total = 0;
+
         $entradas_id = $request->get('entradas');
+        $segundos_id = $request->get('segundos');
+        $postres_id = $request->get('postres');
+        $bebidas_id = $request->get('bebidas');
 
-        $entradas = Plato::find($entradas_id);
-        $segundos = Plato::find( $request->get('segundos') );
-        $postres = Plato::find( $request->get('postres') );
-        $bebidas = Plato::find( $request->get('bebidas') );
+        $entradas = Plato::find( $entradas_id );
+        if($entradas)
+        foreach($entradas as $entrada)
+            $total += $entrada->precio;
 
-        /*$detalles = [];
-        foreach($entradas_id as $entrada) {
-            $detalles[$entrada] = $request->get('detalles'+$entrada);
-        }
-        foreach($segundos as $segundo) {
-            $detalles[$segundo] = $request->get('detalles'+$segundo);
-        }
-        foreach($postres as $postre) {
-            $detalles[$postre] = $request->get('detalles'+$postre);
-        }
-        foreach($bebidas as $bebida) {
-            $detalles[$bebida] = $request->get('detalles'+$bebida);
-        }*/
+        $segundos = Plato::find( $segundos_id );
+        if($segundos)
+        foreach($segundos as $segundo)
+            $total += $segundo->precio;
 
-        return view('user.orden')->with(compact(['entradas', 'segundos', 'postres', 'bebidas']));
+        $postres = Plato::find( $postres_id );
+        if($postres)
+        foreach($postres as $postre)
+            $total += $postre->precio;
+
+        $bebidas = Plato::find( $bebidas_id );
+        if($bebidas)
+        foreach($bebidas as $bebida)
+            $total += $bebida->precio;
+
+        $detalles = [];
+        if($entradas_id)
+            foreach($entradas_id as $entrada) {
+                $detalles_id = $request->get('detalles'.$entrada);
+                $detalles_objetos = Detalle::find($detalles_id);
+                $detalles[$entrada] = $detalles_objetos;
+                if($detalles_objetos)
+                foreach($detalles_objetos as $detalle)
+                    $total += $detalle->precio;
+
+            }
+        if($segundos_id)
+            foreach($segundos_id as $segundo) {
+                $detalles_id = $request->get('detalles'.$segundo);
+                $detalles_objetos = Detalle::find($detalles_id);
+                $detalles[$segundo] = $detalles_objetos;
+                if($detalles_objetos)
+                foreach($detalles_objetos as $detalle)
+                    $total += $detalle->precio;
+            }
+        if($postres_id)
+            foreach($postres_id as $postre) {
+                $detalles_id = $request->get('detalles'.$postre);
+                $detalles_objetos = Detalle::find($detalles_id);
+                $detalles[$postre] = $detalles_objetos;
+                if($detalles_objetos)
+                    foreach($detalles_objetos as $detalle)
+                        $total += $detalle->precio;
+            }
+        if($bebidas_id)
+            foreach($bebidas_id as $bebida) {
+                $detalles_id = $request->get('detalles'.$bebida);
+                $detalles_objetos = Detalle::find($detalles_id);
+                $detalles[$bebida] = $detalles_objetos;
+                if($detalles_objetos)
+                    foreach($detalles_objetos as $detalle)
+                        $total += $detalle->precio;
+
+            }
+
+//        dd($request->get('detalles'+1));
+        return view('user.orden')->with(compact(['total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
     }
 
     public function getConfirmar()
