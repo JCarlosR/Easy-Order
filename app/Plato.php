@@ -27,6 +27,12 @@ class Plato extends Model
         return $this->hasMany('App\MenuPlatos', 'plato_id');
     }
 
+    // Cada plato se puede relacionar con varios combos
+    public function combo_platos()
+    {
+        return $this->hasMany('App\ComboPlatos', 'plato_id');
+    }
+
     //Cada plato tiene un tipo de plato
     public function tipo()
     {

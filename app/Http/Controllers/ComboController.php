@@ -13,7 +13,21 @@ class ComboController extends Controller
 	public function index()
 	{
 		$combos = Combo::all();
-		return $combos;
+		$comboPlatos = ComboPlatos::all();
+
+
+		foreach ( $combos as $combo )
+		{
+			foreach( $comboPlatos as $comboPlato )
+			{
+				if ( $combo->id == $comboPlato->combo_id )
+					$platos[] = $comboPlato->plato;
+			}
+			$answer[] = ['combo'=>$combo,'platos'=>$platos];
+			$platos=[];
+		}
+
+		return $answer;
 	}
 
 	public function show($id)
