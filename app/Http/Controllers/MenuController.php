@@ -11,7 +11,6 @@ class MenuController extends Controller
 {
 	public function index()
 	{
-		$platos = Plato::all();
 		$menu = Menu::where('fecha','2015-11-7')->first();
 		$relaciones = $menu->menu_platos;
 
@@ -43,7 +42,6 @@ class MenuController extends Controller
 
 	public function show($id)
 	{
-		$platos = Plato::all();
 		$menu = Menu::where('fecha', '2015-11-7')->first();
 		$relaciones = $menu->menu_platos;
 

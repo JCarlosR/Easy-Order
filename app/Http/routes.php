@@ -61,3 +61,5 @@ Route::resource('detalle', 'DetalleController', ['only' => ['index', 'store', 'u
 
 //API Menú
 Route::resource('menu', 'MenuController', ['only' => ['index', 'show']]);
+//API Combo
+Route::resource('combo', 'ComboController', ['only' => ['index', 'show']]);
