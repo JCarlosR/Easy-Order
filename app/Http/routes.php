@@ -26,6 +26,7 @@ Route::get('anteriores', 'UsuarioController@getAnteriores');
 Route::get('bienvenido/admin', 'AdminController@getWelcome');
 Route::get('asignar/menu', 'AdminController@getAsignarMenu');
 Route::get('asignar/platos/{dia}/{tipo}', 'AdminController@getAsignarPlatos');
+Route::post('asignar/platos/{dia}/{tipo}', 'AdminController@postAsignarPlatos');
 Route::get('previsualizar/menu/{dia}/{tipo}', 'AdminController@getPrevisualizarMenu');
 Route::get('pedidos/entregados', 'AdminController@getEntregados');
 Route::get('pedidos/pendientes', 'AdminController@getPendientes');

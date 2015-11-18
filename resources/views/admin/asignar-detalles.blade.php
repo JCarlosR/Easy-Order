@@ -65,6 +65,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Detalles del Plato</div>
                 <div id="asignados" class="panel-body" >
+
                     @foreach($asignados as $detalle)
                         <div data-detalle="{{ $detalle->id }}" class="plato col-md-4 text-center">
                             <img  class="img-thumbnail img-rounded" src="{{ asset('images/detalles') }}/{{ $detalle->imagen }}.jpg">

@@ -64,14 +64,36 @@ class AdminController extends Controller {
                 $adicionales = 7;
                 break;
         }
+
         $carbon = $carbon->addDays($adicionales);
+
         $menu = Menu::where('fecha',$carbon->toDateString())->first();
+
         if (!$menu)
             $menu = Menu::create([
                 'fecha' => $carbon
             ]);
-        $relaciones = MenuPlatos::where('menu_id',$menu->id);
-        $platos = Plato::all();
+
+        $relaciones = MenuPlatos::where('menu_id',$menu->id)->get();
+
+        //Filtramos el tipo de plato que se mostrara en la vista
+        switch($tipo) {
+            case 'Entradas':
+                $tipo = 1;
+                break;
+            case 'Segundos':
+                $tipo = 2;
+                break;
+            case 'Postres':
+                $tipo = 3;
+                break;
+            case 'Bebidas':
+                $tipo = 4;
+                break;
+        }
+
+        $platos = Plato::where('tipo_id', $tipo)->get();
+
         $asignados = [];
         $noAsignados = [];
         foreach ($platos as $plato) {
@@ -90,12 +112,60 @@ class AdminController extends Controller {
                 $noAsignados[] = $plato;
             }
         }
+
         return view('admin.asignar-platos')->with(compact(['asignados','noAsignados']));
+    }
+
+    public function postAsignarPlatos( $dia, $tipo,  Request $request){
+        $asignar = $request->get('asignar');
+        $carbon = Carbon::now('America/Lima');
+        switch ($dia){
+            case 'lunes':
+                $adicionales = 1;
+                break;
+            case 'martes':
+                $adicionales = 2;
+                break;
+            case 'miercoles':
+                $adicionales = 3;
+                break;
+            case 'jueves':
+                $adicionales = 4;
+                break;
+            case 'viernes':
+                $adicionales = 5;
+                break;
+            case 'sabado':
+                $adicionales = 6;
+                break;
+            case 'domingo':
+                $adicionales = 7;
+                break;
+        }
+        $carbon = $carbon->addDays($adicionales);
+
+        $menu = Menu::where('fecha',$carbon->toDateString())->first();
+
+        if($asignar == 1){
+            $relacion = MenuPlatos::create([
+                'menu_id' => $menu->id,
+                'plato_id' => $request->get('plato_id')
+            ]);
+            if($relacion)
+                return ['exito'=>true];
+            return ['exito'=>false];
+        }
+        else{
+            $relacion = MenuPlatos::where('menu_id', $menu->id)->where('plato_id',$request->get('plato_id'))->first();
+
+            $relacion->delete();
+            return ['exito'=>true];
+        }
     }
 
     public function getPrevisualizarMenu($dia, $tipo)
     {
-        dd($tipo);
+        //dd($tipo);
         return view('admin.previsualizar-menu');
     }
 

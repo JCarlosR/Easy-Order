@@ -44,11 +44,11 @@
         <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-heading">Platos para seleccionar</div>
-                <div id="original" class="panel-body">
+                <div id="noAsignados" class="panel-body">
                     @foreach($noAsignados as $plato)
-                    <div id="ele{{ $plato->id }}" class="plato col-md-4 text-center">
+                    <div data-detalle="{{ $plato->id }}" class="plato col-md-4 text-center">
                         <img  class="img-thumbnail img-rounded" src="{{ asset('images/platos') }}/{{ $plato->imagen }}.jpg">
-                        <input type="checkbox" name="origen" value="ele{{ $plato->id }}"/> <p class="detalle">{{ $plato->nombre }}</p>
+                        <input type="checkbox" name="origen" value="{{ $plato->id }}"/> <p class="detalle">{{ $plato->nombre }}</p>
                     </div>
                     @endforeach
                 </div>
@@ -56,15 +56,20 @@
         </div>
         <div class="col-md-2 ">
             <div class="">
-                <button type="button" class="btn btn-info margen btn-block" onclick="copiar();">Trasladar <span class="glyphicon glyphicon-forward" ></span> </button>
+                <button type="button" class="btn btn-info margen btn-block" onclick="asignar();">Trasladar <span class="glyphicon glyphicon-forward" ></span> </button>
                 <button type="button" class="btn btn-warning btn-block" onclick="devolver();"> <span class="glyphicon glyphicon-backward" ></span> Devolver</button>
             </div>
         </div>
         <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-heading">Platos seleccionados</div>
-                <div id="copia" class="panel-body" >
-
+                <div id="asignados" class="panel-body" >
+                    @foreach($asignados as $plato)
+                        <div data-detalle="{{ $plato->id }}" class="plato col-md-4 text-center">
+                            <img  class="img-thumbnail img-rounded" src="{{ asset('images/platos') }}/{{ $plato->imagen }}.jpg">
+                            <input type="checkbox" name="destino" value="{{ $plato->id }}"/> <p class="detalle">{{ $plato->nombre }}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
