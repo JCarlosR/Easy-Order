@@ -9,7 +9,7 @@ function asignar() {
         var _this = $(this);
         var datosEnviados =
         {
-            'detalle_id': $(this).val(),
+            'plato_id': $(this).val(),
             'asignar': 1
         };
 

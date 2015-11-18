@@ -1,23 +1,60 @@
 var values = [];
-function copiar() {
+function asignar() {
     $("input[name=origen]:checked").each(function(){
-        values.push($(this).val());
+        values.push($(this));
     });
-    for (var i = 0; i <= values.length; i++) {
-        var ele = values[i];
-        $('#'+ele).appendTo('#copia');
-        $('#'+ele).attr('name', 'destinity');
-    };
-    values.length=0
+    $(values).each( function(i,element) {
+        var _this = $(this);
+        var datosEnviados =
+        {
+            'plato_id': $(this).val(),
+            'asignar': 1
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: location.href,
+            data: datosEnviados,
+            dataType: 'json',
+            encode: true
+        }).done(function(datos){
+            if(datos.exito){
+                _this.attr('name','destino');
+                _this.parent().appendTo('#asignados');
+            }
+            else
+                alert('No se pudo realizar la asignación.');
+        });
+    });
+    values.length=0;
 }
 function devolver() {
-    $("input:checkbox:checked").each(function(){
-        values.push($(this).val());
+    $("input[name=destino]:checked").each(function(){
+        values.push($(this));
     });
-    for (var i = 0; i <= values.length; i++) {
-        var ele = values[i];
-        $('#'+ele).appendTo('#original');
-        $('#'+ele).attr('name', 'origen');
-    };
-    values.length=0
+    $(values).each( function(i,element) {
+        var _this = $(this);
+        var datosEnviados =
+        {
+            'plato_id': $(this).val(),
+            'asignar': 0
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: location.href,
+            data: datosEnviados,
+            dataType: 'json',
+            encode: true
+        }).done(function(datos){
+            if(datos.exito){
+                _this.attr('name','origen');
+                _this.parent().appendTo('#noAsignados');
+            }
+            else
+                alert('No se pudo realizar la eliminación.');
+        });
+
+    });
+    values.length=0;
 }

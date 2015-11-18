@@ -13,6 +13,7 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         'plato*',
         'detalle*',
-        'gestionar/platodetalles/*'
+        'gestionar/platodetalles/*',
+        'asignar/platos/*'
     ];
 }
