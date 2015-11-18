@@ -147,7 +147,9 @@ CREATE TABLE Orden
 
 	fecha date NOT NULL,
 	importe decimal(8,2) NOT NULL,
-	descuento decimal(8,2)
+	descuento decimal(8,2),
+	estado varchar(15),
+	combo_name varchar(20)
 );
 
 CREATE TABLE OrdenPlatos

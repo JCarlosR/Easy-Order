@@ -4,6 +4,7 @@
 use App\Combo;
 use App\Detalle;
 use App\Menu;
+use App\Orden;
 use App\Plato;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -178,6 +179,11 @@ class UsuarioController extends Controller {
 
     public function getAnteriores()
     {
-        return view('user.anteriores');
+        // Obtener todas las ordenes con estado-> 'confirmado'
+        $estado = 'confirmado';
+        $usuario = Auth::user()->id;
+        $ordenes = Orden::where('estado',$estado)->where('usuario_id',$usuario)->get();
+
+        return view('user.anteriores')->with(compact('ordenes'));
     }
 }

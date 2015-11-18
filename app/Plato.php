@@ -44,4 +44,9 @@ class Plato extends Model
     {
         return $this->belongsToMany('App\Detalle', 'PlatoDetalles', "plato_id");
     }
+
+    public function ordenes()
+    {
+        return $this->belongsToMany('App\Orden', 'OrdenPlatos', "plato_id");
+    }
 }
