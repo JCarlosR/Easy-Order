@@ -27,37 +27,40 @@ class UsuarioController extends Controller {
         // Listado de combos
         $combos = Combo::all();
 
-        // Menu del día
-        $fechaActual = Carbon::now()->toDateString();
-        $menu = Menu::where('fecha', $fechaActual)->first();
-        $relaciones = $menu->menu_platos;
-
+        // Variables a llenar
         $platos = [];
         $entradas = [];
         $segundos = [];
         $postres = [];
         $bebidas = [];
 
-        foreach ( $relaciones as $relacion )
-        {
-            $platos[] = $relacion->plato;
-            switch ( $relacion->plato->tipo->descripcion )
+        // Menu del día
+        $fechaActual = Carbon::now()->toDateString();
+        $menu = Menu::where('fecha', $fechaActual)->first();
+
+        if ($menu) {
+            $relaciones = $menu->menu_platos;
+
+            foreach ( $relaciones as $relacion )
             {
-                case "Entradas":
-                    $entradas[] = $relacion->plato;
-                    break;
-                case "Segundos":
-                    $segundos[] = $relacion->plato;
-                    break;
-                case "Postres" :
-                    $postres[]  = $relacion->plato;
-                    break;
-                case "Bebidas" :
-                    $bebidas[]  = $relacion->plato;
-                    break;
+                $platos[] = $relacion->plato;
+                switch ( $relacion->plato->tipo->descripcion )
+                {
+                    case "Entradas":
+                        $entradas[] = $relacion->plato;
+                        break;
+                    case "Segundos":
+                        $segundos[] = $relacion->plato;
+                        break;
+                    case "Postres" :
+                        $postres[]  = $relacion->plato;
+                        break;
+                    case "Bebidas" :
+                        $bebidas[]  = $relacion->plato;
+                        break;
+                }
             }
         }
-
         return view('user.solicitar')->with(compact(['combos','entradas','segundos','postres','bebidas', 'platos']));
     }
 
@@ -130,14 +133,36 @@ class UsuarioController extends Controller {
 
             }
 
-//        dd($request->get('detalles'+1));
+        // Guardamos en variables de sesión para que los datos persistan
+        $request->session()->put('entradas', $entradas);
+        $request->session()->put('segundos', $segundos);
+        $request->session()->put('postres', $postres);
+        $request->session()->put('bebidas', $bebidas);
+
         return view('user.orden')->with(compact(['total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
     }
 
-    public function getConfirmar()
+    public function postConfirmar(Request $request)
     {
+        $entradas = $request->session()->get('entradas');
+        $segundos = $request->session()->get('segundos');
+        $postres = $request->session()->get('postres');
+        $bebidas = $request->session()->get('bebidas');
+        //dd($request->session()->all());
+
+        // Validación de los datos requeridos
+        if (! $request->has('direccion'))
+            return redirect('solicitar')->with('information', 'No ha indicado la dirección destino.');
+        if (! $request->has('tipo_orden'))
+            return redirect('solicitar')->with('information', 'No ha indicado el tipo de orden (delivery o pick-up).');
+
+        $tipo_orden = $request->get('tipo_orden');
+        $direccion = $request->get('direccion');
+        $hora_pedido = date('h:i A', time() - 3600*date('I'));
+        $hora_entrega = date('h:i A', time() - 3600*date('I') + 3600*2);
+
         date_default_timezone_set("America/Lima" ) ;
-        $hora = date('h:i A',time() - 3600*date('I'));
+
         $time = getdate(time());
         $dia = $time['wday'];
         $dia_mes = $time['mday'];
@@ -148,7 +173,7 @@ class UsuarioController extends Controller {
         switch ($dia){
             case "1": $dia_name="Lunes"; break;
             case "2": $dia_name="Martes"; break;
-            case "3": $dia_name="Mi&eacute;rcoles"; break;
+            case "3": $dia_name="Miércoles"; break;
             case "4": $dia_name="Jueves"; break;
             case "5": $dia_name="Viernes"; break;
             case "6": $dia_name="Sábado"; break;
@@ -168,8 +193,9 @@ class UsuarioController extends Controller {
             case "11": $mes_name = "Noviembre"; break;
             case "12": $mes_name = "Diciembre"; break;
         }
+
         $fecha = $dia_name." ".$dia_mes." de ".$mes_name." de ".$year;
-        return view('user.confirmar')->with(compact('fecha','hora'));
+        return view('user.confirmar')->with(compact('fecha','hora_pedido', 'hora_entrega', 'direccion'));
     }
 
     public function getRecepcion()
@@ -182,7 +208,7 @@ class UsuarioController extends Controller {
         // Obtener todas las ordenes con estado-> 'confirmado'
         $estado = 'confirmado';
         $usuario = Auth::user()->id;
-        $ordenes = Orden::where('estado',$estado)->where('usuario_id',$usuario)->get();
+        $ordenes = Orden::where('estado', $estado)->where('usuario_id',$usuario)->get();
 
         return view('user.anteriores')->with(compact('ordenes'));
     }

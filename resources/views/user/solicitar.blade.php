@@ -198,44 +198,49 @@
 @endsection
 
 @section('content')
-    <h1>Realizar pedido</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <label for="tipo">Tipo de pedido:</label>
-            <select name="tipo" class="form-control">
-                <option value="0">Delivery</option>
-                <option value="1">Pick-up</option>
-            </select>
+    @if (session('information'))
+        <div class="alert alert-danger">
+            {{ session('information') }}
         </div>
-        <div class="col-md-6">
-            <label for="hora">Hora del pedido:</label>
-            <input type="time" value="" class="form-control"/>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-
-            <ul class="nav nav-tabs nav-justified">
-                <li class="active"><a data-toggle="tab" href="#combos">Combos</a></li>
-                <li><a data-toggle="tab" href="#menu">Menú del día</a></li>
-            </ul>
-
-            <div class="tab-content">
-                <!-- Tab Combos -->
-                <div id="combos" class="tab-pane fade in active">
-                    @include('user.tabs.combos')
-                </div>
-                <!-- Tab Menú del día -->
-                <div id="menu" class="tab-pane fade">
-                    <form action="{{ url('previsualizar') }}" method="POST">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                        @include('user.tabs.menu')
-                    </form>
-                </div>
+    @endif
+    <form action="{{ url('previsualizar') }}" method="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <h1>Realizar pedido</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="tipo">Tipo de pedido:</label>
+                <select name="tipo" class="form-control">
+                    <option value="0">Delivery</option>
+                    <option value="1">Pick-up</option>
+                </select>
             </div>
-
+            <div class="col-md-6">
+                <label for="hora">Hora del pedido:</label>
+                <input type="time" name="hora" value="" readonly class="form-control"/>
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="active"><a data-toggle="tab" href="#combos">Combos</a></li>
+                    <li><a data-toggle="tab" href="#menu">Menú del día</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <!-- Tab Combos -->
+                    <div id="combos" class="tab-pane fade in active">
+                        @include('user.tabs.combos')
+                    </div>
+                    <!-- Tab Menú del día -->
+                    <div id="menu" class="tab-pane fade">
+                            @include('user.tabs.menu')
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
 @endsection
 
 

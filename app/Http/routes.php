@@ -18,7 +18,7 @@ Route::get('salir', 'Auth\AuthController@getLogout');
 Route::get('bienvenido/usuario', 'UsuarioController@getWelcome');
 Route::get('solicitar', 'UsuarioController@getSolicitar');
 Route::post('previsualizar', 'UsuarioController@getPrevisualizar');
-Route::get('confirmar', 'UsuarioController@getConfirmar');
+Route::post('confirmar', 'UsuarioController@postConfirmar');
 Route::get('recepcion', 'UsuarioController@getRecepcion');
 Route::get('anteriores', 'UsuarioController@getAnteriores');
 
@@ -51,7 +51,7 @@ Route::post('detalle/modificar', 'DetalleController@postModificar');
 Route::post('detalle/eliminar', 'DetalleController@postEliminar');
 
 
-// Rutas referentes al webservice que consumirá la app iOS
+// Rutas referentes a los webservice (app iOS)
 
 // Platos API
 Route::resource('plato', 'PlatoController', ['only' => ['index', 'store', 'update', 'destroy', 'show']]);
@@ -59,7 +59,7 @@ Route::resource('plato', 'PlatoController', ['only' => ['index', 'store', 'updat
 // Detalles API
 Route::resource('detalle', 'DetalleController', ['only' => ['index', 'store', 'update', 'destroy', 'show']]);
 
-//API Menú
+// Menú API
 Route::resource('menu', 'MenuController', ['only' => ['index', 'show']]);
-//API Combo
+// Combos API
 Route::resource('combo', 'ComboController', ['only' => ['index', 'show']]);

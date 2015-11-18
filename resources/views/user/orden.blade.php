@@ -5,7 +5,7 @@
             margin-left: 25px;
         }
 
-        .move-right{
+        .move-right {
             margin-right: 1em;
         }
     </style>
@@ -29,20 +29,26 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span
-                                            class="glyphicon glyphicon-leaf">
-                    </span> Sopas y Entradas</a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    <span class="glyphicon glyphicon-leaf"></span> Sopas y Entradas
+                                </a>
                             </h4>
                         </div>
                         <div id="collapseOne" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 @if($entradas)
                                     @foreach($entradas as $entrada)
-                                        <p>{{ $entrada->nombre }}<strong class="pull-right">S/. {{ $entrada->precio }}</strong></p>
+                                        <p>
+                                            {{ $entrada->nombre }}
+                                            <strong class="pull-right">S/. {{ $entrada->precio }}</strong>
+                                        </p>
 
                                         @if($detalles[$entrada->id])
                                             @foreach($detalles[$entrada->id] as $detalle)
-                                                <p class="detalle">{{ $detalle->nombre }}<span class="pull-right">S/. {{ $detalle->precio }}</span></p>
+                                                <p class="detalle">
+                                                    {{ $detalle->nombre }}
+                                                    <span class="pull-right">S/. {{ $detalle->precio }}</span>
+                                                </p>
                                             @endforeach
                                         @endif
                                     @endforeach
@@ -61,10 +67,12 @@
                             <div class="panel-body">
                                 @if($segundos)
                                     @foreach($segundos as $segundo)
-                                        <p>{{ $segundo->nombre }}<span class="pull-right">S/. {{ $segundo->precio }}</span></p>
+                                        <p>{{ $segundo->nombre }}<span
+                                                    class="pull-right">S/. {{ $segundo->precio }}</span></p>
                                         @if($detalles[$segundo->id])
                                             @foreach($detalles[$segundo->id] as $detalle)
-                                                <p class="detalle">{{ $detalle->nombre }}<span class="pull-right">S/. {{ $detalle->precio }}</span></p>
+                                                <p class="detalle">{{ $detalle->nombre }}<span
+                                                            class="pull-right">S/. {{ $detalle->precio }}</span></p>
                                             @endforeach
                                         @endif
                                     @endforeach
@@ -75,19 +83,25 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span
-                                            class="glyphicon glyphicon-apple">
-                    </span> Postres</a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    <span class="glyphicon glyphicon-apple"></span> Postres
+                                </a>
                             </h4>
                         </div>
                         <div id="collapseThree" class="panel-collapse collapse">
                             <div class="panel-body">
                                 @if($postres)
                                     @foreach($postres as $postre)
-                                        <p>{{ $postre->nombre }} <span class="pull-right">S/. {{ $postre->precio }}</span> </p>
+                                        <p>
+                                            {{ $postre->nombre }} 
+                                            <span class="pull-right">S/. {{ $postre->precio }}</span>
+                                        </p>
                                         @if($detalles[$postre->id])
                                             @foreach($detalles[$postre->id] as $detalle)
-                                                <p class="detalle">{{ $detalle->nombre }}<span class="pull-right">S/. {{ $detalle->precio }}</span></p>
+                                                <p class="detalle">
+                                                    {{ $detalle->nombre }}
+                                                    <span class="pull-right">S/. {{ $detalle->precio }}</span>
+                                                </p>
                                             @endforeach
                                         @endif
                                     @endforeach
@@ -99,17 +113,24 @@
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                    <span class="glyphicon glyphicon-glass"></span> Bebidas</a>
+                                    <span class="glyphicon glyphicon-glass"></span> Bebidas
+                                </a>
                             </h4>
                         </div>
                         <div id="collapseFour" class="panel-collapse collapse">
                             <div class="panel-body">
                                 @if($bebidas)
                                     @foreach($bebidas as $bebida)
-                                        <p>{{ $bebida->nombre }}<span class="pull-right">S/. {{ $bebida->precio }}</span></p>
+                                        <p>
+                                            {{ $bebida->nombre }}
+                                            <span class="pull-right">S/. {{ $bebida->precio }}</span>
+                                        </p>
                                         @if($detalles[$bebida->id])
                                             @foreach($detalles[$bebida->id] as $detalle)
-                                                <p class="detalle">{{ $detalle->nombre }}<span class="pull-right">S/. {{ $detalle->precio }}</span></p>
+                                                <p class="detalle">
+                                                    {{ $detalle->nombre }}
+                                                    <span class="pull-right">S/. {{ $detalle->precio }}</span>
+                                                </p>
                                             @endforeach
                                         @endif
                                     @endforeach
@@ -122,8 +143,8 @@
 
 
                 <div class="col-md-offset-3 col-md-5">
-                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal">
-                        <span class="glyphicon glyphicon-cutlery" aria-hidden="true" ></span> Guardar combo
+                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#modalNuevoCombo">
+                        <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> Guardar combo
                     </button>
                 </div>
 
@@ -132,33 +153,36 @@
                 <header>
                     <h1>Detalles adicionales</h1>
                 </header>
-                <div class="form-group">
-                    <label for="txtCantidad">Cantidad</label>
-                    <input type="number" class="form-control" id="txtCantidad" placeholder="Cantidad">
-                </div>
-
-                <div class="form-group">
-                    <label for="txtNombre">Dirección</label>
-                    <input type="text" class="form-control" id="txtDireccion" placeholder="Direccion">
-                </div>
-
-                <div class="form-group">
-                    <label for="txtTotal">Total</label>
-
-                    <div class="input-group">
-                        <div class="input-group-addon">S/.</div>
-                        <input type="text" class="form-control" id="txtTotal" readonly value="{{ $total }}">
+                <form action="{{ url('confirmar') }}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" value="1" readonly>
                     </div>
-                </div>
 
-                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='confirmar'" >Continuar  <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span></button>
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" class="form-control" name="direccion" placeholder="Dirección destino" required>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="total">Total</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">S/.</div>
+                            <input type="text" class="form-control" name="total" readonly value="{{ $total }}" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                        Continuar <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+                    </button>
+                </form>
             </div>
         </div>
 
 
     </div>
-    <div id="myModal" class="modal fade in">
+    <div id="modalNuevoCombo" class="modal fade in">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -170,12 +194,16 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group">
-                        <button class="btn btn-danger move-right" data-dismiss="modal"><span class="glyphicon glyphicon-thumbs-down"></span> Cancelar</button>
-                        <button class="btn btn-primary "><span class="glyphicon glyphicon-thumbs-up"></span> Guardar combo</button>
+                        <button class="btn btn-danger move-right" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-thumbs-down"></span> Cancelar
+                        </button>
+                        <button class="btn btn-primary ">
+                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                            Guardar combo
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
