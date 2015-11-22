@@ -33,12 +33,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            <span class="glyphicon glyphicon-cutlery"></span>Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{ $orden->id }}">
+                            <span class="glyphicon glyphicon-cutlery"></span> Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}
                         </a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
+                <div id="collapseOne{{ $orden->id }}" class="panel-collapse collapse in">
                     <div class="panel-body">
                         @foreach($orden->platos as $plato)
                         <div class="col-md-3">
@@ -56,57 +56,7 @@
 @endsection
 
 @section('extra-content')
-    <div id="modalDetalle" class="modal fade in">
-        <div class="modal-dialog">
-            <div class="modal-content">
 
-                <div class="modal-header">
-                    <h4 class="modal-title">Detalles del plato</h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            <img src="http://lorempixel.com/140/140/food/1" width="60" height="60">
-                            <label>Sin menestra</label>
-                        </div>
-                        <div class="col-md-3">
-                            <img src="http://lorempixel.com/140/140/food/2" width="80" height="80">
-                            <label>Con papa frita</label>
-                        </div>
-                        <div class="col-md-3">
-                            <img src="http://lorempixel.com/140/140/food/3" width="80" height="80">
-                            <label>Con papa sanchocada</label>
-                        </div>
-                        <div class="col-md-3">
-                            <img src="http://lorempixel.com/140/140/food/4" width="80" height="80">
-                            <label>Una presa adicional</label>
-                        </div>
-                        <div class="col-md-3">
-                            <img src="http://lorempixel.com/140/140/food/3" width="80" height="80">
-                            <label>Con papa sanchocada</label>
-                        </div>
-                        <div class="col-md-3">
-                            <img src="http://lorempixel.com/140/140/food/4" width="80" height="80">
-                            <label>Una presa adicional</label>
-                        </div>
-                        <div class="col-md-3">
-                            <img src="http://lorempixel.com/140/140/food/3" width="80" height="80">
-                            <label>Con papa sanchocada</label>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn btn-danger move-right" data-dismiss="modal">
-                        <span class="glyphicon glyphicon-thumbs-down"></span> Cancelar
-                    </button>
-                </div>
-
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('scripts')

@@ -3,6 +3,9 @@
 use App\Detalle;
 use App\Menu;
 use App\MenuPlatos;
+use App\Orden;
+use App\OrdenPlatoDetalles;
+use App\OrdenPlatos;
 use App\Plato;
 use App\PlatoDetalles;
 use App\Tipo;
@@ -171,12 +174,36 @@ class AdminController extends Controller {
 
     public function getPendientes()
     {
-        return view('admin.pendientes');
+        $estado = 'pendiente';
+        $ordenes = Orden::where('estado', $estado)->get();
+        return view('admin.pendientes')->with(compact('ordenes'));
+    }
+
+    public function postPendientes(Request $request)
+    {
+        $ordenplato = OrdenPlatos::where('orden_id',$request->get('orden_id'))->where('plato_id',$request->get('plato_id'))->first();
+        $ordendetalles = OrdenPlatoDetalles::where('ordenplatos_id', $ordenplato->id)->get();
+        foreach($ordendetalles as $ordendetalle){
+            $detalles[] = $ordendetalle->detalle;
+        }
+        return response()->json($detalles);
     }
 
     public function getEntregados()
     {
-        return view('admin.entregados');
+        $estado = 'confirmado';
+        $ordenes = Orden::where('estado', $estado)->get();
+        return view('admin.entregados')->with(compact('ordenes'));
+    }
+
+    public function postEntregados(Request $request)
+    {
+        $ordenplato = OrdenPlatos::where('orden_id',$request->get('orden_id'))->where('plato_id',$request->get('plato_id'))->first();
+        $ordendetalles = OrdenPlatoDetalles::where('ordenplatos_id', $ordenplato->id)->get();
+        foreach($ordendetalles as $ordendetalle){
+            $detalles[] = $ordendetalle->detalle;
+        }
+        return response()->json($detalles);
     }
 
     public function getGestionarPlatos()
