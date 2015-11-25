@@ -66,3 +66,7 @@ Route::resource('detalle', 'DetalleController', ['only' => ['index', 'store', 'u
 Route::resource('menu', 'MenuController', ['only' => ['index', 'show']]);
 // Combos API
 Route::resource('combo', 'ComboController', ['only' => ['index', 'show']]);
+
+// Usuario
+Route::get('validar', 'UsuarioController@validarUsuario');
+

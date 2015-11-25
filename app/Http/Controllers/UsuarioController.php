@@ -6,9 +6,11 @@ use App\Detalle;
 use App\Menu;
 use App\Orden;
 use App\Plato;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller {
 
@@ -211,5 +213,25 @@ class UsuarioController extends Controller {
         $ordenes = Orden::where('estado', $estado)->where('usuario_id',$usuario)->get();
 
         return view('user.anteriores')->with(compact('ordenes'));
+    }
+
+    public function validarUsuario(Request $request)
+    {
+        $user      = $request->get('user');
+        $password  = $request->get('password');
+        $usuario   = User::where('username',$user)->first();
+        $answer    = "";
+        if ( $usuario != null AND Hash::check($password,$usuario->password) )
+        {
+            $answer = ("Bienvenido al sistema: ".$user);
+        }
+        else if( $usuario == null )
+        {
+            $answer = ( "Usuario incorrecto");
+        }
+        else
+            $answer = ("Password es incorrecto");
+
+        return json_encode($answer);
     }
 }

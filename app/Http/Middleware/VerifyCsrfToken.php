@@ -16,6 +16,8 @@ class VerifyCsrfToken extends BaseVerifier
         'gestionar/platodetalles/*',
         'asignar/platos/*',
         'pedidos/pendientes*',
-        'pedidos/entregados*'
+        'pedidos/entregados*',
+        'validar*'
+
     ];
 }
