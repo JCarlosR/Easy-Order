@@ -173,3 +173,19 @@ CREATE TABLE OrdenPlatoDetalles
 	detalle_id int NOT NULL,
 	FOREIGN KEY (detalle_id) REFERENCES Detalle(id)
 );
+
+CREATE TABLE Chefs
+(
+		id int AUTO_INCREMENT PRIMARY KEY,
+		usuario_id int NOT NULL,
+		FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
+		nombres varchar(100) NOT NULL,
+		apellidos varchar(100) NOT NULL,
+		dni char(8) NOT NULL,
+		direccion varchar(100) NOT NULL,
+		email varchar(100) NOT NULL,
+		telefono varchar(9) NOT NULL,
+		sueldo decimal(8,2)  NOT NULL,
+		masculino tinyint,
+		activo tinyint
+);

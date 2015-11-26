@@ -32,4 +32,9 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function chef()
+    {
+        return $this->hasMany('App\Chef', 'chef_id');
+    }
 }
