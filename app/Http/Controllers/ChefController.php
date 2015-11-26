@@ -70,7 +70,7 @@ class ChefController extends Controller {
             $user = User::create([
                 'username'  => $user_completo,
                 'full_name' => $fullname,
-                'password'  => $request->get('dni'),
+                'password'  => bcrypt( $request->get('dni') ),
                 'phone'     => $request->get('telefono'),
                 'email'     => $request->get('email'),
                 'tipo'      => 2
@@ -88,9 +88,9 @@ class ChefController extends Controller {
             }
 
             $user = User::create([
-                'username' => bcrypt($user_completo),
+                'username' => $user_completo,
                 'full_name' => $fullname,
-                'password' => $request->get('dni'),
+                'password' => bcrypt( $request->get('dni') ),
                 'phone'    => $request->get('telefono'),
                 'email'    => $request->get('email'),
                 'tipo'     => 2,
