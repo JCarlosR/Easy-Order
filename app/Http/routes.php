@@ -68,5 +68,4 @@ Route::resource('menu', 'MenuController', ['only' => ['index', 'show']]);
 Route::resource('combo', 'ComboController', ['only' => ['index', 'show']]);
 
 // Usuario
-Route::post('validar', 'UsuarioController@validarUsuario');
-
+Route::post('validar', 'HomeController@validarUsuario');

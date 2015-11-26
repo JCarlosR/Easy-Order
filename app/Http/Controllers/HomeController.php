@@ -1,14 +1,9 @@
 <?php namespace App\Http\Controllers;
 
-use App\Detalle;
-use App\Menu;
-use App\MenuPlatos;
-use App\Plato;
-use App\Tipo;
-use Carbon\Carbon;
+use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller {
 
@@ -25,5 +20,32 @@ class HomeController extends Controller {
         return view('home');
     }
 
+    public function validarUsuario(Request $request)
+    {
+        $username      = $request->get('username');
+        $password  = $request->get('password');
+        $usuario   = User::where('username', $username)->first();
+
+        $respuesta    = new \stdClass();
+
+        // Si no existe el usuario
+        if ($usuario)
+        {
+            if ( Hash::check($password, $usuario->password) )
+            {
+                $respuesta->exito = true;
+                $respuesta->tipo = $usuario->tipo;
+                // 0: Usuario | 1: Chef | 2: Administrador
+            } else {
+                $respuesta->exito = false;
+                $respuesta->mensaje = "Contraseña incorrecta.";
+            }
+        } else {
+            $respuesta->exito = false;
+            $respuesta->mensaje = "No existe una cuenta de usuario con el nombre indicado.";
+        }
+
+        return response()->json($respuesta);
+    }
 
 }
