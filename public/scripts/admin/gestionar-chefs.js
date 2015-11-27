@@ -29,6 +29,7 @@ function mostrarEditar() {
     $modalEditar.find('[name="dni"]').val(dni);
 
     var email = $(this).data('email');
+    alert(email);
     $modalEditar.find('[name="email"]').val(email);
 
     var direccion = $(this).data('direccion');

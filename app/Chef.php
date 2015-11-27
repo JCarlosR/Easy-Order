@@ -10,7 +10,7 @@ class Chef extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['usuario_id','nombres', 'apellidos', 'dni','direccion','telefono','sueldo','masculino','activo'];
+    protected $fillable = ['usuario_id','email','nombres', 'apellidos', 'dni','direccion','telefono','sueldo','masculino','activo'];
 
     public function user()
     {

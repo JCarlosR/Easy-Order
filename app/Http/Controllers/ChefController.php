@@ -51,8 +51,8 @@ class ChefController extends Controller {
             'nombres'	 => $request->get('nombres'),
             'apellidos'  => $request->get('apellidos'),
             'dni'        => $request->get('dni'),
-            'email'      => $request->get('email'),
             'direccion'  => $request->get('direccion'),
+            'email'      => $request->get('email'),
             'telefono'   => $request->get('telefono'),
             'sueldo'     => $request->get('sueldo'),
             'masculino'  => $request->get('masculino'),
@@ -99,6 +99,7 @@ class ChefController extends Controller {
 
         $user->save();
         $chef->save();
+
         $data['notif'] = "El Chef se ha registrado correctamente.";
 
         return redirect('gestionar/chefs')->with($data);
