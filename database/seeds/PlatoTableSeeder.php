@@ -74,14 +74,6 @@ class PlatoTableSeeder extends Seeder
             'precio' => 5
         ]);
 
-        Plato::create([
-            'tipo_id' => '3',
-            'nombre' => 'Ensalada de fruta',
-            'descripcion' => 'El plato constará de porciones de platano, papaya y mandarina',
-            'imagen' => 'ensaladaf',
-            'precio' => 5
-        ]);
-
         // Registramos los platos de tipo 4
 
         Plato::create([

@@ -13,7 +13,7 @@ class Orden extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['usuario_id', 'fecha', 'importe', 'descuento', 'estado','combo_name'];
+    protected $fillable = ['usuario_id', 'fecha', 'importe', 'descuento', 'estado','combo_name','tipo_orden'];
 
     // Cada orden se puede relacionar con un plato
     public function orden_platos()

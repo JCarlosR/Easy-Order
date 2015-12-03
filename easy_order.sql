@@ -149,7 +149,8 @@ CREATE TABLE Orden
 	importe decimal(8,2) NOT NULL,
 	descuento decimal(8,2),
 	estado varchar(15),
-	combo_name varchar(20)
+	combo_name varchar(20),
+	tipo_orden integer
 );
 
 CREATE TABLE OrdenPlatos

@@ -35,7 +35,7 @@ class UsuarioController extends Controller {
         $bebidas = [];
 
         // Menu del día
-        $fechaActual = Carbon::now()->toDateString();
+        $fechaActual = Carbon::now('America/Lima')->toDateString();
         $menu = Menu::where('fecha', $fechaActual)->first();
 
         if ($menu) {
