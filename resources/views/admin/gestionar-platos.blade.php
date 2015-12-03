@@ -101,6 +101,14 @@
                             <input type="text" class="form-control" name="descripcion" placeholder="Ingrese descripción del plato" value="{{ old('descripcion') }}" required/>
                         </div>
                         <div class="form-group">
+                            <label for="descripcion">Tipo</label>
+                            <select name="tipo_id" class="form-control">
+                                @foreach($tipos as $tipo)
+                                <option value="{{ $tipo->id }}">{{ $tipo->descripcion }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="precio">Precio</label>
                             <input type="number" step="0.01" min="0" class="form-control" name="precio" placeholder="Ingrese precio del plato" value="{{ old('precio') }}" required/>
                         </div>
@@ -139,6 +147,14 @@
                         <div class="form-group">
                             <label for="descripcion">Nueva descripción</label>
                             <input type="text" class="form-control" name="descripcion" placeholder="Nueva descripción del detalle" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Tipo</label>
+                            <select name="tipo_id" class="form-control">
+                                @foreach($tipos as $tipo)
+                                    <option value="{{ $tipo->id }}">{{ $tipo->descripcion }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="precio">Nuevo precio</label>

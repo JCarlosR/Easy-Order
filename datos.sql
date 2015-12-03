@@ -18,6 +18,7 @@ insert into ComboPlatoDetalles(comboplatos_id,detalle_id) values
 	(9,5),(10,10),(11,11),(11,15),
 	(12,3),(13,7),(14,13),(15,16);
 
+<<<<<<< HEAD
 insert into Orden(usuario_id,fecha,importe,descuento,estado,combo_name, tipo_orden) values
 	(3,'10/10/2015',80.5,0,'confirmado','Megacomb'),
 	(3,'11/10/2015',70.5,0,'pendiente','Estelar'),
@@ -27,6 +28,8 @@ insert into Orden(usuario_id,fecha,importe,descuento,estado,combo_name, tipo_ord
   (3,'11/10/2015',70.5,0,'pendiente',NULL),
   (3,'4/11/2015',80,0,'pendiente',NULL),
   (3,'6/11/2015',90.3,0,'confirmado','SummerCombo');
+=======
+>>>>>>> 0209d6763c97eeda51667823e9475187b0d64a2f
 
 insert into OrdenPlatos(orden_id,plato_id) values (1,1),(1,4),(1,6),(1,8),
 	(2,2),(2,4),(2,7),(2,8),
