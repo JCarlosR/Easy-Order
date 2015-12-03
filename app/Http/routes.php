@@ -37,6 +37,13 @@ Route::get('gestionar/detalles', 'AdminController@getGestionarDetalles');
 Route::get('gestionar/platodetalles', 'AdminController@getPlatoDetalles');
 Route::get('gestionar/platodetalles/{id}', 'AdminController@getGestionarPlatoDetalles');
 Route::post('gestionar/platodetalles/{id}', 'AdminController@postGestionarPlatoDetalles');
+Route::get('gestionar/chefs','AdminController@getGestionarChefs');
+
+
+// CRUD para los chefs
+Route::post('chef/registrar','ChefController@postRegistrar');
+Route::post('chef/modificar','ChefController@postModificar');
+Route::post('chef/eliminar','ChefController@postEliminar');
 
 // Páginas disponibles para un chef autenticado
 Route::get('bienvenido/chef', 'ChefController@getWelcome');
@@ -66,3 +73,6 @@ Route::resource('detalle', 'DetalleController', ['only' => ['index', 'store', 'u
 Route::resource('menu', 'MenuController', ['only' => ['index', 'show']]);
 // Combos API
 Route::resource('combo', 'ComboController', ['only' => ['index', 'show']]);
+
+// Usuario
+Route::post('validar', 'HomeController@validarUsuario');

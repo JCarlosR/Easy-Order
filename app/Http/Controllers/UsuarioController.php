@@ -6,9 +6,11 @@ use App\Detalle;
 use App\Menu;
 use App\Orden;
 use App\Plato;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller {
 
@@ -212,4 +214,5 @@ class UsuarioController extends Controller {
 
         return view('user.anteriores')->with(compact('ordenes'));
     }
+
 }

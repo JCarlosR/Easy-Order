@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Chef;
 use App\Detalle;
 use App\Menu;
 use App\MenuPlatos;
@@ -275,6 +276,11 @@ class AdminController extends Controller {
         }
     }
 
-
+    public function getGestionarChefs()
+    {
+        $notif = Session::get('notif');
+        $chefs = Chef::all();
+        return view('admin.gestionar-chefs')->with(compact(['chefs', 'notif']));
+    }
 
 }
