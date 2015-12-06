@@ -133,6 +133,21 @@ CREATE TABLE ComboPlatoDetalles
 	FOREIGN KEY (detalle_id) REFERENCES Detalle(id)
 );
 
+CREATE TABLE Chefs
+(
+	id int AUTO_INCREMENT PRIMARY KEY,
+	usuario_id int NOT NULL,
+	FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
+	nombres varchar(100) NOT NULL,
+	apellidos varchar(100) NOT NULL,
+	dni char(8) NOT NULL,
+	direccion varchar(100) NOT NULL,
+	email varchar(100) NOT NULL,
+	telefono varchar(9) NOT NULL,
+	sueldo decimal(8,2)  NOT NULL,
+	masculino tinyint,
+	activo tinyint
+);
 
 -- Un combo nunca se guarda como detalle de una orden
 -- Están propenso a cambios
@@ -145,10 +160,13 @@ CREATE TABLE Orden
 	usuario_id int NOT NULL,
 	FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
 
+	chef_id int,
+	FOREIGN KEY (chef_id) REFERENCES  Chefs(id),
+
 	fecha date NOT NULL,
 	importe decimal(8,2) NOT NULL,
 	descuento decimal(8,2),
-	estado varchar(15),
+	estado varchar(15) CHECK (estado IN ('Espera', 'Preparacion', 'Terminado', 'Confirmado')),
 	combo_name varchar(20),
 	tipo_orden integer
 );
@@ -175,18 +193,4 @@ CREATE TABLE OrdenPlatoDetalles
 	FOREIGN KEY (detalle_id) REFERENCES Detalle(id)
 );
 
-CREATE TABLE Chefs
-(
-		id int AUTO_INCREMENT PRIMARY KEY,
-		usuario_id int NOT NULL,
-		FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
-		nombres varchar(100) NOT NULL,
-		apellidos varchar(100) NOT NULL,
-		dni char(8) NOT NULL,
-		direccion varchar(100) NOT NULL,
-		email varchar(100) NOT NULL,
-		telefono varchar(9) NOT NULL,
-		sueldo decimal(8,2)  NOT NULL,
-		masculino tinyint,
-		activo tinyint
-);
+

@@ -31,7 +31,11 @@
                     <tbody>
                     <tr>
                         <th>Tipo de Orden</th>
-                        <td>{{ $tipo_orden }}</td>
+                        @if($tipo_orden == 0)
+                            <td>Delivery</td>
+                        @else
+                            <td>Pick up</td>
+                        @endif
                     </tr>
                     <tr>
                         <th>Fecha actual</th>
@@ -65,7 +69,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form action="{{ url('bienvenido/usuario') }}" method="GET">
+                        <form action="{{ url('orden/registrar') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <h3 class="text-center">TIPO DE PAGO</h3>

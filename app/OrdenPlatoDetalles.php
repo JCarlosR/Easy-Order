@@ -13,7 +13,7 @@ class OrdenPlatoDetalles extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['ordeplatos_id', 'detalle_id'];
+    protected $fillable = ['ordenplatos_id', 'detalle_id'];
 
     public function detalle()
     {

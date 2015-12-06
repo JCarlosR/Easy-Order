@@ -203,20 +203,25 @@
             {{ session('information') }}
         </div>
     @endif
+    @if (session('notif'))
+        <div class="alert alert-success">
+            {{ session('notif') }}
+        </div>
+    @endif
     <form action="{{ url('previsualizar') }}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <h1>Realizar pedido</h1>
         <div class="row">
             <div class="col-md-6">
                 <label for="tipo">Tipo de pedido:</label>
-                <select name="tipo" class="form-control">
+                <select name="tipo_orden" class="form-control">
                     <option value="0">Delivery</option>
                     <option value="1">Pick-up</option>
                 </select>
             </div>
             <div class="col-md-6">
                 <label for="hora">Hora del pedido:</label>
-                <input type="time" name="hora" value="" readonly class="form-control"/>
+                <input type="time" name="hora" value="{{ $hora }}" readonly class="form-control"/>
             </div>
         </div>
         <div class="row">

@@ -15,7 +15,7 @@ class MenuTableSeeder extends Seeder
     public function run()
     {
         // Registramos un menú para la fecha actual
-        Menu::create(['fecha' => Carbon::now()]);
+        Menu::create(['fecha' => Carbon::now('America/Lima')]);
 
         // Y los platos de este menú
         MenuPlatos::create(['menu_id' => 1, 'plato_id' => 1]);
