@@ -73,7 +73,7 @@ class ChefController extends Controller {
                 'password'  => bcrypt( $request->get('dni') ),
                 'phone'     => $request->get('telefono'),
                 'email'     => $request->get('email'),
-                'tipo'      => 2
+                'tipo'      => 1
             ]);
         }
         else
@@ -93,14 +93,15 @@ class ChefController extends Controller {
                 'password' => bcrypt( $request->get('dni') ),
                 'phone'    => $request->get('telefono'),
                 'email'    => $request->get('email'),
-                'tipo'     => 2,
+                'tipo'     => 1
             ]);
         }
 
+        dd($user);
         $user->save();
         $chef->save();
 
-        $data['notif'] = "El Chef se ha registrado correctamente.";
+        $data['notif'] = "El Chef con Usuario:".$usuario->username."y Clave".$usuario->password." ha sido registrado correctamente.";
 
         return redirect('gestionar/chefs')->with($data);
     }
