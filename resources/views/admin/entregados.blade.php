@@ -32,7 +32,7 @@
         <div class="panel-body">
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="delivery">
-                    @foreach($ordenes as $orden)
+                    @foreach($ordenesD as $orden)
                         <div class="col-md-4">
                             <div class="panel panel-default" >
                                 <h3 class="panel-heading">Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}</h3>
@@ -50,98 +50,21 @@
                 </div>
 
                 <div class="tab-pane fade" id="pickUp">
-                    <div class="col col-md-4">
-                        <div class="panel panel-default" >
-                            <div class="panel-heading">
-                                <h3>Pedido 1</h3>
-                                <img src="{{ asset('images/pickedUp.png') }}" class="img-rounded img-selled">
-                            </div>
-                            <div class="panel-body">
-                                <a href="#myModal" data-toggle="modal" class="col col-md-6">
-                                    <img src="{{ asset('images/1.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#" class="col col-md-6">
-                                    <img src="{{ asset('images/4.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#" class="col col-md-6">
-                                    <img src="{{ asset('images/3.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
+                    @foreach($ordenesP as $orden)
+                        <div class="col-md-4">
+                            <div class="panel panel-default" >
+                                <h3 class="panel-heading">Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}</h3>
+                                <div class="panel-body">
+                                    @foreach($orden->platos as $plato)
+                                        <div class="plato col-md-6" data-id="{{ $orden->id }}">
+                                            <img src="{{ asset('images/platos') }}/{{ $plato->imagen }}.jpg" data-id="{{ $plato->id }}" class="img-rounded img-w-h">
+                                            <p>{{ $plato->nombre }}</p>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col col-md-4">
-                        <div class="panel panel-default" >
-                            <div class="panel-heading">
-                                <h3>Pedido 2</h3>
-                                <img src="{{ asset('images/pickedUp.png') }}" class="img-rounded img-selled">
-                            </div>
-                            <div class="panel-body">
-                                <a href="#myModal" data-toggle="modal" class="col col-md-6">
-                                    <img src="{{ asset('images/1.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#" class="col col-md-6">
-                                    <img src="{{ asset('images/4.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#" class="col col-md-6">
-                                    <img src="{{ asset('images/3.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#" class="col col-md-6">
-                                    <img src="{{ asset('images/3.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#" class="col col-md-6">
-                                    <img src="{{ asset('images/3.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col col-md-4">
-                        <div class="panel panel-default" >
-                            <div class="panel-heading">
-                                <h3>Pedido 3</h3>
-                                <img src="{{ asset('images/pickedUp.png') }}" class="img-rounded img-selled">
-                            </div>
-                            <div class="panel-body">
-                                <a href="#myModal" data-toggle="modal" class="col col-md-6">
-                                    <img src="{{ asset('images/1.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#" class="col col-md-6">
-                                    <img src="{{ asset('images/4.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#myModal" data-toggle="modal" class="col col-md-6">
-                                    <img src="{{ asset('images/3.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#" class="col col-md-6">
-                                    <img src="{{ asset('images/2.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#myModal" data-toggle="modal" class="col col-md-6">
-                                    <img src="{{ asset('images/4.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#" class="col col-md-6">
-                                    <img src="{{ asset('images/3.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                                <a href="#myModal" data-toggle="modal" class="col col-md-6">
-                                    <img src="{{ asset('images/1.jpg') }}" class="img-rounded img-w-h">
-                                    <p>Nombre plato</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

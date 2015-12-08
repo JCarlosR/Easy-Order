@@ -19,6 +19,7 @@ Route::get('bienvenido/usuario', 'UsuarioController@getWelcome');
 Route::get('solicitar', 'UsuarioController@getSolicitar');
 Route::post('previsualizar', 'UsuarioController@getPrevisualizar');
 Route::post('confirmar', 'UsuarioController@postConfirmar');
+Route::post('orden/registrar', 'UsuarioController@postOrden');
 Route::get('recepcion', 'UsuarioController@getRecepcion');
 Route::get('anteriores', 'UsuarioController@getAnteriores');
 

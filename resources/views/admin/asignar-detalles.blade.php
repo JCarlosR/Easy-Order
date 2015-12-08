@@ -78,7 +78,7 @@
     </div>
     <div class="clearfix visible-xs-block"></div>
     <div class="col-md-12">
-    <a type="button" class="btn btn-primary pull-right" href="bienvenido/welcome">Regresar</a>
+    <a type="button" class="btn btn-primary pull-right" href="{{ url('/') }}">Regresar</a>
 
     </div>
 @endsection

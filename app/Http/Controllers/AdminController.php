@@ -45,31 +45,31 @@ class AdminController extends Controller {
 //        if (!$isSunday)
 //            return redirect('previsualizar/menu/'.$dia.'/'.$tipo);
 
-        switch ($dia){
-            case 'lunes':
-                $adicionales = 1;
-                break;
-            case 'martes':
-                $adicionales = 2;
-                break;
-            case 'miercoles':
-                $adicionales = 3;
-                break;
-            case 'jueves':
-                $adicionales = 4;
-                break;
-            case 'viernes':
-                $adicionales = 5;
-                break;
-            case 'sabado':
-                $adicionales = 6;
-                break;
-            case 'domingo':
-                $adicionales = 7;
-                break;
-        }
+        //    switch ($dia){
+        //      case 'lunes':
+        //        $adicionales = 1;
+        //        break;
+        //    case 'martes':
+        //        $adicionales = 2;
+        //        break;
+        //    case 'miercoles':
+        //        $adicionales = 3;
+        //       break;
+        //   case 'jueves':
+        //        $adicionales = 4;
+        //        break;
+        //   case 'viernes':
+        //        $adicionales = 5;
+        //        break;
+        //    case 'sabado':
+        //       $adicionales = 6;
+        //       break;
+        //   case 'domingo':
+        //       $adicionales = 7;
+        //       break;
+        //}
 
-        $carbon = $carbon->addDays($adicionales);
+        //$carbon = $carbon->addDays($adicionales);
 
         $menu = Menu::where('fecha',$carbon->toDateString())->first();
 
@@ -176,8 +176,9 @@ class AdminController extends Controller {
     public function getPendientes()
     {
         $estado = 'pendiente';
-        $ordenes = Orden::where('estado', $estado)->get();
-        return view('admin.pendientes')->with(compact('ordenes'));
+        $ordenesD = Orden::where('estado', $estado)->where('tipo_orden',1)->get();
+        $ordenesP = Orden::where('estado', $estado)->where('tipo_orden',0)->get();
+        return view('admin.pendientes')->with(compact('ordenesD','ordenesP'));
     }
 
     public function postPendientes(Request $request)
@@ -193,8 +194,9 @@ class AdminController extends Controller {
     public function getEntregados()
     {
         $estado = 'confirmado';
-        $ordenes = Orden::where('estado', $estado)->get();
-        return view('admin.entregados')->with(compact('ordenes'));
+        $ordenesD = Orden::where('estado', $estado)->where('tipo_orden',1)->get();
+        $ordenesP = Orden::where('estado', $estado)->where('tipo_orden',0)->get();
+        return view('admin.entregados')->with(compact('ordenesD','ordenesP'));
     }
 
     public function postEntregados(Request $request)
@@ -211,7 +213,8 @@ class AdminController extends Controller {
     {
         $notif = Session::get('notif');
         $platos = Plato::all();
-        return view('admin.gestionar-platos')->with(compact(['platos', 'notif']));
+        $tipos = Tipo::all();
+        return view('admin.gestionar-platos')->with(compact(['platos','tipos', 'notif']));
     }
 
     public function getGestionarDetalles()

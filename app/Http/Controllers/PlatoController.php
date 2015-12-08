@@ -30,7 +30,8 @@ class PlatoController extends Controller {
 		$plato = Plato::create([
 			'nombre'	  => $request->get('nombre'),
 			'descripcion' => $request->get('descripcion'),
-			'precio'      => $request->get('precio')
+			'precio'      => $request->get('precio'),
+			'tipo_id'     => $request->get('tipo_id')
 		]);
 
 		// Imagen
@@ -77,6 +78,7 @@ class PlatoController extends Controller {
 		$plato = Plato::find($request->get('id'));
 		$plato->nombre = $request->get('nombre');
 		$plato->descripcion = $request->get('descripcion');
+		$plato->tipo_id = $request->get('tipo_id');
 		$plato->precio = $request->get('precio');
 		if($request->hasFile('imagen'))
 		{

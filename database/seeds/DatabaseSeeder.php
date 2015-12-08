@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
         // Menú del día (fecha actual) y sus platos
         $this->call(MenuTableSeeder::class);
 
+        $this->call(OrdenTableSeeder::class);
+
         Model::reguard();
     }
 }

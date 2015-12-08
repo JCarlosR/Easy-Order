@@ -5,6 +5,8 @@ use App\Combo;
 use App\Detalle;
 use App\Menu;
 use App\Orden;
+use App\OrdenPlatoDetalles;
+use App\OrdenPlatos;
 use App\Plato;
 use App\User;
 use Carbon\Carbon;
@@ -37,8 +39,10 @@ class UsuarioController extends Controller {
         $bebidas = [];
 
         // Menu del día
-        $fechaActual = Carbon::now()->toDateString();
+        $carbon = Carbon::now('America/Lima');
+        $fechaActual = $carbon->toDateString();
         $menu = Menu::where('fecha', $fechaActual)->first();
+        $hora = $carbon->toTimeString();
 
         if ($menu) {
             $relaciones = $menu->menu_platos;
@@ -63,7 +67,7 @@ class UsuarioController extends Controller {
                 }
             }
         }
-        return view('user.solicitar')->with(compact(['combos','entradas','segundos','postres','bebidas', 'platos']));
+        return view('user.solicitar')->with(compact(['hora', 'combos','entradas','segundos','postres','bebidas', 'platos']));
     }
 
     public function getPrevisualizar(Request $request)
@@ -74,6 +78,10 @@ class UsuarioController extends Controller {
         $segundos_id = $request->get('segundos');
         $postres_id = $request->get('postres');
         $bebidas_id = $request->get('bebidas');
+        $tipo_orden = $request->get('tipo_orden');
+
+
+        //dd($tipo_orden);
 
         $entradas = Plato::find( $entradas_id );
         if($entradas)
@@ -140,28 +148,29 @@ class UsuarioController extends Controller {
         $request->session()->put('segundos', $segundos);
         $request->session()->put('postres', $postres);
         $request->session()->put('bebidas', $bebidas);
-
+        $request->session()->put('tipo_orden', $tipo_orden);
+        $request->session()->put('detalles', $detalles);
+        $request->session()->put('importe', $total);
+        //dd($tipo_orden);
         return view('user.orden')->with(compact(['total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
     }
 
     public function postConfirmar(Request $request)
     {
-        $entradas = $request->session()->get('entradas');
-        $segundos = $request->session()->get('segundos');
-        $postres = $request->session()->get('postres');
-        $bebidas = $request->session()->get('bebidas');
-        //dd($request->session()->all());
+
+        $tipo_orden = $request->session()->get('tipo_orden');
+        //dd($tipo_orden);
 
         // Validación de los datos requeridos
         if (! $request->has('direccion'))
             return redirect('solicitar')->with('information', 'No ha indicado la dirección destino.');
-        if (! $request->has('tipo_orden'))
+        if (! isset($tipo_orden))
             return redirect('solicitar')->with('information', 'No ha indicado el tipo de orden (delivery o pick-up).');
 
-        $tipo_orden = $request->get('tipo_orden');
         $direccion = $request->get('direccion');
-        $hora_pedido = date('h:i A', time() - 3600*date('I'));
-        $hora_entrega = date('h:i A', time() - 3600*date('I') + 3600*2);
+        $carbon = Carbon::now('America/Lima');
+        $hora_pedido = $carbon->format('h:i:s A');
+        $hora_entrega = $carbon->addHours(2)->format('h:i:s A');
 
         date_default_timezone_set("America/Lima" ) ;
 
@@ -195,9 +204,88 @@ class UsuarioController extends Controller {
             case "11": $mes_name = "Noviembre"; break;
             case "12": $mes_name = "Diciembre"; break;
         }
-
+        //dd($tipo_orden);
         $fecha = $dia_name." ".$dia_mes." de ".$mes_name." de ".$year;
-        return view('user.confirmar')->with(compact('fecha','hora_pedido', 'hora_entrega', 'direccion'));
+        return view('user.confirmar')->with(compact('tipo_orden', 'fecha','hora_pedido', 'hora_entrega', 'direccion'));
+    }
+
+    public function postOrden(Request $request)
+    {
+        $detalles = $request->session()->get('detalles');
+
+        $entradas = $request->session()->get('entradas');
+        $segundos = $request->session()->get('segundos');
+        $postres = $request->session()->get('postres');
+        $bebidas = $request->session()->get('bebidas');
+        $importe = $request->session()->get('importe');
+        $tipo_orden = $request->session()->get('tipo_orden');
+
+        $orden = Orden::create([
+            'usuario_id' => Auth::user()->id,
+            'fecha' => Carbon::now('America/Lima'),
+            'importe' => $importe,
+            'descuento' => 0,
+            'estado' => 'Espera',
+            //'combo_name' => ,
+            'tipo_orden' => $tipo_orden
+        ]);
+        if($entradas)
+            foreach ($entradas as $entrada){
+                $plato = OrdenPlatos::create([
+                    'orden_id' => $orden->id,
+                    'plato_id' => $entrada->id
+                ]);
+                foreach ($detalles[$entrada->id] as $detalle){
+                    OrdenPlatoDetalles::create([
+                        'ordenplatos_id' => $plato->id,
+                        'detalle_id' => $detalle->id
+                    ]);
+                }
+            }
+
+        if($segundos)
+            foreach ($segundos as $segundo){
+                $plato = OrdenPlatos::create([
+                    'orden_id' => $orden->id,
+                    'plato_id' => $segundo->id
+                ]);
+                foreach ($detalles[$segundo->id] as $detalle){
+                    OrdenPlatoDetalles::create([
+                        'ordenplatos_id' => $plato->id,
+                        'detalle_id' => $detalle->id
+                    ]);
+                }
+            }
+
+        if($postres)
+            foreach ($postres as $postre){
+                $plato = OrdenPlatos::create([
+                    'orden_id' => $orden->id,
+                    'plato_id' => $postre->id
+                ]);
+                foreach ($detalles[$postre->id] as $detalle){
+                    OrdenPlatoDetalles::create([
+                        'ordenplatos_id' => $plato->id,
+                        'detalle_id' => $detalle->id
+                    ]);
+                }
+            }
+
+        if($bebidas)
+            foreach ($bebidas as $bebida){
+                $plato = OrdenPlatos::create([
+                    'orden_id' => $orden->id,
+                    'plato_id' => $bebida->id
+                ]);
+                foreach ($detalles[$bebida->id] as $detalle){
+                    OrdenPlatoDetalles::create([
+                        'ordenplatos_id' => $plato->id,
+                        'detalle_id' => $detalle->id
+                    ]);
+                }
+            }
+
+        return redirect('solicitar')->with('notif', 'Su orden se ha registrado correctamente.');
     }
 
     public function getRecepcion()

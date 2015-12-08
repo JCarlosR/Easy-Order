@@ -44,6 +44,6 @@ class PlatoDetallesTableSeeder extends Seeder
 
         // Registramos los detalles del plato 8
         PlatoDetalles::create(['plato_id' => 8, 'detalle_id' => 15]);
-        PlatoDetalles::create(['plato_id' => 8, 'detalle_id' => 15]);
+        PlatoDetalles::create(['plato_id' => 8, 'detalle_id' => 16]);
     }
 }
