@@ -4,6 +4,7 @@ use App\Orden;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -31,15 +32,36 @@ class ChefController extends Controller {
         $validator = Validator::make($request->all(), [
             'nombres' => 'required|min:3|max:50',
             'apellidos' => 'required|min:3|max:50',
-            'dni' => 'required|max:8',
+            'dni' => 'required|min:7|max:8',
             'email' => 'required|min:5|max:50',
             'direccion' => 'required|min:3|max:50',
             'telefono' => 'required|min:6|max:9',
             'sueldo' => 'required|min:0'
         ]);
 
-        if ($validator->fails()) {
+        $chef_test = Chef::where('dni',$request->dni )->first();
+
+        if( strpos(trim($request->nombres),' ') == false )
+            $espacio = strlen($request->nombres);
+        else
+            $espacio = strpos(trim($request->nombres),' ');
+        $nombre  = substr($request->nombres,0,$espacio);
+
+        if( strpos(trim($request->apellidos),' ') == false )
+            $space = strlen($request->apellidos);
+        else
+            $space = strpos($request->apellidos,' ');
+        $apellido  = substr($request->apellidos,0,$space);
+
+        if ($validator->fails() OR strlen($nombre)<3 OR strlen($apellido)<3 OR $chef_test != null) {
             $data['errors'] = $validator->errors();
+            if($chef_test != null)
+                $data['errors']->add("dni", "No puede registrar 2  chefs con el mismo dni");
+            else if( strlen($nombre)<3 )
+                $data['errors']->add("nombre", "El primer nombre debe tener por lo menos 3 caracteres ");
+            else if ( strlen($apellido)<3 )
+                $data['errors']->add("apellido", "El primer apellido debe tener por lo menos 3 caracteres ");
+
             return redirect('gestionar/chefs')
                 ->withInput($request->all())
                 ->with($data);
@@ -98,23 +120,16 @@ class ChefController extends Controller {
                 'tipo'     => 1
             ]);
         }
-
-        dd($user);
+        $data['notif'] = "El Chef con USUARIO: ".$user->username." y CLAVE: ".$chef->dni." ha sido registrado correctamente.";
         $user->save();
         $chef->save();
-
-        $data['notif'] = "El Chef con Usuario:".$usuario->username."y Clave".$usuario->password." ha sido registrado correctamente.";
 
         return redirect('gestionar/chefs')->with($data);
     }
 
     public function postModificar(Request $request)
-    {	// Permite guardar cambios sobre un chef
-
+    {
         $validator = Validator::make($request->all(), [
-            'nombres' => 'required|min:3|max:50',
-            'apellidos' => 'required|min:3|max:50',
-            'dni' => 'required|max:8',
             'email' => 'required|min:3|max:50',
             'direccion' => 'required|min:3|max:50',
             'telefono' => 'required|min:6|max:9',
@@ -132,9 +147,6 @@ class ChefController extends Controller {
         $chef = Chef::find($request->get('id'));
 
         $chef->usuario_id = $usuario->id;
-        $chef->nombres	  = $request->get('nombres');
-        $chef->apellidos  = $request->get('apellidos');
-        $chef->dni        = $request->get('dni');
         $chef->email  = $request->get('email');
         $chef->direccion  = $request->get('direccion');
         $chef->telefono   = $request->get('telefono');
