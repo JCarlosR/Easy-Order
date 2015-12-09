@@ -23,6 +23,6 @@ class ComboPlatoDetalles extends Model
     // con un detalle
     public function detalle()
     {
-        return $this->belongsTo('App\ComboPlatoDetalles', 'comboplatodetalles_id');
+        return $this->belongsTo('App\Detalle', 'detalle_id');
     }
 }

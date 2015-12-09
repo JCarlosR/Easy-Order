@@ -17,6 +17,7 @@ class ComboTableSeeder extends Seeder
         Combo::create([
             'usuario_id' => 1,
             'fecha' => '10/9/2015',
+            'nombre' => 'Norteño',
             'destacado' => true
         ]);
         $platos1 = [ 1, 4, 6, 8 ];
@@ -30,12 +31,13 @@ class ComboTableSeeder extends Seeder
         Combo::create([
             'usuario_id' => 1,
             'fecha' => '11/9/2015',
+            'nombre' => 'Start Week',
             'destacado' => false
         ]);
         $platos2 = [ 2, 4, 7, 8 ];
         foreach ($platos2 as $plato_id) {
             ComboPlatos::create([
-                'combo_id' => 1,
+                'combo_id' => 2,
                 'plato_id' => $plato_id
             ]);
         }
@@ -43,12 +45,13 @@ class ComboTableSeeder extends Seeder
         Combo::create([
             'usuario_id' => 2,
             'fecha' => '12/9/2015',
+            'nombre' => 'All rich',
             'destacado' => true
         ]);
         $platos3 = [ 3, 5, 6, 8 ];
         foreach ($platos3 as $plato_id) {
             ComboPlatos::create([
-                'combo_id' => 1,
+                'combo_id' => 3,
                 'plato_id' => $plato_id
             ]);
         }
@@ -56,12 +59,13 @@ class ComboTableSeeder extends Seeder
         Combo::create([
             'usuario_id' => 2,
             'fecha' => '13/9/2015',
+            'nombre' => 'Rimenri',
             'destacado' => false
         ]);
         $platos4 =  [ 4, 5, 7, 8 ];
         foreach ($platos4 as $plato_id) {
             ComboPlatos::create([
-                'combo_id' => 1,
+                'combo_id' => 4,
                 'plato_id' => $plato_id
             ]);
         }
@@ -85,6 +89,10 @@ class ComboTableSeeder extends Seeder
             [ 'comboplatos_id' => 14, 'detalle_id' => 13 ],
             [ 'comboplatos_id' => 15, 'detalle_id' => 16 ]
         ];
-        ComboPlatoDetalles::create($detalles);
+        foreach($detalles as $detalle){
+            ComboPlatoDetalles::create($detalle);
+        }
+
+
     }
 }

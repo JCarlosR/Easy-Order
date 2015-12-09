@@ -5,7 +5,7 @@
         @foreach( $combos as $combo )
         <div class="col-md-4 combo">
             <div class="panel-heading">
-                Combo XYZ
+                Combo {{ $combo->nombre }}
                 <span class="glyphicon glyphicon-star pull-right" aria-hidden="true" title="Combo destacado"></span>
             </div>
             <div class="panel panel-info">
@@ -26,8 +26,8 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAddFO" onclick="location.href='previsualizar'"
-                        <span class="glyphicon glyphicon-plus"></span> Ver más
+                    <button type="button" class="btn btn-primary btn-block" data-combo="{{ $combo->id }}">
+                        <span class="glyphicon glyphicon-plus"></span> Solicitar
                     </button>
                 </div>
             </div>

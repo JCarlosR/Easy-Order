@@ -31,6 +31,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(OrdenTableSeeder::class);
 
+        $this->call(OrdenPlatosTableSeeder::class);
+
+        $this->call(ComboTableSeeder::class);
+
         Model::reguard();
     }
 }
