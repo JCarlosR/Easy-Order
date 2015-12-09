@@ -79,6 +79,7 @@ Route::resource('combo', 'ComboController', ['only' => ['index', 'show']]);
 // Usuario
 Route::post('validar', 'HomeController@validarUsuario');
 
-// API Orden
-Route::resource('registrar/orden/menu', 'OrdenController', ['only' => ['store'] ]);
-Route::resource('ordenes/anteriores', 'OrdenController', ['only' => ['index'] ]);
+// Ordenes
+Route::post('registrar/orden/menu', 'OrdenController@postRegistrarMenuOrden');
+Route::get('ordenes/pendientes', 'OrdenController@getPendientes');
+Route::get('ordenes/entregadas', 'OrdenController@getEntregadas');

@@ -14,25 +14,29 @@ use Illuminate\Support\Facades\Auth;
 
 class OrdenController extends Controller
 {
-    //API
-    public function index()
+
+    public function getEntregadas()
+    {
+        $entregadas = Orden::where('estado','confirmado')->get();
+        return response()->json($entregadas);
+    }
+
+    public function getPendientes()
     {
         $orders = Orden::all();
-        $date = Carbon::now('America/Lima');
-        $today = $date->toDateString();
-        $ordenes = [];
+        $entregadas = [];
 
         foreach( $orders as $order )
         {
-            if( date_create($order->fecha)< date_create($today)  )
+            if( $order->estado != "confirmado" )
             {
-                $ordenes[] = $order;
+                $Pendientes[] = $order;
             }
         }
-        return response()->json($ordenes);
+        return response()->json($Pendientes);
     }
 
-    public function store( Request $request)
+    public function postRegistrarMenuOrden( Request $request)
     {
         $usuario_id = $request->get('usuario_id');
         $detalles = $request->get('detalles');
@@ -113,30 +117,5 @@ class OrdenController extends Controller
             }
 
         return response()->json("Registro satisfctorio");
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }
