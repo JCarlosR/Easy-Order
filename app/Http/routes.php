@@ -77,3 +77,7 @@ Route::resource('combo', 'ComboController', ['only' => ['index', 'show']]);
 
 // Usuario
 Route::post('validar', 'HomeController@validarUsuario');
+
+// API Orden
+Route::resource('registrar/orden/menu', 'OrdenController', ['only' => ['store'] ]);
+Route::resource('ordenes/anteriores', 'OrdenController', ['only' => ['index'] ]);
