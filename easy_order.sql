@@ -104,6 +104,7 @@ CREATE TABLE Combo
 	usuario_id int NOT NULL,
 	FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
 
+	nombre VARCHAR(25),
 	fecha date NOT NULL,
 	destacado tinyint -- 0: No | 1: Sí
 );
