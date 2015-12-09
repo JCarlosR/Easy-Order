@@ -78,6 +78,7 @@ Route::resource('combo', 'ComboController', ['only' => ['index', 'show']]);
 
 // Usuario
 Route::post('validar', 'HomeController@validarUsuario');
+Route::post('usuario/registrar', 'HomeController@postUsuarioRegistrar');
 
 // Ordenes
 Route::post('registrar/orden/menu', 'OrdenController@postRegistrarMenuOrden');
