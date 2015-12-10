@@ -365,12 +365,13 @@ class UsuarioController extends Controller {
                         'combo_id' => $combo->id,
                         'plato_id' => $entrada->id
                     ]);
-                    foreach ($detalles[$entrada->id] as $detalle){
-                        ComboPlatoDetalles::create([
-                            'comboplatos_id' => $comboplato->id,
-                            'detalle_id' => $detalle->id
-                        ]);
-                    }
+                    if($detalles[$entrada->id])
+                        foreach ($detalles[$entrada->id] as $detalle){
+                            ComboPlatoDetalles::create([
+                                'comboplatos_id' => $comboplato->id,
+                                'detalle_id' => $detalle->id
+                            ]);
+                        }
                 }
             if($segundos)
                 foreach ($segundos as $segundo){
@@ -378,12 +379,13 @@ class UsuarioController extends Controller {
                         'combo_id' => $combo->id,
                         'plato_id' => $segundo->id
                     ]);
-                    foreach ($detalles[$segundo->id] as $detalle){
-                        ComboPlatoDetalles::create([
-                            'comboplatos_id' => $comboplato->id,
-                            'detalle_id' => $detalle->id
-                        ]);
-                    }
+                    if($detalles[$segundo->id])
+                        foreach ($detalles[$segundo->id] as $detalle){
+                            ComboPlatoDetalles::create([
+                                'comboplatos_id' => $comboplato->id,
+                                'detalle_id' => $detalle->id
+                            ]);
+                        }
                 }
 
             if($postres)
@@ -392,12 +394,13 @@ class UsuarioController extends Controller {
                         'combo_id' => $combo->id,
                         'plato_id' => $postre->id
                     ]);
-                    foreach ($detalles[$postre->id] as $detalle){
-                        ComboPlatoDetalles::create([
-                            'comboplatos_id' => $comboplato->id,
-                            'detalle_id' => $detalle->id
-                        ]);
-                    }
+                    if($detalles[$postre->id])
+                        foreach ($detalles[$postre->id] as $detalle){
+                            ComboPlatoDetalles::create([
+                                'comboplatos_id' => $comboplato->id,
+                                'detalle_id' => $detalle->id
+                            ]);
+                        }
                 }
 
             if($bebidas)
@@ -406,12 +409,13 @@ class UsuarioController extends Controller {
                         'combo_id' => $combo->id,
                         'plato_id' => $bebida->id
                     ]);
-                    foreach ($detalles[$bebida->id] as $detalle){
-                        ComboPlatoDetalles::create([
-                            'comboplatos_id' => $comboplato->id,
-                            'detalle_id' => $detalle->id
-                        ]);
-                    }
+                    if($detalles[$bebida->id])
+                        foreach ($detalles[$bebida->id] as $detalle){
+                            ComboPlatoDetalles::create([
+                                'comboplatos_id' => $comboplato->id,
+                                'detalle_id' => $detalle->id
+                            ]);
+                        }
                 }
 
 
