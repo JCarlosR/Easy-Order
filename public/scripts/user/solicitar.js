@@ -3,12 +3,12 @@ $(document).on('ready', funcPrincipal);
 function funcPrincipal() {
     // Al hacer click en un plato, se permite mostrar sus detalles
     $('.img-thumbnail').next().on('click', mostrarDetalles);
-    $('.combo').next().on('click', mostrarDetallesCombo);
+    $('.combo').on('click', mostrarDetallesCombo);
     $('[data-combo]').on('click', enviarDatos);
 }
 
 function mostrarDetalles() {
-    // Obtener el id del plato del data-id
+    // Obtener el id del plato desde el atributo data-id
     var idPlato = $(this).prev().data('id');
     var selector = '.modal[data-plato='+idPlato+']';
     var $modalDetalles = $(selector);
@@ -17,23 +17,20 @@ function mostrarDetalles() {
 }
 
 function mostrarDetallesCombo() {
-    // Obtener el id del plato del data-id
+    // Obtener el id del combo desde e atributo data-comboplato
     var idComboPlato = $(this).data('comboplato');
-    var selector = '.modal[data-comboplatoId='+idComboPlato+']';
+    var idCombo = $(this).data('comboid');
+    var selector = '.modal[data-comboPlatoId='+idComboPlato+idCombo+']';
     var $modalDetalles = $(selector);
     // Mostrar modal
     $modalDetalles.modal('show');
 }
 
 function enviarDatos() {
-    // Obtener el id del tipo
+    // Obtener el tipo de orden y el id del combo elegido
     var tipo = $('select[name=tipo_orden]').val();
     var combo_id = $(this).data('combo');
 
     //Hacer petición GET y pasarle los valores anteriores
-
     location.href = 'previsualizar/'+tipo+'/'+combo_id;
-
-
-
 }

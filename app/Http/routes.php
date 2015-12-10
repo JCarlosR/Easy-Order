@@ -24,6 +24,7 @@ Route::post('orden/registrar', 'UsuarioController@postOrden');
 Route::get('recepcion', 'UsuarioController@getRecepcion');
 Route::post('recepcion', 'UsuarioController@postRecepcion');
 Route::get('anteriores', 'UsuarioController@getAnteriores');
+Route::post('combo/guardarName', 'UsuarioController@postguardarName');
 
 // Páginas disponibles para un admin autenticado
 Route::get('bienvenido/admin', 'AdminController@getWelcome');
@@ -85,5 +86,9 @@ Route::post('usuario/registrar', 'HomeController@postUsuarioRegistrar');
 
 // Ordenes
 Route::post('registrar/orden/menu', 'OrdenController@postRegistrarMenuOrden');
-Route::get('ordenes/pendientes', 'OrdenController@getPendientes');
-Route::get('ordenes/entregadas', 'OrdenController@getEntregadas');
+
+Route::get('orden/entregadas', 'OrdenController@getEntregadas');
+Route::get('orden/pendientes', 'OrdenController@getPendientes');
+Route::get('orden/platos/{id}', 'OrdenController@getOrdenPlatos');
+Route::get('orden/plato/detalles/{id_orden}/{id_plato}', 'OrdenController@getOrdenPlatoDetalles');
+Route::post('orden/cambiar/estado', 'OrdenController@postOrdenCambiarEstado');

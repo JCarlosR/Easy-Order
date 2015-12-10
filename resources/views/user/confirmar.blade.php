@@ -67,9 +67,11 @@
 
             </div>
             <div class="col-md-6">
+
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <form action="{{ url('orden/registrar') }}" method="POST">
+                            <input type="hidden" name="combo_name" class="form-control text-center" value="{{ $combo_name }}">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <h3 class="text-center">TIPO DE PAGO</h3>

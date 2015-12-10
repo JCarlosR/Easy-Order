@@ -21,7 +21,9 @@ class VerifyCsrfToken extends BaseVerifier
 
         'recepcion*',
         'registrar/orden/menu',
-        'ordenes/anteriores',
-        'usuario/registrar'
+        'usuario/registrar',
+        'ordenes/entregadas',
+        'ordenes/pendientes',
+        'orden/cambiar/estado'
     ];
 }
