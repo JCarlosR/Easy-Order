@@ -81,7 +81,7 @@ class UsuarioController extends Controller {
         $postres_id = $request->get('postres');
         $bebidas_id = $request->get('bebidas');
         $tipo_orden = $request->get('tipo_orden');
-
+        $combo_id = null;
 
         //dd($tipo_orden);
 
@@ -154,7 +154,7 @@ class UsuarioController extends Controller {
         $request->session()->put('detalles', $detalles);
         $request->session()->put('importe', $total);
         //dd($detalles);
-        return view('user.orden')->with(compact(['total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
+        return view('user.orden')->with(compact(['combo_id','total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
     }
 
     public function getPrevisualizar(Request $request, $tipo, $combo_id)
@@ -202,8 +202,9 @@ class UsuarioController extends Controller {
         $request->session()->put('detalles', $detalles);
         $request->session()->put('importe', $total);
         $request->session()->put('tipo_orden', $tipo);
+        //
         //dd($tipo);
-        return view('user.orden')->with(compact(['total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
+        return view('user.orden')->with(compact(['combo_id','total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
 
     }
 
@@ -211,7 +212,8 @@ class UsuarioController extends Controller {
     {
 
         $tipo_orden = $request->session()->get('tipo_orden');
-        //dd($tipo_orden);
+        $combo_name = $request->get('comboName');
+        //dd($combo_name);
 
         // Validación de los datos requeridos
         if (! $request->has('direccion'))
@@ -257,8 +259,9 @@ class UsuarioController extends Controller {
             case "12": $mes_name = "Diciembre"; break;
         }
         //dd($tipo_orden);
+        //$request->session()->put('combo_name', $combo_name);
         $fecha = $dia_name." ".$dia_mes." de ".$mes_name." de ".$year;
-        return view('user.confirmar')->with(compact('tipo_orden', 'fecha','hora_pedido', 'hora_entrega', 'direccion'));
+        return view('user.confirmar')->with(compact('combo_name','tipo_orden', 'fecha','hora_pedido', 'hora_entrega', 'direccion'));
     }
 
     public function postOrden(Request $request)
@@ -272,6 +275,9 @@ class UsuarioController extends Controller {
         $importe = $request->session()->get('importe');
         $tipo_orden = $request->session()->get('tipo_orden');
 
+        $combo_name = $request->get('combo_name');
+
+        //dd($entradas);
         $orden = Orden::create([
             'usuario_id' => Auth::user()->id,
             'fecha' => Carbon::now('America/Lima'),
@@ -337,12 +343,92 @@ class UsuarioController extends Controller {
                 }
             }
 
+        $carbon = Carbon::now('America/Lima');
+        $fechaActual = $carbon->toDateString();
+        if($combo_name != "")
+        {
+            $combo = Combo::create([
+                'usuario_id' => Auth::user()->id,
+                'fecha' => $fechaActual,
+                'destacado' => 0,
+                'nombre' => $combo_name
+            ]);
+            if($entradas)
+                foreach ($entradas as $entrada){
+                    $comboplato = ComboPlatos::create([
+                        'combo_id' => $combo->id,
+                        'plato_id' => $entrada->id
+                    ]);
+                    foreach ($detalles[$entrada->id] as $detalle){
+                        ComboPlatoDetalles::create([
+                            'comboplatos_id' => $comboplato->id,
+                            'detalle_id' => $detalle->id
+                        ]);
+                    }
+                }
+            if($segundos)
+                foreach ($segundos as $segundo){
+                    $comboplato = ComboPlatos::create([
+                        'combo_id' => $combo->id,
+                        'plato_id' => $segundo->id
+                    ]);
+                    foreach ($detalles[$segundo->id] as $detalle){
+                        ComboPlatoDetalles::create([
+                            'comboplatos_id' => $comboplato->id,
+                            'detalle_id' => $detalle->id
+                        ]);
+                    }
+                }
+
+            if($postres)
+                foreach ($postres as $postre){
+                    $comboplato = ComboPlatos::create([
+                        'combo_id' => $combo->id,
+                        'plato_id' => $postre->id
+                    ]);
+                    foreach ($detalles[$postre->id] as $detalle){
+                        ComboPlatoDetalles::create([
+                            'comboplatos_id' => $comboplato->id,
+                            'detalle_id' => $detalle->id
+                        ]);
+                    }
+                }
+
+            if($bebidas)
+                foreach ($bebidas as $bebida){
+                    $comboplato = ComboPlatos::create([
+                        'combo_id' => $combo->id,
+                        'plato_id' => $bebida->id
+                    ]);
+                    foreach ($detalles[$bebida->id] as $detalle){
+                        ComboPlatoDetalles::create([
+                            'comboplatos_id' => $comboplato->id,
+                            'detalle_id' => $detalle->id
+                        ]);
+                    }
+                }
+
+
+        }
+
+
         return redirect('solicitar')->with('notif', 'Su orden se ha registrado correctamente.');
     }
 
     public function getRecepcion()
     {
-        return view('user.recepcion');
+        $estado = 'terminado';
+        $usuario = Auth::user()->id;
+        $ordenes = Orden::where('estado', $estado)->where('usuario_id',$usuario)->get();
+        return view('user.recepcion')->with(compact('ordenes'));
+    }
+
+    public function postRecepcion(Request $request)
+    {
+        $orden = Orden::find($request->get('orden_id'));
+        $orden->estado = $request->get('estado');
+        $orden->save();
+        return response()->json($orden);
     }
 
     public function getAnteriores()
@@ -351,8 +437,11 @@ class UsuarioController extends Controller {
         $estado = 'confirmado';
         $usuario = Auth::user()->id;
         $ordenes = Orden::where('estado', $estado)->where('usuario_id',$usuario)->get();
-
         return view('user.anteriores')->with(compact('ordenes'));
+    }
+    public function postguardarName(Request $request)
+    {
+
     }
 
 }

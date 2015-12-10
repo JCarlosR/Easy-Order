@@ -18,6 +18,8 @@ class VerifyCsrfToken extends BaseVerifier
         'pedidos/pendientes*',
         'pedidos/entregados*',
         'validar*',
+
+        'recepcion*',
         'registrar/orden/menu',
         'usuario/registrar',
         'ordenes/entregadas',
