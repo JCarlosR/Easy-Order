@@ -35,7 +35,7 @@
                     @foreach($ordenesD as $ordend)
                     <div class="col-md-4">
                         <div class="panel panel-default" >
-                            <h3 class="panel-heading">Orden {{ $ordend->id }} - {{ $ordend->combo_name or 'Elección Común' }}</h3>
+                            <h3 class="panel-heading"><a href="{{ asset('pedidos/pendientes') }}/{{ $ordend->id }}" >Orden {{ $ordend->id }} - {{ $ordend->combo_name or 'Elección Común' }}</a></h3>
                             <div class="panel-body">
                                 @foreach($ordend->platos as $plato)
                                 <div class="plato col-md-6" data-id="{{ $ordend->id }}">
@@ -43,6 +43,14 @@
                                     <p>{{ $plato->nombre }}</p>
                                 </div>
                                 @endforeach
+                            </div>
+                            <div align="center">
+                                <h3 class="panel-footer">
+                                    <span class="label label-{{ $ordend->estadodesc->color }}">{{ $ordend->estadodesc->descripcion }}</span>
+                                    <br>
+                                    <span>Chef: {{ $ordend->chef->nombres or 'No Asignado' }}</span>
+                                </h3>
+
                             </div>
                         </div>
                     </div>
@@ -53,7 +61,7 @@
                     @foreach($ordenesP as $orden)
                         <div class="col-md-4">
                             <div class="panel panel-default" >
-                                <h3 class="panel-heading">Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}</h3>
+                                <h3 class="panel-heading"><a href="{{ asset('pedidos/pendientes') }}/{{ $orden->id }}" >Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}</a></h3>
                                 <div class="panel-body">
                                     @foreach($orden->platos as $plato)
                                         <div class="plato col-md-6" data-id="{{ $orden->id }}">
@@ -61,6 +69,14 @@
                                             <p>{{ $plato->nombre }}</p>
                                         </div>
                                     @endforeach
+                                </div>
+                                <div align="center">
+                                    <h3 class="panel-footer">
+                                        <span class="label label-{{ $orden->estadodesc->color }}">{{ $orden->estadodesc->descripcion }}</span>
+                                        <br>
+                                        <span>Chef: {{ $orden->chef->nombres or 'No Asignado' }}</span>
+                                    </h3>
+
                                 </div>
                             </div>
                         </div>

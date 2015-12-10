@@ -21,6 +21,7 @@ Route::post('previsualizar', 'UsuarioController@getPrevisualizar');
 Route::post('confirmar', 'UsuarioController@postConfirmar');
 Route::post('orden/registrar', 'UsuarioController@postOrden');
 Route::get('recepcion', 'UsuarioController@getRecepcion');
+Route::post('recepcion', 'UsuarioController@postRecepcion');
 Route::get('anteriores', 'UsuarioController@getAnteriores');
 
 // Páginas disponibles para un admin autenticado
@@ -33,6 +34,8 @@ Route::get('pedidos/entregados', 'AdminController@getEntregados');
 Route::post('pedidos/entregados', 'AdminController@postEntregados');
 Route::get('pedidos/pendientes', 'AdminController@getPendientes');
 Route::post('pedidos/pendientes', 'AdminController@postPendientes');
+Route::get('pedidos/pendientes/{id}', 'AdminController@getGestionarPendientes');
+Route::post('pedidos/pendientes/{id}', 'AdminController@postGestionarPendientes');
 Route::get('gestionar/platos', 'AdminController@getGestionarPlatos');
 Route::get('gestionar/detalles', 'AdminController@getGestionarDetalles');
 Route::get('gestionar/platodetalles', 'AdminController@getPlatoDetalles');

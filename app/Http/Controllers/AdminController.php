@@ -2,6 +2,7 @@
 
 use App\Chef;
 use App\Detalle;
+use App\Estado;
 use App\Menu;
 use App\MenuPlatos;
 use App\Orden;
@@ -175,9 +176,9 @@ class AdminController extends Controller {
 
     public function getPendientes()
     {
-        $estado = 'pendiente';
-        $ordenesD = Orden::where('estado', $estado)->where('tipo_orden',1)->get();
-        $ordenesP = Orden::where('estado', $estado)->where('tipo_orden',0)->get();
+        $estado = 'confirmado';
+        $ordenesD = Orden::where('estado','<>',$estado)->where('tipo_orden',1)->get();
+        $ordenesP = Orden::where('estado','<>',$estado)->where('tipo_orden',0)->get();
         return view('admin.pendientes')->with(compact('ordenesD','ordenesP'));
     }
 
@@ -281,6 +282,22 @@ class AdminController extends Controller {
         $notif = Session::get('notif');
         $chefs = Chef::all();
         return view('admin.gestionar-chefs')->with(compact(['chefs', 'notif']));
+    }
+
+    public function getGestionarPendientes($id)
+    {
+        $orden = Orden::find($id);
+        $estados = Estado::where('state','>',$orden->estadodesc->state)->where('nombre','<>','confirmado')->get();
+        return view('chef.gestionar-pendientes')->with(compact(['orden','estados']));
+    }
+
+    public function postGestionarPendientes($id,Request $request)
+    {
+        $orden = Orden::find($id);
+        $orden->estado = $request->get('estado');
+        $orden->chef_id = Auth::user()->id;
+        $orden->save();
+        return response()->json($orden);
     }
 
 }

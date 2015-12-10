@@ -2,8 +2,9 @@
 
 @section('styles')
     <style>
-        .pointer {
-            cursor: pointer;
+        .img-thumbnail {
+            width: 100px;
+            height: 100px;
         }
 
         .modal-body {
@@ -29,144 +30,30 @@
         </header>
 
         <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            <span class="glyphicon glyphicon-cutlery"></span> COMBO XYZ1
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/1" width="100"
-                                 height="100">
-                            <p class="text-center">ENTRADA</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/2" width="100"
-                                 height="100">
-                            <p class="text-center">SEGUNDO</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/3" width="100"
-                                 height="100">
-                            <p class="text-center">POSTRE</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/4" width="100"
-                                 height="100">
-                            <p class="text-center">BEBIDA</p>
+            @foreach($ordenes as $orden)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{ $orden->id }}">
+                                <span class="glyphicon glyphicon-cutlery"></span> Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne{{ $orden->id }}" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            @foreach($orden->platos as $plato)
+                                <div class="col-md-3">
+                                    <img src="{{ asset('images/platos') }}/{{ $plato->imagen }}.jpg" class="img-thumbnail">
+                                    <p class="text-center">{{ $plato->nombre }}</p>
+                                </div>
+                            @endforeach
+                            <button type="button" class="btn btn-primary btn-lg btn-block" data-id="{{ $orden->id }}">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Confirmar pedido
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            <span class="glyphicon glyphicon-cutlery"></span> COMBO XYZ
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/1" width="100"
-                                 height="100">
-                            <p class="text-center">ENTRADA</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/2" width="100"
-                                 height="100">
-                            <p class="text-center">SEGUNDO</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/3" width="100"
-                                 height="100">
-                            <p class="text-center">POSTRE</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/4" width="100"
-                                 height="100">
-                            <p class="text-center">BEBIDA</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <span class="glyphicon glyphicon-cutlery"></span> COMBO XYZ
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/1" width="100"
-                                 height="100">
-                            <p class="text-center">ENTRADA</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/2" width="100"
-                                 height="100">
-                            <p class="text-center">SEGUNDO</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/3" width="100"
-                                 height="100">
-                            <p class="text-center">POSTRE</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/4" width="100"
-                                 height="100">
-                            <p class="text-center">BEBIDA</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                            <span class="glyphicon glyphicon-cutlery"></span> COMBO XYZ
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/1" width="100"
-                                 height="100">
-                            <p class="text-center">ENTRADA</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/2" width="100"
-                                 height="100">
-                            <p class="text-center">SEGUNDO</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/3" width="100"
-                                 height="100">
-                            <p class="text-center">POSTRE</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="plato pointer" src="http://lorempixel.com/140/140/food/4" width="100"
-                                 height="100">
-                            <p class="text-center">BEBIDA</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-offset-3 col-md-5">
-            <button type="button" class="btn btn-primary btn-lg btn-block">
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Confirmar pedido
-            </button>
+            @endforeach
         </div>
 
     </div>
@@ -227,5 +114,6 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('scripts/user/jquery.confirm.min.js') }}"></script>
     <script src="{{ asset('scripts/user/recepcion.js') }}"></script>
 @endsection

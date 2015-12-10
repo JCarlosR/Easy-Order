@@ -46,19 +46,6 @@ class ChefController extends Controller {
         // Si no hay errores, registramos
         $usuario = Auth::user();
 
-        $chef = Chef::create([
-            'usuario_id' =>$usuario->id,
-            'nombres'	 => $request->get('nombres'),
-            'apellidos'  => $request->get('apellidos'),
-            'dni'        => $request->get('dni'),
-            'direccion'  => $request->get('direccion'),
-            'email'      => $request->get('email'),
-            'telefono'   => $request->get('telefono'),
-            'sueldo'     => $request->get('sueldo'),
-            'masculino'  => $request->get('masculino'),
-            'activo'     => $request->get('activo'),
-        ]);
-
         $i =1;
         $user_base = strtolower( substr($request->get('nombres'),0,3).substr($request->get('apellidos'),0,3) );
         $user_completo = $user_base.$i;
@@ -93,9 +80,24 @@ class ChefController extends Controller {
                 'password' => bcrypt( $request->get('dni') ),
                 'phone'    => $request->get('telefono'),
                 'email'    => $request->get('email'),
-                'tipo'     => 2,
+                'tipo'     => 2
             ]);
         }
+
+        $id = User::all()->max('id');
+
+        $chef = Chef::create([
+            'usuario_id' => $id,
+            'nombres'	 => $request->get('nombres'),
+            'apellidos'  => $request->get('apellidos'),
+            'dni'        => $request->get('dni'),
+            'direccion'  => $request->get('direccion'),
+            'email'      => $request->get('email'),
+            'telefono'   => $request->get('telefono'),
+            'sueldo'     => $request->get('sueldo'),
+            'masculino'  => $request->get('masculino'),
+            'activo'     => $request->get('activo'),
+        ]);
 
         $user->save();
         $chef->save();
