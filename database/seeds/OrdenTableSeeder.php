@@ -17,7 +17,7 @@ class OrdenTableSeeder extends Seeder
             'fecha' => '10/10/2015',
             'importe' => 80.5,
             'descuento' => 0,
-            'estado' => 'confirmado',
+            'estado' => 'terminado',
             'combo_name' => 'Megacomb',
             'tipo_orden' => 1
         ]);
@@ -27,7 +27,7 @@ class OrdenTableSeeder extends Seeder
             'fecha' => '11/10/2015',
             'importe' => 70.5,
             'descuento' => 0,
-            'estado' => 'pendiente',
+            'estado' => 'espera',
             'combo_name' => 'Estelar',
             'tipo_orden' => 1
         ]);
@@ -37,7 +37,7 @@ class OrdenTableSeeder extends Seeder
             'fecha' => '4/11/2015',
             'importe' => 80,
             'descuento' => 0,
-            'estado' => 'pendiente',
+            'estado' => 'terminado',
             'combo_name' => NULL,
             'tipo_orden' => 0
         ]);
@@ -67,7 +67,7 @@ class OrdenTableSeeder extends Seeder
             'fecha' => '11/10/2015',
             'importe' => 70.5,
             'descuento' => 0,
-            'estado' => 'pendiente',
+            'estado' => 'espera',
             'combo_name' => NULL,
             'tipo_orden' => 1
         ]);
@@ -77,7 +77,7 @@ class OrdenTableSeeder extends Seeder
             'fecha' => '4/11/2015',
             'importe' => 80,
             'descuento' => 0,
-            'estado' => 'pendiente',
+            'estado' => 'espera',
             'combo_name' => NULL,
             'tipo_orden' => 0
         ]);

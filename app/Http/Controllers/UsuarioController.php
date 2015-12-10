@@ -417,7 +417,18 @@ class UsuarioController extends Controller {
 
     public function getRecepcion()
     {
-        return view('user.recepcion');
+        $estado = 'terminado';
+        $usuario = Auth::user()->id;
+        $ordenes = Orden::where('estado', $estado)->where('usuario_id',$usuario)->get();
+        return view('user.recepcion')->with(compact('ordenes'));
+    }
+
+    public function postRecepcion(Request $request)
+    {
+        $orden = Orden::find($request->get('orden_id'));
+        $orden->estado = $request->get('estado');
+        $orden->save();
+        return response()->json($orden);
     }
 
     public function getAnteriores()
@@ -426,7 +437,6 @@ class UsuarioController extends Controller {
         $estado = 'confirmado';
         $usuario = Auth::user()->id;
         $ordenes = Orden::where('estado', $estado)->where('usuario_id',$usuario)->get();
-
         return view('user.anteriores')->with(compact('ordenes'));
     }
     public function postguardarName(Request $request)

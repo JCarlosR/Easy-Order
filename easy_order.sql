@@ -162,7 +162,7 @@ CREATE TABLE Orden
 	FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
 
 	chef_id int,
-	FOREIGN KEY (chef_id) REFERENCES  Chefs(id),
+	FOREIGN KEY (chef_id) REFERENCES  Chefs(usuario_id),
 
 	fecha date NOT NULL,
 	importe decimal(8,2) NOT NULL,
@@ -192,6 +192,14 @@ CREATE TABLE OrdenPlatoDetalles
 
 	detalle_id int NOT NULL,
 	FOREIGN KEY (detalle_id) REFERENCES Detalle(id)
+);
+
+CREATE TABLE Estados
+(
+	nombre varchar(15) PRIMARY KEY,
+	descripcion varchar(15),
+	color varchar(15),
+	state int
 );
 
 
