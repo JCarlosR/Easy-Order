@@ -21,4 +21,9 @@ class Combo extends Model
         return $this->belongsToMany('App\Plato','ComboPlatos' ,'combo_id');
     }
 
+    public function comboplatos()
+    {
+        return $this->hasmany('App\ComboPlatos');
+    }
+
 }

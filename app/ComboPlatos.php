@@ -25,4 +25,9 @@ class ComboPlatos extends Model
     {
         return $this->belongsTo('App\Plato', 'plato_id');
     }
+    //un ComboPlatos se relaciona con varios ComboPlatoDetalles
+    public function comboplatodetalles()
+    {
+        return $this->hasMany('App\ComboPlatoDetalles', 'comboplatos_id');
+    }
 }

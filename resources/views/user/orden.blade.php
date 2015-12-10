@@ -25,6 +25,7 @@
                 <header>
                     <h1>Orden de delivery</h1>
                 </header>
+                <input type="hidden" id="comboID" value="{{ $combo_id }}">
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -143,7 +144,7 @@
 
 
                 <div class="col-md-offset-3 col-md-5">
-                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#modalNuevoCombo">
+                    <button type="button" id="btnGuardarCombo" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#modalNuevoCombo">
                         <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> Guardar combo
                     </button>
                 </div>
@@ -172,7 +173,26 @@
                             <input type="text" class="form-control" name="total" readonly value="{{ $total }}" required>
                         </div>
                     </div>
-
+                    <div id="modalNuevoCombo" class="modal fade in">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Asigne un nombre al combo</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Nombre:
+                                    <input type="text" name="comboName" class="form-control">
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="btn-group">
+                                        <button class="btn btn-success move-right" data-dismiss="modal">
+                                            <span class="glyphicon glyphicon-thumbs-down"></span> Aceptar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
                         Continuar <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
                     </button>
@@ -182,28 +202,9 @@
 
 
     </div>
-    <div id="modalNuevoCombo" class="modal fade in">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Asigne un nombre al combo</h4>
-                </div>
-                <div class="modal-body">
-                    Nombre:
-                    <input type="text" class="form-control">
-                </div>
-                <div class="modal-footer">
-                    <div class="btn-group">
-                        <button class="btn btn-danger move-right" data-dismiss="modal">
-                            <span class="glyphicon glyphicon-thumbs-down"></span> Cancelar
-                        </button>
-                        <button class="btn btn-primary ">
-                            <span class="glyphicon glyphicon-thumbs-up"></span>
-                            Guardar combo
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('scripts/user/orden.js') }}"></script>
 @endsection

@@ -23,6 +23,7 @@ Route::post('confirmar', 'UsuarioController@postConfirmar');
 Route::post('orden/registrar', 'UsuarioController@postOrden');
 Route::get('recepcion', 'UsuarioController@getRecepcion');
 Route::get('anteriores', 'UsuarioController@getAnteriores');
+Route::post('combo/guardarName', 'UsuarioController@postguardarName');
 
 // Páginas disponibles para un admin autenticado
 Route::get('bienvenido/admin', 'AdminController@getWelcome');
