@@ -88,8 +88,29 @@ class OrdenPlatosTableSeeder extends Seeder
             ]);
         }
 
-        //(6,3),(6,5),(6,6),(6,8)
-        //(7,2),(7,4),(7,7),(7,8)
-        //(8,1),(8,4),(8,6),(8,8)
+        $platos6 = [ 3, 5, 6, 8 ];
+        foreach ($platos6 as $plato_id) {
+            OrdenPlatos::create([
+                'orden_id' => 6,
+                'plato_id' => $plato_id
+            ]);
+        }
+
+        $platos7 = [ 2, 4, 7, 8 ];
+        foreach ($platos7 as $plato_id) {
+            OrdenPlatos::create([
+                'orden_id' => 7,
+                'plato_id' => $plato_id
+            ]);
+        }
+
+        $platos8 = [ 1, 4, 6, 8 ];
+        foreach ($platos8 as $plato_id) {
+            OrdenPlatos::create([
+                'orden_id' => 8,
+                'plato_id' => $plato_id
+            ]);
+        }
+
     }
 }
