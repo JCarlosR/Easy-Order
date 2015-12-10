@@ -26,7 +26,6 @@ class Orden extends Model
     {
         return $this->belongsToMany('App\Plato', 'OrdenPlatos', "orden_id");
     }
-
     public function estadodesc()
     {
         return $this->belongsTo('App\Estado', 'estado','nombre');
@@ -36,5 +35,4 @@ class Orden extends Model
     {
         return $this->belongsTo('App\Chef', 'chef_id','usuario_id');
     }
-
 }
