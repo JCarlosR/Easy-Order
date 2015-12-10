@@ -287,17 +287,20 @@ class UsuarioController extends Controller {
             //'combo_name' => ,
             'tipo_orden' => $tipo_orden
         ]);
+
         if($entradas)
             foreach ($entradas as $entrada){
                 $plato = OrdenPlatos::create([
                     'orden_id' => $orden->id,
                     'plato_id' => $entrada->id
                 ]);
-                foreach ($detalles[$entrada->id] as $detalle){
-                    OrdenPlatoDetalles::create([
-                        'ordenplatos_id' => $plato->id,
-                        'detalle_id' => $detalle->id
-                    ]);
+                if($detalles[$entrada->id]){
+                    foreach ($detalles[$entrada->id] as $detalle){
+                        OrdenPlatoDetalles::create([
+                            'ordenplatos_id' => $plato->id,
+                            'detalle_id' => $detalle->id
+                        ]);
+                    }
                 }
             }
 
@@ -307,12 +310,13 @@ class UsuarioController extends Controller {
                     'orden_id' => $orden->id,
                     'plato_id' => $segundo->id
                 ]);
-                foreach ($detalles[$segundo->id] as $detalle){
-                    OrdenPlatoDetalles::create([
-                        'ordenplatos_id' => $plato->id,
-                        'detalle_id' => $detalle->id
-                    ]);
-                }
+                if($detalles[$segundo->id])
+                    foreach ($detalles[$segundo->id] as $detalle){
+                        OrdenPlatoDetalles::create([
+                            'ordenplatos_id' => $plato->id,
+                            'detalle_id' => $detalle->id
+                        ]);
+                    }
             }
 
         if($postres)
@@ -321,12 +325,13 @@ class UsuarioController extends Controller {
                     'orden_id' => $orden->id,
                     'plato_id' => $postre->id
                 ]);
-                foreach ($detalles[$postre->id] as $detalle){
-                    OrdenPlatoDetalles::create([
-                        'ordenplatos_id' => $plato->id,
-                        'detalle_id' => $detalle->id
-                    ]);
-                }
+                if($detalles[$postre->id])
+                    foreach ($detalles[$postre->id] as $detalle){
+                        OrdenPlatoDetalles::create([
+                            'ordenplatos_id' => $plato->id,
+                            'detalle_id' => $detalle->id
+                        ]);
+                    }
             }
 
         if($bebidas)
@@ -335,12 +340,13 @@ class UsuarioController extends Controller {
                     'orden_id' => $orden->id,
                     'plato_id' => $bebida->id
                 ]);
-                foreach ($detalles[$bebida->id] as $detalle){
-                    OrdenPlatoDetalles::create([
-                        'ordenplatos_id' => $plato->id,
-                        'detalle_id' => $detalle->id
-                    ]);
-                }
+                if($detalles[$bebida->id])
+                    foreach ($detalles[$bebida->id] as $detalle){
+                        OrdenPlatoDetalles::create([
+                            'ordenplatos_id' => $plato->id,
+                            'detalle_id' => $detalle->id
+                        ]);
+                    }
             }
 
         $carbon = Carbon::now('America/Lima');
