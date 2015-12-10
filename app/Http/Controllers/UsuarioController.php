@@ -224,7 +224,7 @@ class UsuarioController extends Controller {
         $direccion = $request->get('direccion');
         $carbon = Carbon::now('America/Lima');
         $hora_pedido = $carbon->format('h:i:s A');
-        $hora_entrega = $carbon->addHours(2)->format('h:i:s A');
+        $hora_entrega = $carbon->addMinutes(30)->format('h:i:s A');
 
         date_default_timezone_set("America/Lima" ) ;
 
