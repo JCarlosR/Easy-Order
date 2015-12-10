@@ -17,7 +17,8 @@ Route::get('salir', 'Auth\AuthController@getLogout');
 // Páginas disponibles para un usuario autenticado
 Route::get('bienvenido/usuario', 'UsuarioController@getWelcome');
 Route::get('solicitar', 'UsuarioController@getSolicitar');
-Route::post('previsualizar', 'UsuarioController@getPrevisualizar');
+Route::get('previsualizar/{tipo}/{combo}', 'UsuarioController@getPrevisualizar');
+Route::post('previsualizar', 'UsuarioController@postPrevisualizar');
 Route::post('confirmar', 'UsuarioController@postConfirmar');
 Route::post('orden/registrar', 'UsuarioController@postOrden');
 Route::get('recepcion', 'UsuarioController@getRecepcion');
@@ -80,3 +81,9 @@ Route::resource('combo', 'ComboController', ['only' => ['index', 'show']]);
 
 // Usuario
 Route::post('validar', 'HomeController@validarUsuario');
+Route::post('usuario/registrar', 'HomeController@postUsuarioRegistrar');
+
+// Ordenes
+Route::post('registrar/orden/menu', 'OrdenController@postRegistrarMenuOrden');
+Route::get('ordenes/pendientes', 'OrdenController@getPendientes');
+Route::get('ordenes/entregadas', 'OrdenController@getEntregadas');

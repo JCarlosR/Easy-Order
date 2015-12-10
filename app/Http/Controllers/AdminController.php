@@ -277,7 +277,7 @@ class AdminController extends Controller {
         }
     }
 
-    public function getGestionarChefs()
+    public function getGestionarChefs(Request $request)
     {
         $notif = Session::get('notif');
         $chefs = Chef::all();

@@ -80,10 +80,16 @@ class OrdenPlatosTableSeeder extends Seeder
             'plato_id' => 8
         ]);
 
+        $platos5 = [ 1, 5, 7, 8 ];
+        foreach ($platos5 as $plato_id) {
+            OrdenPlatos::create([
+                'orden_id' => 5,
+                'plato_id' => $plato_id
+            ]);
+        }
 
-	//(5,1),(5,5),(5,7),(5,8)
-	//(6,3),(6,5),(6,6),(6,8)
-	//(7,2),(7,4),(7,7),(7,8)
-	//(8,1),(8,4),(8,6),(8,8)
+        //(6,3),(6,5),(6,6),(6,8)
+        //(7,2),(7,4),(7,7),(7,8)
+        //(8,1),(8,4),(8,6),(8,8)
     }
 }

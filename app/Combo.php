@@ -13,7 +13,7 @@ class Combo extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['usuario_id', 'fecha', 'destacado'];
+    protected $fillable = ['usuario_id', 'fecha', 'destacado', 'nombre'];
 
     // Cada combo incluye varios platos
     public function platos()

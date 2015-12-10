@@ -2,6 +2,8 @@
 
 
 use App\Combo;
+use App\ComboPlatoDetalles;
+use App\ComboPlatos;
 use App\Detalle;
 use App\Menu;
 use App\Orden;
@@ -70,7 +72,7 @@ class UsuarioController extends Controller {
         return view('user.solicitar')->with(compact(['hora', 'combos','entradas','segundos','postres','bebidas', 'platos']));
     }
 
-    public function getPrevisualizar(Request $request)
+    public function postPrevisualizar(Request $request)
     {
         $total = 0;
 
@@ -151,8 +153,58 @@ class UsuarioController extends Controller {
         $request->session()->put('tipo_orden', $tipo_orden);
         $request->session()->put('detalles', $detalles);
         $request->session()->put('importe', $total);
-        //dd($tipo_orden);
+        //dd($detalles);
         return view('user.orden')->with(compact(['total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
+    }
+
+    public function getPrevisualizar(Request $request, $tipo, $combo_id)
+    {
+        $total = 0;
+        $entradas = [];
+        $segundos = [];
+        $postres = [];
+        $bebidas = [];
+        $comboplatos = ComboPlatos::where('combo_id',$combo_id)->get();
+
+        // Detalles de todos los platos, arreglo de arreglos
+        $detalles = [];
+
+        foreach($comboplatos as $comboplato)
+        {
+            $plato = $comboplato->plato;
+            $total += $plato->precio;
+            // Capturar detalles en un arreglo global
+            $comboplatodetalles_actual = ComboPlatoDetalles::where('comboplatos_id', $comboplato->id)->get();
+            $detalles_actual = collect([]);
+
+            foreach($comboplatodetalles_actual as $comboplatodetalle_actual)
+            {
+                $detalles_actual->push($comboplatodetalle_actual->detalle);
+                $total += $comboplatodetalle_actual->detalle->precio;
+            }
+
+            $detalles[$plato->id] = $detalles_actual;
+
+            // Clasificar
+            switch ($plato->tipo_id){
+                case 1: $entradas[] = $plato; break;
+                case 2: $segundos[] = $plato; break;
+                case 3: $postres[] = $plato; break;
+                case 4: $bebidas[] = $plato; break;
+            }
+
+        }
+        //dd($detalles);
+        $request->session()->put('entradas', $entradas);
+        $request->session()->put('segundos', $segundos);
+        $request->session()->put('postres', $postres);
+        $request->session()->put('bebidas', $bebidas);
+        $request->session()->put('detalles', $detalles);
+        $request->session()->put('importe', $total);
+        $request->session()->put('tipo_orden', $tipo);
+        //dd($tipo);
+        return view('user.orden')->with(compact(['total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
+
     }
 
     public function postConfirmar(Request $request)

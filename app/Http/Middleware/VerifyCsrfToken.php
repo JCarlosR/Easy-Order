@@ -18,7 +18,10 @@ class VerifyCsrfToken extends BaseVerifier
         'pedidos/pendientes*',
         'pedidos/entregados*',
         'validar*',
-        'recepcion*'
 
+        'recepcion*',
+        'registrar/orden/menu',
+        'ordenes/anteriores',
+        'usuario/registrar'
     ];
 }

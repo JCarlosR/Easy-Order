@@ -176,15 +176,15 @@
 
                         <div class="form-group">
                             <label for="nombres">Nuevos nombres</label>
-                            <input type="text" class="form-control" name="nombres" placeholder="Nombres" required/>
+                            <input type="text" class="form-control" name="nombres" placeholder="Nombres" disabled required/>
                         </div>
                         <div class="form-group">
                             <label for="apellidos">Nuevos Apellidos</label>
-                            <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" required/>
+                            <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" disabled required/>
                         </div>
                         <div class="form-group">
                             <label for="dni">Nuevo DNI</label>
-                            <input type="text" class="form-control" name="dni" placeholder="DNI" required/>
+                            <input type="text" class="form-control" name="dni" placeholder="DNI" disabled required/>
                         </div>
                         <div class="form-group">
                             <label for="email">Nuevo Email</label>

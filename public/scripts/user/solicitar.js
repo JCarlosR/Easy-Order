@@ -3,6 +3,8 @@ $(document).on('ready', funcPrincipal);
 function funcPrincipal() {
     // Al hacer click en un plato, se permite mostrar sus detalles
     $('.img-thumbnail').next().on('click', mostrarDetalles);
+    $('.combo').next().on('click', mostrarDetallesCombo);
+    $('[data-combo]').on('click', enviarDatos);
 }
 
 function mostrarDetalles() {
@@ -12,4 +14,26 @@ function mostrarDetalles() {
     var $modalDetalles = $(selector);
     // Mostrar modal
     $modalDetalles.modal('show');
+}
+
+function mostrarDetallesCombo() {
+    // Obtener el id del plato del data-id
+    var idComboPlato = $(this).data('comboplato');
+    var selector = '.modal[data-comboplatoId='+idComboPlato+']';
+    var $modalDetalles = $(selector);
+    // Mostrar modal
+    $modalDetalles.modal('show');
+}
+
+function enviarDatos() {
+    // Obtener el id del tipo
+    var tipo = $('select[name=tipo_orden]').val();
+    var combo_id = $(this).data('combo');
+
+    //Hacer petición GET y pasarle los valores anteriores
+
+    location.href = 'previsualizar/'+tipo+'/'+combo_id;
+
+
+
 }

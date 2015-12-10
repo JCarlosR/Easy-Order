@@ -33,20 +33,20 @@ class Plato extends Model
         return $this->hasMany('App\ComboPlatos', 'plato_id');
     }
 
-    //Cada plato tiene un tipo de plato
+    // Cada plato tiene un tipo de plato
     public function tipo()
     {
         return $this->belongsTo('App\Tipo', 'tipo_id');
     }
 
-    //Cada plato presenta varios detalles
+    // Cada plato presenta varios detalles
     public function detalles()
     {
-        return $this->belongsToMany('App\Detalle', 'PlatoDetalles', "plato_id");
+        return $this->belongsToMany('App\Detalle', 'PlatoDetalles', 'plato_id');
     }
 
     public function ordenes()
     {
-        return $this->belongsToMany('App\Orden', 'OrdenPlatos', "plato_id");
+        return $this->belongsToMany('App\Orden', 'OrdenPlatos', 'plato_id');
     }
 }

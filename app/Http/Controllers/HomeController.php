@@ -48,4 +48,27 @@ class HomeController extends Controller {
         return response()->json($respuesta);
     }
 
+    public function postUsuarioRegistrar(Request $request)
+    {
+        $usuario = User::where('username', $request->username)->first();
+        if ($usuario != null)
+        {
+            $exito = false;
+        }
+        else
+        {
+            $user = User::create([
+                'username' => $request->username,
+                'full_name' => $request->full_name,
+                'password' => bcrypt($request->password),
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'tipo' => 0
+            ]);
+            $user->save();
+            $exito = true;
+        }
+        return response()->json($exito);
+    }
+
 }
