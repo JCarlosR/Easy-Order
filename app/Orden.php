@@ -26,5 +26,4 @@ class Orden extends Model
     {
         return $this->belongsToMany('App\Plato', 'OrdenPlatos', "orden_id");
     }
-
 }

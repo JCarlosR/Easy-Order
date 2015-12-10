@@ -17,12 +17,12 @@ class OrdenPlatos extends Model
 
     public function plato()
     {
-        return $this->belongsTo('App\Plato', 'id');
+        return $this->belongsTo('App\Plato', 'plato_id');
     }
 
     public function orden()
     {
-        return $this->belongsTo('App\Orden', 'id');
+        return $this->belongsTo('App\Orden', 'orden_id');
     }
 
 }
