@@ -179,10 +179,11 @@ class AdminController extends Controller {
 
     public function getPendientes()
     {
+        $user = Auth::user();
         $estado = 'confirmado';
-        $ordenesD = Orden::where('estado','<>',$estado)->where('tipo_orden',1)->get();
-        $ordenesP = Orden::where('estado','<>',$estado)->where('tipo_orden',0)->get();
-        return view('admin.pendientes')->with(compact('ordenesD','ordenesP'));
+        $ordenesD = Orden::where('estado','<>',$estado)->where('tipo_orden',0)->get();
+        $ordenesP = Orden::where('estado','<>',$estado)->where('tipo_orden',1)->get();
+        return view('admin.pendientes')->with(compact('ordenesD','ordenesP','user'));
     }
 
     public function postPendientes(Request $request)
@@ -198,8 +199,8 @@ class AdminController extends Controller {
     public function getEntregados()
     {
         $estado = 'confirmado';
-        $ordenesD = Orden::where('estado', $estado)->where('tipo_orden',1)->get();
-        $ordenesP = Orden::where('estado', $estado)->where('tipo_orden',0)->get();
+        $ordenesD = Orden::where('estado', $estado)->where('tipo_orden',0)->get();
+        $ordenesP = Orden::where('estado', $estado)->where('tipo_orden',1)->get();
         return view('admin.entregados')->with(compact('ordenesD','ordenesP'));
     }
 

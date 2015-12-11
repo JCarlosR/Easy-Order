@@ -283,7 +283,7 @@ class UsuarioController extends Controller {
             'fecha' => Carbon::now('America/Lima'),
             'importe' => $importe,
             'descuento' => 0,
-            'estado' => 'Espera',
+            'estado' => 'espera',
             //'combo_name' => ,
             'tipo_orden' => $tipo_orden
         ]);
@@ -353,6 +353,9 @@ class UsuarioController extends Controller {
         $fechaActual = $carbon->toDateString();
         if($combo_name != "")
         {
+            $orden->combo_name = $combo_name;
+            $orden->save();
+
             $combo = Combo::create([
                 'usuario_id' => Auth::user()->id,
                 'fecha' => $fechaActual,

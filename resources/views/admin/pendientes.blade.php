@@ -35,7 +35,13 @@
                     @foreach($ordenesD as $ordend)
                     <div class="col-md-4">
                         <div class="panel panel-default" >
-                            <h3 class="panel-heading"><a href="{{ asset('pedidos/pendientes') }}/{{ $ordend->id }}" >Orden {{ $ordend->id }} - {{ $ordend->combo_name or 'Elección Común' }}</a></h3>
+                            <h3 class="panel-heading">
+                                @if($user->tipo == 1)
+                                    <a href="{{ asset('pedidos/pendientes') }}/{{ $ordend->id }}" >Orden {{ $ordend->id }} - {{ $ordend->combo_name or 'Elección Común' }}</a>
+                                @else
+                                    Orden {{ $ordend->id }} - {{ $ordend->combo_name or 'Elección Común' }}
+                                @endif
+                            </h3>
                             <div class="panel-body">
                                 @foreach($ordend->platos as $plato)
                                 <div class="plato col-md-6" data-id="{{ $ordend->id }}">
