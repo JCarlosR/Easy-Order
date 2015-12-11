@@ -70,21 +70,21 @@ class OrdenController extends Controller
 
     public function postOrdenCambiarEstado( Request $request )
     {
-        $orden = Orden::find('id',$request->orden_id);
+        $orden = Orden::find($request->orden_id);
         $estadoCorreto = false;
 
         switch ($request->estado)
         {
-            case 'Espera':
+            case 'espera':
                 $estadoCorreto = true;
                 break;
-            case 'Preparacion':
+            case 'preparacion':
                 $estadoCorreto = true;
                 break;
-            case 'Terminado':
+            case 'terminado':
                 $estadoCorreto = true;
                 break;
-            case 'Confirmado':
+            case 'confirmado':
                 $estadoCorreto = true;
                 break;
         }
@@ -93,14 +93,15 @@ class OrdenController extends Controller
         {
             $orden->chef_id = $request->chef_id;
             $orden->estado = $request->estado;
-            $respuesta = "Orden modificada correctamene";
+            $respuesta = "Orden modificada correctamente.";
+            $orden->save();
         }
         else if($orden == null)
         {
-            $respuesta = "La orden no existe";
+            $respuesta = "La orden no existe.";
         }
         else
-            $respuesta = "El estado de la orden no es correcto";
+            $respuesta = "El estado de la orden no es correcto.";
 
         return response()->json($respuesta);
     }
