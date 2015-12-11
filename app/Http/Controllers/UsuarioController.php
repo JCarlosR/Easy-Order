@@ -430,9 +430,8 @@ class UsuarioController extends Controller {
 
     public function getRecepcion()
     {
-        $estado = 'terminado';
         $usuario = Auth::user()->id;
-        $ordenes = Orden::where('estado', $estado)->where('usuario_id',$usuario)->get();
+        $ordenes = Orden::where('estado','<>', 'confirmado')->where('usuario_id',$usuario)->get();
         return view('user.recepcion')->with(compact('ordenes'));
     }
 

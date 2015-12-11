@@ -47,9 +47,15 @@
                                     <p class="text-center">{{ $plato->nombre }}</p>
                                 </div>
                             @endforeach
-                            <button type="button" class="btn btn-primary btn-lg btn-block" data-id="{{ $orden->id }}">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Confirmar pedido
-                            </button>
+                        </div>
+                        <div class="panel-footer">
+                            <h3 align="center"><span class="label label-{{ $orden->estadodesc->color }}">{{ $orden->estadodesc->descripcion }}</span></h3>
+                            <br>
+                            @if($orden->estadodesc->nombre == 'terminado')
+                                <button type="button" class="btn btn-primary btn-lg btn-block" data-id="{{ $orden->id }}">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Confirmar pedido
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>
