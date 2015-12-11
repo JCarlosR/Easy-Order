@@ -107,14 +107,16 @@ class OrdenController extends Controller
 
     public function postRegistrarMenuOrden( Request $request)
     {
-        $usuario_id = $request->get('usuario_id');
-        $detalles = $request->get('detalles');
-        $entradas = $request->get('entradas');
-        $segundos = $request->get('segundos');
-        $postres = $request->get('postres');
-        $bebidas = $request->get('bebidas');
-        $importe = $request->get('importe');
-        $tipo_orden = $request->get('tipo_orden');
+        $usuario_id = $request->usuario_id;
+        $detalles = $request->detalles;
+
+        $entradas = $request->entradas;
+        $segundos = $request->segundos;
+        $postres = $request->postres;
+        $bebidas = $request->bebidas;
+
+        $importe = $request->importe;
+        $tipo_orden = $request->tipo_orden;
 
         $orden = Orden::create([
             'usuario_id' => $usuario_id,
@@ -129,16 +131,14 @@ class OrdenController extends Controller
             foreach ($entradas as $entrada) {
                 $plato = OrdenPlatos::create([
                     'orden_id' => $orden->id,
-                    'plato_id' => $entrada['id']
+                    'plato_id' => $entrada->id
                 ]);
 
-                foreach ( $detalles[$entrada['id'] ] as $detalle) {
-
-                    dd($detalle);
+                foreach ( $detalles[ $entrada->id ] as $detalle) {
 
                     OrdenPlatoDetalles::create([
                         'ordenplatos_id' => $plato->id,
-                        'detalle_id' => $detalle['id']
+                        'detalle_id' => $detalle->id
                     ]);
                 }
             }
@@ -147,12 +147,12 @@ class OrdenController extends Controller
             foreach ($segundos as $segundo) {
                 $plato = OrdenPlatos::create([
                     'orden_id' => $orden->id,
-                    'plato_id' => $segundo['id']
+                    'plato_id' => $segundo->id
                 ]);
-                foreach ( $detalles[$segundo['id'] ] as $detalle) {
+                foreach ( $detalles[$segundo->id ] as $detalle ) {
                     OrdenPlatoDetalles::create([
                         'ordenplatos_id' => $plato->id,
-                        'detalle_id' => $detalle['id']
+                        'detalle_id' => $detalle->id
                     ]);
                 }
             }
@@ -161,12 +161,12 @@ class OrdenController extends Controller
             foreach ($postres as $postre) {
                 $plato = OrdenPlatos::create([
                     'orden_id' => $orden->id,
-                    'plato_id' => $postre['id']
+                    'plato_id' => $postre->id
                 ]);
-                foreach ( $detalles[$postre['id'] ] as $detalle) {
+                foreach ( $detalles[ $postre->id ] as $detalle) {
                     OrdenPlatoDetalles::create([
                         'ordenplatos_id' => $plato->id,
-                        'detalle_id' => $detalle['id']
+                        'detalle_id' => $detalle->id
                     ]);
                 }
             }
@@ -177,10 +177,10 @@ class OrdenController extends Controller
                     'orden_id' => $orden->id,
                     'plato_id' => $bebida['id']
                 ]);
-                foreach ( $detalles[$bebida['id'] ] as $detalle) {
+                foreach ( $detalles[ $bebida->id ] as $detalle) {
                     OrdenPlatoDetalles::create([
                         'ordenplatos_id' => $plato->id,
-                        'detalle_id' => $detalle['id']
+                        'detalle_id' => $detalle->id
                     ]);
                 }
             }
