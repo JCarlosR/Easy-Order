@@ -40,37 +40,40 @@ class AdminController extends Controller {
     public function getAsignarPlatos($dia, $tipo)
     {
         //Comprobamos si es domingo
-        $carbon = Carbon::now('America/Lima');
-        $isSunday = $carbon->dayOfWeek == 0;
+
+        $carbon = Carbon::now()->startOfWeek();
+
+//        Alguna vez pensamos algo pero no lo usamos tal cual.
+//        $isSunday = $carbon->dayOfWeek == 0;
 
 //        if (!$isSunday)
 //            return redirect('previsualizar/menu/'.$dia.'/'.$tipo);
 
-        //    switch ($dia){
-        //      case 'lunes':
-        //        $adicionales = 1;
-        //        break;
-        //    case 'martes':
-        //        $adicionales = 2;
-        //        break;
-        //    case 'miercoles':
-        //        $adicionales = 3;
-        //       break;
-        //   case 'jueves':
-        //        $adicionales = 4;
-        //        break;
-        //   case 'viernes':
-        //        $adicionales = 5;
-        //        break;
-        //    case 'sabado':
-        //       $adicionales = 6;
-        //       break;
-        //   case 'domingo':
-        //       $adicionales = 7;
-        //       break;
-        //}
+            switch ($dia){
+              case 'lunes':
+                $adicionales = 0;
+                break;
+            case 'martes':
+                $adicionales = 1;
+                break;
+            case 'miercoles':
+                $adicionales = 2;
+               break;
+           case 'jueves':
+                $adicionales = 3;
+                break;
+           case 'viernes':
+                $adicionales = 4;
+                break;
+            case 'sabado':
+               $adicionales = 5;
+               break;
+           case 'domingo':
+               $adicionales = 6;
+               break;
+        }
 
-        //$carbon = $carbon->addDays($adicionales);
+        $carbon = $carbon->addDays($adicionales);
 
         $menu = Menu::where('fecha',$carbon->toDateString())->first();
 
@@ -123,28 +126,28 @@ class AdminController extends Controller {
 
     public function postAsignarPlatos( $dia, $tipo,  Request $request){
         $asignar = $request->get('asignar');
-        $carbon = Carbon::now('America/Lima');
+        $carbon = Carbon::now()->startOfWeek();
         switch ($dia){
             case 'lunes':
-                $adicionales = 1;
+                $adicionales = 0;
                 break;
             case 'martes':
-                $adicionales = 2;
+                $adicionales = 1;
                 break;
             case 'miercoles':
-                $adicionales = 3;
+                $adicionales = 2;
                 break;
             case 'jueves':
-                $adicionales = 4;
+                $adicionales = 3;
                 break;
             case 'viernes':
-                $adicionales = 5;
+                $adicionales = 4;
                 break;
             case 'sabado':
-                $adicionales = 6;
+                $adicionales = 5;
                 break;
             case 'domingo':
-                $adicionales = 7;
+                $adicionales = 6;
                 break;
         }
         $carbon = $carbon->addDays($adicionales);
