@@ -71,6 +71,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <form action="{{ url('orden/registrar') }}" method="POST">
+                            <input type="hidden" name="comboName" class="form-control text-center" value="{{ $comboName }}">
                             <input type="hidden" name="combo_name" class="form-control text-center" value="{{ $combo_name }}">
                             {{ csrf_field() }}
                             <div class="form-group">

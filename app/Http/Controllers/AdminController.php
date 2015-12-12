@@ -304,4 +304,9 @@ class AdminController extends Controller {
         return response()->json($orden);
     }
 
+    public function getRepoteOrdenes()
+    {
+        return view('admin.reporte');
+    }
+
 }

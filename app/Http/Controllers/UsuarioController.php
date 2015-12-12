@@ -154,7 +154,8 @@ class UsuarioController extends Controller {
         $request->session()->put('detalles', $detalles);
         $request->session()->put('importe', $total);
         //dd($detalles);
-        return view('user.orden')->with(compact(['combo_id','total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
+        $comboname = null;
+        return view('user.orden')->with(compact(['comboname','combo_id','total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
     }
 
     public function getPrevisualizar(Request $request, $tipo, $combo_id, $comboname)
@@ -213,6 +214,7 @@ class UsuarioController extends Controller {
 
         $tipo_orden = $request->session()->get('tipo_orden');
         $combo_name = $request->get('combo_name');
+        $comboName = $request->get('comboName');
         //dd($combo_name);
 
         // Validación de los datos requeridos
@@ -261,7 +263,7 @@ class UsuarioController extends Controller {
         //dd($tipo_orden);
         //$request->session()->put('combo_name', $combo_name);
         $fecha = $dia_name." ".$dia_mes." de ".$mes_name." de ".$year;
-        return view('user.confirmar')->with(compact('combo_name','tipo_orden', 'fecha','hora_pedido', 'hora_entrega', 'direccion'));
+        return view('user.confirmar')->with(compact('comboName', 'combo_name','tipo_orden', 'fecha','hora_pedido', 'hora_entrega', 'direccion'));
     }
 
     public function postOrden(Request $request)
@@ -274,8 +276,11 @@ class UsuarioController extends Controller {
         $bebidas = $request->session()->get('bebidas');
         $importe = $request->session()->get('importe');
         $tipo_orden = $request->session()->get('tipo_orden');
-
+        //Vacio si es que es del menu del dia
         $combo_name = $request->get('combo_name');
+
+        //es el nombre del combo desde el menu del dia
+        $comboName = $request->get('comboName');
 
         //dd($entradas);
         $orden = Orden::create([
@@ -351,16 +356,18 @@ class UsuarioController extends Controller {
 
         $carbon = Carbon::now('America/Lima');
         $fechaActual = $carbon->toDateString();
-        if($combo_name != "")
+
+        //dd($combo_name);
+        if($combo_name == "" and $comboName != "")
         {
-            $orden->combo_name = $combo_name;
+            $orden->combo_name = $comboName;
             $orden->save();
 
             $combo = Combo::create([
                 'usuario_id' => Auth::user()->id,
                 'fecha' => $fechaActual,
                 'destacado' => 0,
-                'nombre' => $combo_name
+                'nombre' => $comboName
             ]);
             if($entradas)
                 foreach ($entradas as $entrada){
@@ -422,6 +429,80 @@ class UsuarioController extends Controller {
                 }
 
 
+        }
+
+        if($combo_name != "" and $comboName == "")
+        {
+            $combito = Combo::where('nombre', $combo_name)->first();
+
+            $orden->combo_name = $combo_name;
+            $orden->save();
+            if($combito == null){
+                $combo = Combo::create([
+                    'usuario_id' => Auth::user()->id,
+                    'fecha' => $fechaActual,
+                    'destacado' => 0,
+                    'nombre' => $comboName
+                ]);
+                if($entradas)
+                    foreach ($entradas as $entrada){
+                        $comboplato = ComboPlatos::create([
+                            'combo_id' => $combo->id,
+                            'plato_id' => $entrada->id
+                        ]);
+                        if($detalles[$entrada->id])
+                            foreach ($detalles[$entrada->id] as $detalle){
+                                ComboPlatoDetalles::create([
+                                    'comboplatos_id' => $comboplato->id,
+                                    'detalle_id' => $detalle->id
+                                ]);
+                            }
+                    }
+                if($segundos)
+                    foreach ($segundos as $segundo){
+                        $comboplato = ComboPlatos::create([
+                            'combo_id' => $combo->id,
+                            'plato_id' => $segundo->id
+                        ]);
+                        if($detalles[$segundo->id])
+                            foreach ($detalles[$segundo->id] as $detalle){
+                                ComboPlatoDetalles::create([
+                                    'comboplatos_id' => $comboplato->id,
+                                    'detalle_id' => $detalle->id
+                                ]);
+                            }
+                    }
+
+                if($postres)
+                    foreach ($postres as $postre){
+                        $comboplato = ComboPlatos::create([
+                            'combo_id' => $combo->id,
+                            'plato_id' => $postre->id
+                        ]);
+                        if($detalles[$postre->id])
+                            foreach ($detalles[$postre->id] as $detalle){
+                                ComboPlatoDetalles::create([
+                                    'comboplatos_id' => $comboplato->id,
+                                    'detalle_id' => $detalle->id
+                                ]);
+                            }
+                    }
+
+                if($bebidas)
+                    foreach ($bebidas as $bebida){
+                        $comboplato = ComboPlatos::create([
+                            'combo_id' => $combo->id,
+                            'plato_id' => $bebida->id
+                        ]);
+                        if($detalles[$bebida->id])
+                            foreach ($detalles[$bebida->id] as $detalle){
+                                ComboPlatoDetalles::create([
+                                    'comboplatos_id' => $comboplato->id,
+                                    'detalle_id' => $detalle->id
+                                ]);
+                            }
+                    }
+            }
         }
 
 
