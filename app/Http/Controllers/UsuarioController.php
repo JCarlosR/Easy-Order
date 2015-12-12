@@ -157,7 +157,7 @@ class UsuarioController extends Controller {
         return view('user.orden')->with(compact(['combo_id','total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
     }
 
-    public function getPrevisualizar(Request $request, $tipo, $combo_id)
+    public function getPrevisualizar(Request $request, $tipo, $combo_id, $comboname)
     {
         $total = 0;
         $entradas = [];
@@ -204,7 +204,7 @@ class UsuarioController extends Controller {
         $request->session()->put('tipo_orden', $tipo);
         //
         //dd($tipo);
-        return view('user.orden')->with(compact(['combo_id','total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
+        return view('user.orden')->with(compact(['comboname','combo_id','total', 'entradas', 'segundos', 'postres', 'bebidas', 'detalles']));
 
     }
 
@@ -212,7 +212,7 @@ class UsuarioController extends Controller {
     {
 
         $tipo_orden = $request->session()->get('tipo_orden');
-        $combo_name = $request->get('comboName');
+        $combo_name = $request->get('combo_name');
         //dd($combo_name);
 
         // Validación de los datos requeridos

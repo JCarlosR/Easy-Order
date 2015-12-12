@@ -30,7 +30,8 @@ function enviarDatos() {
     // Obtener el tipo de orden y el id del combo elegido
     var tipo = $('select[name=tipo_orden]').val();
     var combo_id = $(this).data('combo');
+    var combo_name =$(this).data('name');
 
     //Hacer petición GET y pasarle los valores anteriores
-    location.href = 'previsualizar/'+tipo+'/'+combo_id;
+    location.href = 'previsualizar/'+tipo+'/'+combo_id+'/'+combo_name;
 }

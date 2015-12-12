@@ -40,7 +40,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-primary btn-block" data-combo="{{ $combo->id }}">
+                        <button type="button" class="btn btn-primary btn-block" data-combo="{{ $combo->id }}" data-name="{{ $combo->nombre }}">
                             <span class="glyphicon glyphicon-plus"></span> Solicitar
                         </button>
                     </div>

@@ -156,6 +156,7 @@
                 </header>
                 <form action="{{ url('confirmar') }}" method="POST">
                     {{ csrf_field() }}
+                    <input type="hidden" name="combo_name" value="{{ $comboname }}">
                     <div class="form-group">
                         <label for="cantidad">Cantidad</label>
                         <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" value="1" readonly>
