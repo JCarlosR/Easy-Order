@@ -30,7 +30,7 @@
     </li>
     <li class="dropdown"><a href="{{ url('asignar/menu') }}">Menú</a></li>
     <li class="dropdown">
-        <a href="#">Pedidos <b class="caret"></b></a>
+        <a href="#">Pedido<b class="caret"></b></a>
         <ul class="dropdown-menu" style="display: none;">
             <li><a href="{{ url('pedidos/pendientes') }}">Pedidos pendientes</a></li>
             <li><a href="{{ url('pedidos/entregados') }}">Pedidos entregados</a></li>
