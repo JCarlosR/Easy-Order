@@ -304,9 +304,51 @@ class AdminController extends Controller {
         return response()->json($orden);
     }
 
-    public function getRepoteOrdenes()
+    public function getReporteOrdenes()
     {
         return view('admin.reporte');
     }
 
+    public function getReporteGenerado(Request $request)
+    {
+        $user = Auth::user();
+        $fechaInic = $request->get('fechaIni');
+        $fechaFin = $request->get('fechaFin');
+        $tipo = $request->get('tipo');
+        $estado = 'confirmado';
+        $descripcion="confirmadas";
+
+        if($tipo == 0) {
+            $estado = "espera";
+            $descripcion = "en espera";
+        }
+        $cantEspera = Orden::where('estado', 'espera')->whereBetween('fecha',[$fechaInic, $fechaFin])->count();
+        $cantConfirmado = Orden::where('estado', 'confirmado')->whereBetween('fecha',[$fechaInic, $fechaFin])->count();
+        $espera = 'En espera';
+        $confirmado = 'Confirmados';
+        $ordenes = Orden::where('estado',$estado)->whereBetween('fecha',[$fechaInic, $fechaFin])->get();
+
+        return view('admin.reportgenerate')->with(compact(['estado','fechaInic', 'fechaFin','espera', 'confirmado', 'cantConfirmado', 'cantEspera', 'ordenes','user','descripcion']));
+    }
+
+    public function postOrdenesPDF(Request $request)
+    {
+        $user = Auth::user();
+        $fechaInic = $request->get('fechaInic');
+        $fechaFin = $request->get('fechaFin');
+        $estado = $request->get('estado');
+        $descripcion="confirmadas";
+
+        $cantEspera = Orden::where('estado', 'espera')->whereBetween('fecha',[$fechaInic, $fechaFin])->count();
+        $cantConfirmado = Orden::where('estado', 'confirmado')->whereBetween('fecha',[$fechaInic, $fechaFin])->count();
+        $espera = 'En espera';
+        $confirmado = 'Confirmados';
+        $ordenes = Orden::where('estado',$estado)->whereBetween('fecha',[$fechaInic, $fechaFin])->get();
+        //dd($fechaInic);
+        //return view('admin.reportPDF')->with(compact(['estado','fechaInic', 'fechaFin','espera', 'confirmado', 'cantConfirmado', 'cantEspera', 'ordenes','user','descripcion']));
+        $vista =  view('admin.reportPDF')->with(compact(['estado','fechaInic', 'fechaFin','espera', 'confirmado', 'cantConfirmado', 'cantEspera', 'ordenes','user','descripcion']))->render();
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadHTML($vista);
+        return $pdf->stream();
+    }
 }

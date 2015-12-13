@@ -45,7 +45,9 @@ Route::get('gestionar/platodetalles', 'AdminController@getPlatoDetalles');
 Route::get('gestionar/platodetalles/{id}', 'AdminController@getGestionarPlatoDetalles');
 Route::post('gestionar/platodetalles/{id}', 'AdminController@postGestionarPlatoDetalles');
 Route::get('gestionar/chefs','AdminController@getGestionarChefs');
-Route::get('reportes/ordenes','AdminController@getRepoteOrdenes');
+Route::get('reportes/ordenes','AdminController@getReporteOrdenes');
+Route::post('reporte/generar','AdminController@getReporteGenerado');
+Route::post('reporte/ordenes/pdf','AdminController@postOrdenesPDF');
 
 
 // CRUD para los chefs

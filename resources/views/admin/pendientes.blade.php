@@ -31,37 +31,37 @@
         </div>
         <div class="panel-body">
             <div class="tab-content">
-                <div class="tab-pane fade active in" id="delivery">
-                    @foreach($ordenesD as $ordend)
-                    <div class="col-md-4">
-                        <div class="panel panel-default" >
-                            <h3 class="panel-heading">
-                                @if($user->tipo == 1)
-                                    <a href="{{ asset('pedidos/pendientes') }}/{{ $ordend->id }}" >Orden {{ $ordend->id }} - {{ $ordend->combo_name or 'Elección Común' }}</a>
-                                @else
-                                    Orden {{ $ordend->id }} - {{ $ordend->combo_name or 'Elección Común' }}
-                                @endif
-                            </h3>
-                            <div class="panel-body">
-                                @foreach($ordend->platos as $plato)
-                                <div class="plato col-md-6" data-id="{{ $ordend->id }}">
-                                    <img src="{{ asset('images/platos') }}/{{ $plato->imagen }}.jpg" data-id="{{ $plato->id }}" class="img-rounded img-w-h">
-                                    <p>{{ $plato->nombre }}</p>
-                                </div>
-                                @endforeach
-                            </div>
-                            <div align="center">
-                                <h3 class="panel-footer">
-                                    <span class="label label-{{ $ordend->estadodesc->color }}">{{ $ordend->estadodesc->descripcion }}</span>
-                                    <br>
-                                    <span>Chef: {{ $ordend->chef->nombres or 'No Asignado' }}</span>
-                                </h3>
+                    <div class="tab-pane fade active in" id="delivery">
+                        @foreach($ordenesD as $ordend)
+                            <div class="col-md-4">
+                                <div class="panel panel-default" >
+                                    <h3 class="panel-heading">
+                                        @if($user->tipo == 1)
+                                            <a href="{{ asset('pedidos/pendientes') }}/{{ $ordend->id }}" >Orden {{ $ordend->id }} - {{ $ordend->combo_name or 'Elección Común' }}</a>
+                                        @else
+                                            Orden {{ $ordend->id }} - {{ $ordend->combo_name or 'Elección Común' }}
+                                        @endif
+                                    </h3>
+                                    <div class="panel-body">
+                                        @foreach($ordend->platos as $plato)
+                                            <div class="plato col-md-6" data-id="{{ $ordend->id }}">
+                                                <img src="{{ asset('images/platos') }}/{{ $plato->imagen }}.jpg" data-id="{{ $plato->id }}" class="img-rounded img-w-h">
+                                                <p>{{ $plato->nombre }}</p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div align="center">
+                                        <h3 class="panel-footer">
+                                            <span class="label label-{{ $ordend->estadodesc->color }}">{{ $ordend->estadodesc->descripcion }}</span>
+                                            <br>
+                                            <span>Chef: {{ $ordend->chef->nombres or 'No Asignado' }}</span>
+                                        </h3>
 
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                </div>
 
                 <div class="tab-pane fade" id="pickUp">
                     @foreach($ordenesP as $orden)
