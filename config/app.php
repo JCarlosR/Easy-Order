@@ -148,7 +148,8 @@ return [
         /*
          * Additional libraries
          */
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -201,8 +202,8 @@ return [
         /*
          * Additional libraries
          */
-        'Image' => 'Intervention\Image\Facades\Image'
-
+        'Image' => 'Intervention\Image\Facades\Image',
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
