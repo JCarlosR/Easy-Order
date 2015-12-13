@@ -25,6 +25,7 @@ Route::get('recepcion', 'UsuarioController@getRecepcion');
 Route::post('recepcion', 'UsuarioController@postRecepcion');
 Route::get('anteriores', 'UsuarioController@getAnteriores');
 Route::post('combo/guardarName', 'UsuarioController@postguardarName');
+Route::get('combo/ranking', 'UsuarioController@getComboRanking');
 
 // Páginas disponibles para un admin autenticado
 Route::get('bienvenido/admin', 'AdminController@getWelcome');

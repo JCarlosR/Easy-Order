@@ -14,17 +14,17 @@ class OrdenTableSeeder extends Seeder
     {
         Orden::create([
             'usuario_id' => 3,
-            'fecha' => '10/10/2015',
+            'fecha' => '2015/10/10',
             'importe' => 80.5,
             'descuento' => 0,
             'estado' => 'terminado',
-            'combo_name' => 'Megacomb',
+            'combo_name' => 'Megacombo',
             'tipo_orden' => 1
         ]);
 
         Orden::create([
             'usuario_id' => 3,
-            'fecha' => '11/10/2015',
+            'fecha' => '2015/11/10',
             'importe' => 70.5,
             'descuento' => 0,
             'estado' => 'espera',
@@ -34,37 +34,37 @@ class OrdenTableSeeder extends Seeder
 
         Orden::create([
             'usuario_id' => 3,
-            'fecha' => '4/11/2015',
+            'fecha' => '2015/11/4',
             'importe' => 80,
             'descuento' => 0,
             'estado' => 'terminado',
-            'combo_name' => NULL,
+            'combo_name' => 'Estelar',
             'tipo_orden' => 0
         ]);
 
         Orden::create([
             'usuario_id' => 3,
-            'fecha' => '6/11/2015',
+            'fecha' => '2015/11/6',
             'importe' => 90.3,
             'descuento' => 0,
             'estado' => 'confirmado',
-            'combo_name' => NULL,
+            'combo_name' => 'Rimenri',
             'tipo_orden' => 0
         ]);
 
         Orden::create([
             'usuario_id' => 3,
-            'fecha' => '10/10/2015',
+            'fecha' => '2015/10/10',
             'importe' => 80.5,
             'descuento' => 0,
             'estado' => 'confirmado',
-            'combo_name' => NULL,
+            'combo_name' => 'MegaCombo',
             'tipo_orden' => 1
         ]);
 
         Orden::create([
             'usuario_id' => 3,
-            'fecha' => '11/10/2015',
+            'fecha' => '2015/11/9',
             'importe' => 70.5,
             'descuento' => 0,
             'estado' => 'espera',
@@ -74,7 +74,7 @@ class OrdenTableSeeder extends Seeder
 
         Orden::create([
             'usuario_id' => 3,
-            'fecha' => '4/11/2015',
+            'fecha' => '2015/11/14',
             'importe' => 80,
             'descuento' => 0,
             'estado' => 'espera',
@@ -84,11 +84,11 @@ class OrdenTableSeeder extends Seeder
 
         Orden::create([
             'usuario_id' => 3,
-            'fecha' => '6/11/2015',
+            'fecha' => '2015/11/6',
             'importe' => 90.3,
             'descuento' => 0,
             'estado' => 'confirmado',
-            'combo_name' => 'SummerCombo',
+            'combo_name' => 'Rimenri',
             'tipo_orden' => 0
         ]);
 
