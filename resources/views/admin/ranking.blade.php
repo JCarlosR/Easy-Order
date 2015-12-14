@@ -68,5 +68,5 @@
 
 @section('scripts')
     <script src="{{ asset('scripts/admin/jquery.datetimepicker.full.js') }}"></script>
-    <script src="{{ asset('scripts/admin/reporte.js') }}"></script>
+    <script src="{{ asset('scripts/admin/ranking.js') }}"></script>
 @endsection

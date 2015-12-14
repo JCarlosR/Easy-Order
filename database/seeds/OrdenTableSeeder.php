@@ -92,5 +92,87 @@ class OrdenTableSeeder extends Seeder
             'tipo_orden' => 0
         ]);
 
+        Orden::create([
+            'usuario_id' => 3,
+            'fecha' => '2015/11/6',
+            'importe' => 100,
+            'descuento' => 0,
+            'estado' => 'espera',
+            'combo_name' => 'Rimenri',
+            'tipo_orden' => 0
+        ]);
+        Orden::create([
+            'usuario_id' => 3,
+            'fecha' => '2015/11/7',
+            'importe' => 80.3,
+            'descuento' => 0,
+            'estado' => 'confirmado',
+            'combo_name' => 'Rimenri',
+            'tipo_orden' => 0
+        ]);
+        Orden::create([
+            'usuario_id' => 3,
+            'fecha' => '2015/11/8',
+            'importe' => 150.3,
+            'descuento' => 0,
+            'estado' => 'terminado',
+            'combo_name' => 'Rimenri',
+            'tipo_orden' => 0
+        ]);
+        Orden::create([
+            'usuario_id' => 3,
+            'fecha' => '2015/11/9',
+            'importe' => 75.3,
+            'descuento' => 0,
+            'estado' => 'terminado',
+            'combo_name' => 'Rimenri',
+            'tipo_orden' => 0
+        ]);
+        Orden::create([
+            'usuario_id' => 3,
+            'fecha' => '2015/11/10',
+            'importe' => 60.3,
+            'descuento' => 0,
+            'estado' => 'confirmado',
+            'combo_name' => 'All rich',
+            'tipo_orden' => 0
+        ]);
+        Orden::create([
+            'usuario_id' => 3,
+            'fecha' => '2015/11/11',
+            'importe' => 40,
+            'descuento' => 0,
+            'estado' => 'terminado',
+            'combo_name' => 'Start Week',
+            'tipo_orden' => 0
+        ]);
+        Orden::create([
+            'usuario_id' => 3,
+            'fecha' => '2015/11/12',
+            'importe' => 80,
+            'descuento' => 0,
+            'estado' => 'espera',
+            'combo_name' => 'Norteño',
+            'tipo_orden' => 0
+        ]);
+        Orden::create([
+            'usuario_id' => 3,
+            'fecha' => '2015/11/13',
+            'importe' => 35,
+            'descuento' => 0,
+            'estado' => 'terminado',
+            'combo_name' => 'Estelar',
+            'tipo_orden' => 0
+        ]);
+        Orden::create([
+            'usuario_id' => 3,
+            'fecha' => '2015/11/14',
+            'importe' => 110,
+            'descuento' => 0,
+            'estado' => 'espera',
+            'combo_name' => 'Estelar',
+            'tipo_orden' => 0
+        ]);
+
     }
 }

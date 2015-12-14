@@ -360,7 +360,6 @@ class AdminController extends Controller {
     }
     public function postReporteRankingGenerar( Request $request )
     {
-        $user = Auth::user();
         $fecha = date_parse_from_format("Y-m-d", $request->fecha);
 
         $year = $fecha["year"];
@@ -384,20 +383,29 @@ class AdminController extends Controller {
             break;
         }
         $months = array(
-            1 => "enero", 2 => "Febrero", 3 => "Marzo",
+            1 => "Enero", 2 => "Febrero", 3 => "Marzo",
             4 => "Abril", 5 => "Mayo", 6 => "Junio",
             7 => "Julio", 8 => "Agosto", 9 => "Septiembre",
             10 => "Octubre", 11 => "Noviembre", 12 => "Diciembre");
         $month = $months[$month];
 
-        return view('admin.generaranking')->with(compact([ 'user','year','month','ranking','combo']));
+        return view('admin.generaranking')->with(compact([ 'year','month','ranking','combo']));
     }
 
     public function postReporteRankingPDF(Request $request)
     {
-        $user = $request->user;
+        $user = Auth::user();
+        $usuario = $user->full_name;
         $year = $request->year;
         $month = $request->month;
+        $mes = $month;
+        $months = array(
+            "Enero"=>1, "Febrero"=>2, "Marzo"=>3,
+            "Abril"=>4 ,"Mayo"=>5 , "Junio"=>6,
+            "Julio"=>7,  "Agosto"=>8,"Septiembre"=>9,
+            "Octubre"=>10, "Noviembre"=>11, "Diciembre"=>12);
+        $month = $months[$month];
+
         $carbon = Carbon::now('America/Lima');
         $fecha = $carbon->toDateString();
 
@@ -408,18 +416,18 @@ class AdminController extends Controller {
         foreach($combos as $combo )
         {
             $count = $ordenes->where('combo_name',$combo->nombre)->count();
-            $ranking[] = ['Combo'=>$combo,'Cantidad'=>$count];
+            $ranking[] = ['Combo'=>$combo->nombre,'Cantidad'=>$count];
             $count = 0;
         }
 
         $ranking = $ranking->sortByDesc('Cantidad');
         foreach( $ranking as $rank)
         {
-            $combo = $rank['Combo'];
+            $combo = Combo::where('nombre',$rank['Combo'])->first();
             break;
         }
-
-        $vista =  view('admin.rankingPDF')->with(compact(['user','year','month','ranking','combo']))->render();
+        $month = $mes;
+        $vista =  view('admin.rankingPDF')->with(compact(['usuario','year','month','ranking','combo','fecha']))->render();
         $pdf = app('dompdf.wrapper');
         $pdf->loadHTML($vista);
         return $pdf->stream();

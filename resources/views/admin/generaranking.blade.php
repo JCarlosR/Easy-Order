@@ -97,10 +97,9 @@
         <form action="{{ url('reporte/ranking/pdf')}} " method="post">
             {{--target="_blank"--}}
             {{ csrf_field() }}
-            <input type="hidden" name="user" value="{{$user}}">
             <input type="hidden" name="year" value="{{$year}}">
             <input type="hidden" name="month" value="{{$month}}">
-            <button type="submit" class="btn btn-block btn-warning"><span class="glyphicon glyphicon-new-window "></span>
+            <button type="submit" formtarget="_blank" class="btn btn-block btn-warning"><span class="glyphicon glyphicon-new-window "></span>
                 Generar reporte en PDF
             </button>
         </form>

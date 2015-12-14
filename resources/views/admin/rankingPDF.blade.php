@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ordenes - Easy Order</title>
+    <title>Ranking - Easy Order</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -34,10 +34,39 @@
             width: 110px;
             height: 100px;
         }
-        .plato {
-            margin:0;
-            height: 140px;
+        .plato
+        {
+            margin: 1.4em 0;
+            height: 165px;
         }
+        .img-thumbnail {
+            width: 80px;
+            height: 80px;
+        }
+
+        th, td {
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {background-color: #f2f2f2}
+        #header{
+            margin-left: 50px;
+        }
+        #body{
+            margin-left: 50px;
+        }
+        #footer
+        {
+            margin-left:500px;
+        }
+        #tabla
+        {
+            margin-top:20px;
+        }
+
     </style>
 </head>
 <body>
@@ -48,49 +77,56 @@
         <img class="limitar" src="{{ asset('images/easy.png') }}"/>
     </div>
     <div class="contenedor">
-        <h1 >Ranking del combo más solicitado para el año {{$year}} y mes {{$month}}</h1>
-        <div>
-            <table>
-                <thead>
-                <th>Combo</th>
-                <th>Veces solicitado</th>
-                </thead>
-                <tbody>
-                @foreach ($ranking as $rank)
-                    <tr>
-                        <td class="table-text"><div>{{ $rank['Combo']->nombre  }}</div></td>
-                        <td class="table-text"><div>{{ $rank['Cantidad']  }}</div></td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+        <div id="header">
+            <h2>Ranking del combo más solicitado para {{$month}} - {{$year}}</h2>
         </div>
-
-        <div>
-            <h2>Contenido</h2>
-            <div>
-               <label>Combo {{ $combo->nombre }}</label>
-            </div>
+        <div id="body">
             <div>
                 <table>
                     <thead>
                     <tr>
-                        <th>Plato</th>
-                        <th>Descripción</th>
-                        <th>Precio</th>
+                        <th>Nombre de Combo</th>
+                        <th>Veces solicitado</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($combo->platos as $plato)
+                    @foreach($ranking as $rank)
                         <tr>
-                            <td><img data-comboplato="{{ $plato->id }}" data-comboId="{{ $combo->id }}" src="{{asset('images/platos') }}/{{ $plato->imagen  }}.jpg" class="img-thumbnail combo"/></td>
-                            <td>{{ $plato->nombre }}</td>
-                            <td>{{ $plato->precio }}</td>
+                            <td>{{ $rank['Combo'] }}</td>
+                            <td>{{ $rank['Cantidad'] }}</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
+
+            <div id="tabla">
+                <h3>Contenido del combo  {{ $combo->nombre }} </h3>
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Plato</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($combo->platos as $plato)
+                            <tr>
+                                <td><img data-comboplato="{{ $plato->id }}" data-comboId="{{ $combo->id }}" src="{{asset('images/platos') }}/{{ $plato->imagen  }}.jpg" class="img-thumbnail combo"/></td>
+                                <td>{{ $plato->nombre }}</td>
+                                <td>{{ $plato->precio }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <p>Usuario:  {{ $usuario }}</p>
+            <p>Fecha: {{$fecha}}</p>
         </div>
 
     </div>
