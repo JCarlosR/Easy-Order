@@ -20,7 +20,7 @@
 
 @section('menu-options')
     <li class="dropdown"><a href="{{ url('/') }}">Home</a></li>
-    <li class="dropdown active">
+    <li class="dropdown">
         <a href="#">Gestionar <b class="caret"></b></a>
         <ul class="dropdown-menu" style="display: none;">
             <li><a href="{{ url('gestionar/platos') }}">Gestionar platos</a></li>
@@ -37,7 +37,7 @@
         </ul>
     </li>
     <li class="dropdown"><a href="{{ url('gestionar/chefs') }}">Chefs</a></li>
-    <li class="dropdown">
+    <li class="dropdown active">
         <a href="#">Reporte <b class="caret"></b></a>
         <ul class="dropdown-menu" style="display: none;">
             <li><a href="{{ url('reportes/ordenes') }}">Reportes Ordenes</a></li>
@@ -48,23 +48,19 @@
 @endsection
 
 @section('content')
-    <h1 >Reporte de ordenes solicitadas </h1>
+    <h1 > Ranking del combo más solicitado </h1>
     <div class="col-md-12 ">
-        <form action="{{ url('reporte/generar') }}" method="POST" id="formulario">
+        <form action="{{ url('reporte/ranking/generar') }}" method="POST" id="formulario">
             {{ csrf_field() }}
             <div class="col-md-6 col-md-offset-5">
-                <h3>Fecha de Inicio</h3>
-                <input type="text" name="fechaIni" class="datatime"/>
-                <h3>Fecha de Fin</h3>
-                <input type="text" name="fechaFin" class="datatime"/>
-                <h3>Tipo de órdenes</h3>
                 <div class="form-group">
-                    <label><input type="radio" name="tipo" value="0" checked/>En espera</label>
+                    <h3>Fecha</h3>
+                    <input type="text" name="fecha" class="datatime"/>
                 </div>
+
                 <div class="form-group">
-                    <label><input type="radio" name="tipo" value="1"/>Confirmadas</label>
+                    <input type="submit" class="btn btn-success" id="btnGenerar" value="Generar reporte"/>
                 </div>
-                <input type="submit" class="btn btn-success" id="btnGenerar" value="Generar reporte"/>
             </div>
         </form>
     </div>

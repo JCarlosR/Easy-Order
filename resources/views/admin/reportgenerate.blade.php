@@ -38,7 +38,7 @@
         <a href="#">Reporte<b class="caret"></b></a>
         <ul class="dropdown-menu" style="display: none;">
             <li><a href="{{ url('reportes/ordenes') }}">Reportes Ordenes</a></li>
-            <li><a href="{{ url('#') }}">Otros</a></li>
+            <li><a href="{{ url('reporte/ranking') }}">Ranking</a></li>
         </ul>
     </li>
     <li class="dropdown"><a href="{{ url('salir') }}">Salir</a></li>

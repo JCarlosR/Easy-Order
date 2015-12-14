@@ -538,27 +538,4 @@ class UsuarioController extends Controller {
 
     }
 
-
-    public function getComboRanking()
-    {
-        $combos = Combo::all();
-        $year = 2015;
-        $month = 11;
-        $ordenes = Orden::where( DB::raw('YEAR(fecha)'), '=', $year )->where( DB::raw('MONTH(fecha)'), '=', $month )->get();
-
-        $ranking = [];
-
-        $xd = $ordenes->where('combo_name','=','Estelar')->first();
-        dd($ordenes);
-        foreach($combos as $combo )
-        {
-
-            $count = $ordenes->where('combo_name','=',$combo->nombre)->count();
-            dd($ordenes);
-            dd($count);
-            $ranking[] = ['Combo'=>$combo->nombre,'Cantidad'=>$count];
-        }
-
-        dd($ranking);
-    }
 }
