@@ -104,7 +104,7 @@ class ChefController extends Controller {
                 'password' => bcrypt( $request->get('dni') ),
                 'phone'    => $request->get('telefono'),
                 'email'    => $request->get('email'),
-                'tipo'     => 2
+                'tipo'     => 1
             ]);
         }
 
