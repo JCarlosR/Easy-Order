@@ -41,6 +41,7 @@
                                         @else
                                             Orden {{ $ordend->id }} - {{ $ordend->combo_name or 'Elección Común' }}
                                         @endif
+                                            {{ $ordend->fecha }}
                                     </h3>
                                     <div class="panel-body">
                                         @foreach($ordend->platos as $plato)
@@ -67,7 +68,10 @@
                     @foreach($ordenesP as $orden)
                         <div class="col-md-4">
                             <div class="panel panel-default" >
-                                <h3 class="panel-heading"><a href="{{ asset('pedidos/pendientes') }}/{{ $orden->id }}" >Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}</a></h3>
+                                <h3 class="panel-heading">
+                                    <a href="{{ asset('pedidos/pendientes') }}/{{ $orden->id }}" >Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }} - {{$orden->fecha}}
+                                    </a>
+                                </h3>
                                 <div class="panel-body">
                                     @foreach($orden->platos as $plato)
                                         <div class="plato col-md-6" data-id="{{ $orden->id }}">

@@ -16,7 +16,7 @@ class ComboTableSeeder extends Seeder
     {
         Combo::create([
             'usuario_id' => 1,
-            'fecha' => '10/9/2015',
+            'fecha' => '2015/10/9',
             'nombre' => 'Norteño',
             'destacado' => true
         ]);
@@ -30,7 +30,7 @@ class ComboTableSeeder extends Seeder
 
         Combo::create([
             'usuario_id' => 1,
-            'fecha' => '11/9/2015',
+            'fecha' => '2015/9/11',
             'nombre' => 'Start Week',
             'destacado' => false
         ]);
@@ -44,7 +44,7 @@ class ComboTableSeeder extends Seeder
 
         Combo::create([
             'usuario_id' => 1,
-            'fecha' => '12/9/2015',
+            'fecha' => '2015/9/12',
             'nombre' => 'All rich',
             'destacado' => true
         ]);
@@ -58,7 +58,7 @@ class ComboTableSeeder extends Seeder
 
         Combo::create([
             'usuario_id' => 1,
-            'fecha' => '13/9/2015',
+            'fecha' => '2015/9/13',
             'nombre' => 'Rimenri',
             'destacado' => false
         ]);

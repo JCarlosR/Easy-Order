@@ -17,7 +17,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 @section('menu-options')
     <li class="dropdown"><a href="#">Home</a></li>
-    <li class="dropdown active">
+    <li class="dropdown ">
         <a href="#">Gestionar <b class="caret"></b></a>
         <ul class="dropdown-menu" style="display: none;">
             <li><a href="{{ url('gestionar/platos') }}">Gestionar platos</a></li>
@@ -34,7 +34,7 @@
         </ul>
     </li>
     <li class="dropdown"><a href="{{ url('gestionar/chefs') }}">Chefs</a></li>
-    <li class="dropdown">
+    <li class="dropdown active">
         <a href="#">Reporte<b class="caret"></b></a>
         <ul class="dropdown-menu" style="display: none;">
             <li><a href="{{ url('reportes/ordenes') }}">Reportes Ordenes</a></li>
@@ -45,7 +45,7 @@
 @endsection
 
 @section('content')
-    <h1 >Reporte de ordenes {{ $descripcion }} </h1>
+    <h1 >Reporte de ordenes {{ $descripcion }} al {{ $fecha }}</h1>
     @foreach($ordenes as $orden)
         <div class="col-md-4">
             <div class="panel panel-default" >
@@ -55,6 +55,7 @@
                     @else
                         Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}
                     @endif
+                    {{ $orden->fecha }}
                 </h3>
                 <div class="panel-body">
                     @foreach($orden->platos as $plato)
@@ -76,7 +77,7 @@
         </div>
 
     @endforeach
-    <h1 >Realizado por {{ $user->full_name }} </h1>
+
     <div id="container"></div>
     <div class="col-md-6 col-md-offset-3">
         <form action="{{ url('reporte/ordenes/pdf')}} " method="post">
@@ -92,6 +93,9 @@
             </button>
         </form>
     </div>
+
+    <h3 class="pull-right">Realizado por {{ $user->full_name }} </h3>
+
     <script>
 
         $(function () {

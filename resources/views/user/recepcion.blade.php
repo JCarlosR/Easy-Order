@@ -35,7 +35,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{ $orden->id }}">
-                                <span class="glyphicon glyphicon-cutlery"></span> Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}
+                                <span class="glyphicon glyphicon-cutlery"></span> Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }} - {{ $orden->fecha }}
                             </a>
                         </h4>
                     </div>

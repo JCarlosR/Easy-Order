@@ -52,20 +52,7 @@
             color: white;
         }
         tr:nth-child(even) {background-color: #f2f2f2}
-        #header{
-            margin-left: 50px;
-        }
-        #body{
-            margin-left: 50px;
-        }
-        #footer
-        {
-            margin-left:500px;
-        }
-        #tabla
-        {
-            margin-top:20px;
-        }
+
 
     </style>
 </head>

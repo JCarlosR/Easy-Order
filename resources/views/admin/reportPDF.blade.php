@@ -34,9 +34,37 @@
             width: 110px;
             height: 100px;
         }
-        .plato {
-            margin:0;
-            height: 140px;
+        .plato
+        {
+            margin: 1.4em 0;
+            height: 165px;
+        }
+        .img-thumbnail {
+            width: 80px;
+            height: 80px;
+        }
+
+        th, td {
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {background-color: #f2f2f2}
+        #header{
+            margin-left: 50px;
+        }
+        #body{
+            margin-left: 50px;
+        }
+        #footer
+        {
+            margin-left:500px;
+        }
+        #tabla
+        {
+            margin-top:20px;
         }
     </style>
 </head>
@@ -47,36 +75,46 @@
     <div class="row">
         <img class="limitar" src="{{ asset('images/easy.png') }}"/>
     </div>
-    <h1 >Reporte de ordenes {{ $estado }} </h1>
-    <div class="contenedor">
+    <h1 >Reporte de ordenes {{ $estado }} al {{ $fecha }}</h1>
+
     @foreach($ordenes as $orden)
-        <div class="col">
-            <div >
-                <label>
-                    @if($user->tipo == 1)
-                        <p>Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}</p>
-                    @else
-                        Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}
-                    @endif
-                </label>
 
+            <div id="tabla">
+                <table align="center">
+                    <tr>
+                        <td colspan="3">
+                            <h2>
+                                @if($user->tipo == 1)
+                                    <p>Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}</p>
+                                @else
+                                    Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}
+                                @endif
+                                {{ $orden->fecha }}
+                            </h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Plato</td>
+                        <td>Nombre</td>
+                        <td>Precio</td>
+                    </tr>
                     @foreach($orden->platos as $plato)
-                        <div class="plato" data-id="{{ $orden->id }}">
-                            <img src="{{ asset('images/platos') }}/{{ $plato->imagen }}.jpg" data-id="{{ $plato->id }}" class="img-rounded img-w-h">
-                            <p>{{ $plato->nombre }}</p>
-                        </div>
+                        <tr class="plato" data-id="{{ $orden->id }}">
+                            <td>
+                            <img src="{{ asset('images/platos') }}/{{ $plato->imagen }}.jpg" class="img-rounded img-thumbnail">
+                            </td>
+                            <td>
+                                <p>{{ $plato->nombre }}</p>
+                            </td>
+                            <td><p>{{ $plato->precio }}</p></td>
+                        </tr>
                     @endforeach
-
-                {{--<div align="center">--}}
-                    {{--<span>{{ $descripcion }}</span>--}}
-                    {{--<span>Chef: {{ $orden->chef->nombres or 'No Asignado' }}</span>--}}
-                {{--</div>--}}
+                </table>
             </div>
-        </div>
 
     @endforeach
-    </div>
-    <h3 >Realizado por {{ $user->full_name }} </h3>
+
+    <h3>Realizado por {{ $user->full_name }} </h3>
     <div id="container"></div>
     <script>
 

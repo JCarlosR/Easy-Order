@@ -19,6 +19,7 @@
                 <div class="panel-heading">
                     Combo {{ $combo->nombre }}
                     <span class="glyphicon glyphicon-star pull-right" aria-hidden="true" title="Combo destacado"></span>
+                    {{ $combo->fecha }}
                 </div>
                 <div class="panel panel-info">
                     <div class="panel-body">

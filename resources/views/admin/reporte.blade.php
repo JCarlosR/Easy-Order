@@ -20,7 +20,7 @@
 
 @section('menu-options')
     <li class="dropdown"><a href="{{ url('/') }}">Home</a></li>
-    <li class="dropdown active">
+    <li class="dropdown ">
         <a href="#">Gestionar <b class="caret"></b></a>
         <ul class="dropdown-menu" style="display: none;">
             <li><a href="{{ url('gestionar/platos') }}">Gestionar platos</a></li>
@@ -37,7 +37,7 @@
         </ul>
     </li>
     <li class="dropdown"><a href="{{ url('gestionar/chefs') }}">Chefs</a></li>
-    <li class="dropdown">
+    <li class="dropdown active">
         <a href="#">Reporte <b class="caret"></b></a>
         <ul class="dropdown-menu" style="display: none;">
             <li><a href="{{ url('reportes/ordenes') }}">Reportes Ordenes</a></li>

@@ -35,7 +35,7 @@
                     @foreach($ordenesD as $orden)
                         <div class="col-md-4">
                             <div class="panel panel-default" >
-                                <h3 class="panel-heading">Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}</h3>
+                                <h3 class="panel-heading">Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }} - {{ $orden->fecha }}</h3>
                                 <div class="panel-body">
                                     @foreach($orden->platos as $plato)
                                         <div class="plato col-md-6" data-id="{{ $orden->id }}">
@@ -53,7 +53,7 @@
                     @foreach($ordenesP as $orden)
                         <div class="col-md-4">
                             <div class="panel panel-default" >
-                                <h3 class="panel-heading">Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }}</h3>
+                                <h3 class="panel-heading">Orden {{ $orden->id }} - {{ $orden->combo_name or 'Elección Común' }} - {{ $orden->fecha }}</h3>
                                 <div class="panel-body">
                                     @foreach($orden->platos as $plato)
                                         <div class="plato col-md-6" data-id="{{ $orden->id }}">
